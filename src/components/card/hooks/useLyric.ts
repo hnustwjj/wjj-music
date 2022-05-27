@@ -1,6 +1,5 @@
 import { parseLyric } from '@/utils'
 import { useAppSelector } from './../../../store/index'
-import { lyricItem } from '@/utils/index'
 import { useState, useEffect, useRef } from 'react'
 export default function useLyric() {
   // 获取当前歌曲和当前歌词

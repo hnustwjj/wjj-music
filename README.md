@@ -9,14 +9,14 @@ npm i wjj-player
 - 在入口文件中引入css
 
 ```js
-import 'wjj-music/dist/style.css'
+import 'wjj-player/dist/style.css'
 ```
 
 - 任意一个组件中，导入`Card`并使用
 
 ```tsx
 import React from 'react'
-import { Card } from 'wjj-music'
+import { Card } from 'wjj-player'
 function App() {
   return (
     <div className='App'>

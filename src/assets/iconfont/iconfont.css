@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 3405053 */
-  src: url('iconfont.woff2?t=1652690826006') format('woff2'),
-       url('iconfont.woff?t=1652690826006') format('woff'),
-       url('iconfont.ttf?t=1652690826006') format('truetype');
+  src: url('iconfont.woff2?t=1653058014050') format('woff2'),
+       url('iconfont.woff?t=1653058014050') format('woff'),
+       url('iconfont.ttf?t=1653058014050') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,9 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+.icon-jingyin:before {
+  content: "\e747";
 }
 
 .icon-pause:before {
@@ -41,7 +44,3 @@
   content: "\e7a5";
 }
 
-
-.img-pan{
-  background-image: url('./img/pan.png');
-}

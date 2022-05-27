@@ -1,5 +1,6 @@
 import React, { memo, useState, useEffect } from 'react'
 import { Provider } from 'react-redux'
+
 import { PanWrapper, CardWrapper } from './style'
 import store, { useAppDispatch } from '@/store'
 import { fetchHotRecommend } from '@/store/music'
@@ -26,8 +27,7 @@ const Card = memo(() => {
     musicList
   } = useMusicInfo()
   // 获取歌词相关信息的hook
-  const { updateTime, currentLyricIndex, lyricList, lyricBox } =
-    useLyric()
+  const { updateTime, currentLyricIndex, lyricList, lyricBox } = useLyric()
 
   // 获取音频相关信息的hook
   const {
@@ -45,26 +45,33 @@ const Card = memo(() => {
   const onTimeSliderChange = (percent: number) => {
     const time = (duration * percent).toFixed()
     updateTime(time, true)
-    audioRef.current &&
-      (audioRef.current.currentTime = parseInt(time) / 1000)
+    audioRef.current && (audioRef.current.currentTime = parseInt(time) / 1000)
   }
 
   // 时间百分比
-  const timePercent =
-    ((audioRef.current?.currentTime ?? 0) * 1000) / duration
+  const timePercent = ((audioRef.current?.currentTime ?? 0) * 1000) / duration
 
   // 音乐进度条改变事件
   const onVolumeliderChange = (percent: number) => {
+    volumeCache = percent
     setVolume(percent)
   }
 
+  let isJingyin = false
   // 音乐百分比
   const volumePercent = volume
+  let volumeCache = volumePercent
+  const changeJingyin = () => {
+    isJingyin ? setVolume(volumeCache) : setVolume(0)
+    isJingyin = !isJingyin
+  }
 
   //TODO:音乐挂起时进行相关操作(onSuspend)
   //TODO:用户代理试图获取媒体数据，但数据意外地没有进入。
-  //TODO:切换歌曲进行判断，避免崩溃
   //TODO:点击喇叭，静音
+
+  const imgUrl = (size: number, url?: string) =>
+    url ? `${url}?param=${size}y${size}` : undefined
   return (
     <>
       <PanWrapper className={active ? 'active' : 'deactive'}>
@@ -74,7 +81,7 @@ const Card = memo(() => {
             (isPlaying ? '' : 'pause')
           }
           onClick={() => setactive(!active)}>
-          <img className="rounded-full " src={al?.picUrl} />
+          <img className="rounded-full " src={imgUrl(140, al?.picUrl)} />
         </div>
         <audio
           src={url}
@@ -83,18 +90,19 @@ const Card = memo(() => {
           onCanPlay={e => canplay(e)}
           onEnded={() => switchMusic('next')}
           onError={() => switchMusic('next')}
+          onSuspend={() => console.log('音乐被挂起，网络质量不好')}
         />
       </PanWrapper>
       <CardWrapper
         className={'select-none ' + (active ? 'active' : '')}
         style={{
-          backgroundImage: `url(${al?.picUrl})`
+          backgroundImage: `url(${imgUrl(300, al?.picUrl)})`
         }}>
         {/* 三张背景蒙版 */}
         {[5, 10, 2].map(item => (
           <img
             key={item}
-            src={al?.picUrl}
+            src={imgUrl(300, al?.picUrl)}
             className={`blur-${item}px absolute rounded-md h-full w-full`}
           />
         ))}
@@ -114,9 +122,7 @@ const Card = memo(() => {
                 <p
                   className={
                     'text-12px text-center leading-[1.5] text-[hsla(0,0%,100%,.6)] ' +
-                    (currentLyricIndex === index
-                      ? 'active-lyric'
-                      : '')
+                    (currentLyricIndex === index ? 'active-lyric' : '')
                   }
                   key={item.time + item.content}>
                   {item.content}
@@ -126,9 +132,7 @@ const Card = memo(() => {
           </div>
           {/* 控制栏 */}
           <div className="h-40px w-300px flex items-center">
-            <div
-              onClick={() => switchMusicStaus()}
-              className="icon ml-5px">
+            <div onClick={() => switchMusicStaus()} className="icon ml-5px">
               {isPlaying ? (
                 <i className="iconfont icon-pause text-[13px]" />
               ) : (
@@ -144,7 +148,13 @@ const Card = memo(() => {
               />
             </div>
             <div className="icon mr-5px relative">
-              <i className="iconfont icon-laba volume-slider-hover" />
+              <i
+                className={
+                  'iconfont volume-slider-hover ' +
+                  (volume === 0 ? 'icon-jingyin' : 'icon-laba')
+                }
+                onClick={() => changeJingyin()}
+              />
               <div className="absolute h-80px py-10px px-10px flex flex-col items-center bottom-20px opacity-0 hover:opacity-100">
                 <Slider
                   direction="col"

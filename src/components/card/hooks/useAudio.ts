@@ -3,10 +3,7 @@ import { changeCurrentMusic, fetchLyric } from '@/store/music'
 import { useState, useRef, SyntheticEvent, useEffect } from 'react'
 
 export const INITIAL_VOLUME = 0.66
-export default function useDuration(
-  musicList: any[],
-  currentMusic: any
-) {
+export default function useDuration(musicList: any[], currentMusic: any) {
   const dispatch = useAppDispatch()
   // 当前歌曲的时常（毫秒）
   const [duration, setDuration] = useState(0)
@@ -27,7 +24,11 @@ export default function useDuration(
    */
   const switchMusicStaus = () => {
     if (audioRef.current) {
-      isPlaying ? audioRef.current.pause() : audioRef.current.play()
+      if (isPlaying) {
+        audioRef.current.pause()
+      } else {
+        audioRef.current.play()
+      }
       setIsPlaying(!isPlaying)
     }
   }
@@ -65,6 +66,6 @@ export default function useDuration(
     switchMusic,
     canplay,
     setVolume,
-    volume
+    volume,
   }
 }

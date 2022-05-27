@@ -9,7 +9,7 @@ interface Singers {
 
 export default function useMusicInfo() {
   // 获取当前歌曲和当前歌词
-  const { currentMusic, musicList } = useAppSelector((state) => state.music)
+  const { currentMusic, musicList } = useAppSelector(state => state.music)
   // 分别是id，歌曲信息，作者，歌曲名
   const { id, al, ar, name } = currentMusic
   // 根据id获取url

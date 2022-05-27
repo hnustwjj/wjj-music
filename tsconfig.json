@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    // 下面两行是配置别名用的
+    "baseUrl": "src",
+    "paths": {
+      "@/*": ["./*"]
+    },
+    "noEmit": false,  //关闭不输出开关
+    "emitDeclarationOnly":true, //仅输出类型声明文件
+    "declaration": true, // Generates corresponding '.d.ts' file
+    "declarationDir": "lib" //类型声明文件目录
+  },
+  "include": ["src"]
+}

@@ -94,7 +94,6 @@ const Card = memo(() => {
           onCanPlay={e => canplay(e)}
           onEnded={() => switchMusic('next')}
           onError={() => switchMusic('next')}
-          onSuspend={() => console.log('音乐被挂起，网络质量不好')}
         />
       </PanWrapper>
       <CardWrapper

@@ -1,7 +1,23 @@
+
 {
-  "name": "test",
-  "private": true,
-  "version": "0.0.0",
+  "name": "wjj-player",
+  "version": "1.0.1",
+  "private": false,
+  "main": "./dist/index.umd.js",
+  "module": "./dist/index.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.umd.js"
+    },
+    "./dist/style.css": "./dist/style.css"
+  },
+  "keywords": ["react","music","music-player"],
+  "author": "hnustwjj",
+  "repository": {
+    "type": "git",
+    "url":"https://github.com/hnustwjj/wjj-music"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -10,6 +26,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.2",
     "axios": "^0.27.2",
+    "jj-music-player": "^0.0.4",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-redux": "^8.0.2",

@@ -1,13 +1,16 @@
 import React, { memo, useState } from 'react'
 import DivWrapper, { NavButton } from './style'
 
+import { imgUrl } from '@/utils'
 import Playing from './components/Playing'
 import Recommend from './components/Recommend'
 import Search from './components/Search'
 import Mine from './components/Mine'
 import Listened from './components/Listened'
+import { useAppSelector } from '@/store'
 //TODO:手机端兼容
 // 1：header手机端看不清
+
 const navList = [
   { title: '正在播放', element: <Playing /> },
   { title: '推荐', element: <Recommend /> },
@@ -16,11 +19,20 @@ const navList = [
   { title: '我听过的', element: <Listened /> },
 ]
 const Page = memo(() => {
+  const { al } = useAppSelector(state => state.music.currentMusic)
   const [currentIndex, setCurrentIndex] = useState(0)
   return (
     <DivWrapper>
       {/* 两张背景蒙版 */}
-      <div className='bg-page1 absolute' h='full' w='full' z='-2' />
+      <div
+        className='bg-page1 absolute'
+        style={{
+          backgroundImage: al ? `url(${imgUrl(140, al.picUrl)})` : ``,
+        }}
+        h='full'
+        w='full'
+        z='-2'
+      />
       <div className='bg-[rgba(0,0,0,.5)] absolute' z='-1' h='full' w='full' />
       {/* 页头 */}
       <header className='leading-[60px] relative' h='60px' text='center white'>

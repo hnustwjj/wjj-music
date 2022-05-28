@@ -1,5 +1,9 @@
 import styled from 'styled-components'
 export default styled.div`
+  border-radius: 9999px;
+  position: relative;
+  cursor: pointer;
+  background: #9e9e9f;
   &.col {
     width: 5px;
     height: 95%;

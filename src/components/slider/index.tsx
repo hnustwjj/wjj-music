@@ -77,10 +77,7 @@ const Slider = memo((props: SliderProps) => {
   return (
     <DivWrapper
       ref={lineRef}
-      className={
-        direction +
-        ' bg-[#9e9e9f] relative rounded-full cursor-pointer'
-      }
+      className={direction}
       onClick={(e: any) => setcurrent(getOffset(e, direction))}>
       <div
         style={widthOrHeight}
@@ -91,13 +88,19 @@ const Slider = memo((props: SliderProps) => {
         }
       />
       <div
-        className="w-16px h-16px rounded-full bg-[#454545] transition-none flex items-center justify-center cursor-pointer button"
-        style={
-          direction === 'row' ? { marginLeft: -8 } : { marginTop: -8 }
-        }
+        w='16px'
+        h='16px'
+        rounded='full'
+        transition='none'
+        flex='~'
+        items='center'
+        justify='center'
+        cursor='pointer'
+        className='bg-[#454545] button'
+        style={direction === 'row' ? { marginLeft: -8 } : { marginTop: -8 }}
         onMouseDown={() => mouseDown()}
         onClick={e => e.stopPropagation()}>
-        <div className="w-8px h-8px rounded-full bg-[#fff] " />
+        <div w='8px' h='8px' rounded='full' bg='white' />
       </div>
     </DivWrapper>
   )

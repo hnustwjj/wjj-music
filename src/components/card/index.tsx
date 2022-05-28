@@ -70,10 +70,11 @@ const Card = memo((props: { changePageActive: () => void }) => {
     <>
       <PanWrapper className={active ? 'active' : 'deactive'}>
         <div
-          className={
-            'w-80px h-80px rounded-full p-13px bg-pan img-pan ' +
-            (isPlaying ? '' : 'pause')
-          }
+          className={'bg-pan ' + (isPlaying ? '' : 'pause')}
+          rounded='full'
+          w='80px'
+          h='80px'
+          p='13px'
           onClick={() => setPanActive(!active)}>
           <img className='rounded-full ' src={imgUrl(140, al?.picUrl)} />
         </div>
@@ -87,14 +88,20 @@ const Card = memo((props: { changePageActive: () => void }) => {
         />
       </PanWrapper>
       <CardWrapper
-        className={'select-none ' + (active ? 'active' : '')}
+        className={active ? 'active' : ''}
+        select='none'
         style={{
           background: al?.picUrl
             ? `url(${imgUrl(300, al.picUrl)})`
-            : `rgba(0,0,0,.5)`,
+            : `rgba(0,0,0,.15)`,
         }}>
         <i
-          className='iconfont icon-gengduo absolute z-52 icon-color top-15px right-15px cursor-pointer'
+          className='iconfont icon-gengduo icon-color'
+          z='52'
+          top='15px'
+          right='15px'
+          cursor='pointer'
+          absolute='~'
           onClick={() => changePageActive()}
         />
         {/* 三张背景蒙版 */}
@@ -102,27 +109,40 @@ const Card = memo((props: { changePageActive: () => void }) => {
           <img
             key={item}
             src={imgUrl(300, al?.picUrl)}
-            className={`blur-${item}px absolute rounded-md h-full w-full`}
+            className={`blur-${item}px`}
+            absolute='~'
+            rounded='md'
+            h='full'
+            w='full'
           />
         ))}
-        <div className='w-250px flex flex-col items-center h-full z-50'>
+        <div w='250px' flex='~ col' items='center' h='full' z='50'>
           {/* 歌名 */}
-          <div className='h-40px text-15px text-center text-white leading-60px mb-20px z-55'>
+          <div
+            h='40px'
+            text='15px center white'
+            leading='60px'
+            m='b-20px'
+            z='55'>
             {songName}
           </div>
           {/* 歌手 */}
-          <p className='h-40px text-12px text-center text-[hsla(0,0%,100%,.6)] leading-20px mb-20px w-140px '>
+          <p
+            h='40px'
+            text='12px center gray-300'
+            leading='20px'
+            m='b-20px'
+            w='140px'>
             歌手：{singers}
           </p>
           {/* 歌词 */}
-          <div className='flex-1 overflow-hidden relative px-15px'>
+          <div flex='1' overflow='hidden' relative='~' p='x-15px'>
             <div ref={lyricBox}>
               {lyricList.map((item, index) => (
                 <p
-                  className={
-                    'text-12px text-center leading-[1.5] text-[hsla(0,0%,100%,.6)] ' +
-                    (currentLyricIndex === index ? 'active-lyric' : '')
-                  }
+                  text='12px center gray-300'
+                  leading='23px'
+                  className={currentLyricIndex === index ? 'active-lyric' : ''}
                   key={item.time + item.content}>
                   {item.content}
                 </p>
@@ -130,15 +150,15 @@ const Card = memo((props: { changePageActive: () => void }) => {
             </div>
           </div>
           {/* 控制栏 */}
-          <div className='h-40px w-300px flex items-center'>
-            <div onClick={() => switchMusicStaus()} className='icon ml-5px'>
+          <div h='40px' w='300px' flex='~' items='center'>
+            <div m='l-5px' onClick={() => switchMusicStaus()} className='icon'>
               {isPlaying ? (
                 <i className='iconfont icon-pause text-[13px] icon-color' />
               ) : (
                 <i className='iconfont icon-play text-[13px] icon-color' />
               )}
             </div>
-            <div className='w-240px px-15px flex justify-center'>
+            <div w='240px' p='x-15px' flex='~' justify='center'>
               <Slider
                 direction='row'
                 initialValue={0}
@@ -146,7 +166,7 @@ const Card = memo((props: { changePageActive: () => void }) => {
                 value={timePercent}
               />
             </div>
-            <div className='icon mr-5px relative'>
+            <div className='icon' m='r-5px' relative='~'>
               <i
                 className={
                   'iconfont volume-slider-hover icon-color ' +
@@ -154,7 +174,15 @@ const Card = memo((props: { changePageActive: () => void }) => {
                 }
                 onClick={() => changeJingyin()}
               />
-              <div className='absolute h-80px py-10px px-10px flex flex-col items-center bottom-20px opacity-0 hover:opacity-100'>
+              <div
+                absolute='~'
+                h='80px'
+                p='y-10px x-10px'
+                flex='~ col'
+                items='center'
+                bottom='20px'
+                opacity='0'
+                hover='opacity-100'>
                 <Slider
                   direction='col'
                   initialValue={INITIAL_VOLUME}

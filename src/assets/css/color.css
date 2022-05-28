@@ -1,0 +1,14 @@
+
+html{
+  /* css原生也支持变量的设置 */
+  --blue:#15add3;
+  --white:#fff;
+}
+
+.bg-blue{
+  background:var(--blue) !important;
+}
+
+.icon-color{
+  color:var(--white) !important;
+}

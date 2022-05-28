@@ -87,7 +87,7 @@ const Slider = memo((props: SliderProps) => {
         className={
           (direction === 'row'
             ? 'h-5px rounded-l-full'
-            : 'w-5px rounded-t-full') + ' bg-[#15add3] line'
+            : 'w-5px rounded-t-full') + ' bg-blue line'
         }
       />
       <div

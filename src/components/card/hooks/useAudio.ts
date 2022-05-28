@@ -3,7 +3,7 @@ import { changeCurrentMusic, fetchLyric } from '@/store/music'
 import { useState, useRef, SyntheticEvent, useEffect } from 'react'
 
 export const INITIAL_VOLUME = 0.66
-export default function useDuration(musicList: any[], currentMusic: any) {
+export default function (musicList: any[], currentMusic: any) {
   const dispatch = useAppDispatch()
   // 当前歌曲的时常（毫秒）
   const [duration, setDuration] = useState(0)
@@ -37,15 +37,17 @@ export default function useDuration(musicList: any[], currentMusic: any) {
    * @param type 切换到前一首还是后一首
    */
   const switchMusic = async (type: 'pre' | 'next') => {
-    let currentIndex = currentMusic.index
-    currentIndex += type === 'pre' ? -1 : 1
-    if (currentIndex < 0) currentIndex = musicList.length - 1
-    if (currentIndex === musicList.length) currentIndex = 0
-    const Music = musicList[currentIndex]
-    dispatch(changeCurrentMusic(Music))
-    dispatch(fetchLyric(Music.id))
-    // 根据当前状态判断是否要播放
-    isPlaying ? audioRef.current?.play() : audioRef.current?.pause()
+    if (musicList.length) {
+      let currentIndex = currentMusic.index
+      currentIndex += type === 'pre' ? -1 : 1
+      if (currentIndex < 0) currentIndex = musicList.length - 1
+      if (currentIndex === musicList.length) currentIndex = 0
+      const Music = musicList[currentIndex]
+      dispatch(changeCurrentMusic(Music))
+      dispatch(fetchLyric(Music.id))
+      // 根据当前状态判断是否要播放
+      isPlaying ? audioRef.current?.play() : audioRef.current?.pause()
+    }
   }
 
   /**

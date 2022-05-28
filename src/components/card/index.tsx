@@ -1,26 +1,21 @@
-import React, { memo, useState, useEffect } from 'react'
-import { Provider } from 'react-redux'
+import React, { memo, useState } from 'react'
 
-import { PanWrapper, CardWrapper } from './style'
-import store, { useAppDispatch } from '@/store'
-import { fetchHotRecommend } from '@/store/music'
 import Slider from '../slider'
-import useAudio, { INITIAL_VOLUME } from './hooks/useAudio'
+import { imgUrl } from '@/utils'
 import useLyric from './hooks/useLyric'
 import useMusicInfo from './hooks/useMusic'
+import { PanWrapper, CardWrapper } from './style'
+import useAudio, { INITIAL_VOLUME } from './hooks/useAudio'
 
 //需要放在最外面，否则每次执行函数都会重新创建变量
 let volumeCache = 0
 let isJingyin = false
-const Card = memo(() => {
-  const dispatch = useAppDispatch()
-  useEffect(() => {
-    // 请求热榜推荐歌曲的数据
-    dispatch(fetchHotRecommend())
-  }, [dispatch])
 
+const Card = memo((props: { changePageActive: () => void }) => {
+  const { changePageActive } = props
   // 是否点击了pan显示card
-  const [active, setactive] = useState(false)
+  const [active, setPanActive] = useState(false)
+
   // 获取音乐信息相关的hook
   const {
     al,
@@ -71,11 +66,6 @@ const Card = memo(() => {
     isJingyin = !isJingyin
   }
 
-  //TODO:音乐挂起时进行相关操作(onSuspend)
-  //TODO:用户代理试图获取媒体数据，但数据意外地没有进入。
-
-  const imgUrl = (size: number, url?: string) =>
-    url ? `${url}?param=${size}y${size}` : undefined
   return (
     <>
       <PanWrapper className={active ? 'active' : 'deactive'}>
@@ -84,7 +74,7 @@ const Card = memo(() => {
             'w-80px h-80px rounded-full p-13px bg-pan img-pan ' +
             (isPlaying ? '' : 'pause')
           }
-          onClick={() => setactive(!active)}>
+          onClick={() => setPanActive(!active)}>
           <img className='rounded-full ' src={imgUrl(140, al?.picUrl)} />
         </div>
         <audio
@@ -99,8 +89,14 @@ const Card = memo(() => {
       <CardWrapper
         className={'select-none ' + (active ? 'active' : '')}
         style={{
-          backgroundImage: `url(${imgUrl(300, al?.picUrl)})`,
+          background: al?.picUrl
+            ? `url(${imgUrl(300, al.picUrl)})`
+            : `rgba(0,0,0,.5)`,
         }}>
+        <i
+          className='iconfont icon-gengduo absolute z-52 icon-color top-15px right-15px cursor-pointer'
+          onClick={() => changePageActive()}
+        />
         {/* 三张背景蒙版 */}
         {[5, 10, 2].map(item => (
           <img
@@ -137,9 +133,9 @@ const Card = memo(() => {
           <div className='h-40px w-300px flex items-center'>
             <div onClick={() => switchMusicStaus()} className='icon ml-5px'>
               {isPlaying ? (
-                <i className='iconfont icon-pause text-[13px]' />
+                <i className='iconfont icon-pause text-[13px] icon-color' />
               ) : (
-                <i className='iconfont icon-play text-[13px]' />
+                <i className='iconfont icon-play text-[13px] icon-color' />
               )}
             </div>
             <div className='w-240px px-15px flex justify-center'>
@@ -153,7 +149,7 @@ const Card = memo(() => {
             <div className='icon mr-5px relative'>
               <i
                 className={
-                  'iconfont volume-slider-hover ' +
+                  'iconfont volume-slider-hover icon-color ' +
                   (volume === 0 ? 'icon-jingyin' : 'icon-laba')
                 }
                 onClick={() => changeJingyin()}
@@ -172,11 +168,11 @@ const Card = memo(() => {
 
         {/* 切换歌曲的箭头 */}
         <i
-          className='iconfont icon-left arrow left-5px'
+          className='iconfont icon-left arrow left-5px icon-color'
           onClick={() => switchMusic('pre')}
         />
         <i
-          className='iconfont icon-right arrow right-5px'
+          className='iconfont icon-right arrow right-5px icon-color'
           onClick={() => switchMusic('next')}
         />
       </CardWrapper>
@@ -184,8 +180,4 @@ const Card = memo(() => {
   )
 })
 
-export default () => (
-  <Provider store={store}>
-    <Card />
-  </Provider>
-)
+export default Card

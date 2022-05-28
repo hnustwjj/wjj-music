@@ -9,7 +9,7 @@ export interface musicState {
 const initialState: musicState = {
   musicList: [],
   currentMusic: {},
-  currentLyric: ''
+  currentLyric: '',
 }
 
 const music = createSlice({
@@ -24,10 +24,12 @@ const music = createSlice({
     },
     changeCurrentLyric(state: musicState, actions: PayloadAction<any>) {
       state.currentLyric = actions.payload
-    }
-  }
+    },
+  },
 })
 export default music.reducer
+
+//导出所有的普通action
 export const { changeMusicList, changeCurrentMusic, changeCurrentLyric } =
   music.actions
 

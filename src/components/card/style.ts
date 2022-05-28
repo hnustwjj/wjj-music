@@ -59,7 +59,7 @@ export const CardWrapper = styled.div`
   }
   .active-lyric {
     font-weight: 600;
-    color: white;
+    color: rgb(229, 231, 235);
     transform: scale(1.2);
   }
   &.active {
@@ -68,7 +68,6 @@ export const CardWrapper = styled.div`
   }
 
   .arrow {
-    color: white;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -79,8 +78,8 @@ export const CardWrapper = styled.div`
       transform: translateY(-50%) scale(1.2);
     }
   }
-  .blur-10px {
-    filter: blur(10px);
+  .blur-8px {
+    filter: blur(8px);
   }
   .blur-5px {
     filter: blur(5px);

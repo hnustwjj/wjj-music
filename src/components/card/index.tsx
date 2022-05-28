@@ -66,6 +66,7 @@ const Card = memo((props: { changePageActive: () => void }) => {
     isJingyin = !isJingyin
   }
 
+  //TODO:检测背景图的明暗，设置不同的color
   return (
     <>
       <PanWrapper className={active ? 'active' : 'deactive'}>
@@ -91,9 +92,7 @@ const Card = memo((props: { changePageActive: () => void }) => {
         className={active ? 'active' : ''}
         select='none'
         style={{
-          background: al?.picUrl
-            ? `url(${imgUrl(300, al.picUrl)})`
-            : `rgba(0,0,0,.15)`,
+          background: `url(${imgUrl(300, al?.picUrl)})`,
         }}>
         <i
           className='iconfont icon-gengduo icon-color'
@@ -105,7 +104,7 @@ const Card = memo((props: { changePageActive: () => void }) => {
           onClick={() => changePageActive()}
         />
         {/* 三张背景蒙版 */}
-        {[5, 10, 2].map(item => (
+        {[5, 8, 2].map(item => (
           <img
             key={item}
             src={imgUrl(300, al?.picUrl)}
@@ -120,7 +119,7 @@ const Card = memo((props: { changePageActive: () => void }) => {
           {/* 歌名 */}
           <div
             h='40px'
-            text='15px center white'
+            text='15px center gray-200'
             leading='60px'
             m='b-20px'
             z='55'>

@@ -33,3 +33,23 @@ export function parseLyric(lyric: string): lyricItem[] {
  */
 export const imgUrl = (size: number, url?: string) =>
   url ? `${url}?param=${size}y${size}` : undefined
+
+/**
+ * 给出毫秒数，返回时间格式: mm:ss
+ * @param time
+ * @returns
+ */
+export const formatTime = (time: number) => {
+  const minutes = Math.floor(time / 60 / 1000)
+  let res = ''
+  if (minutes < 10) {
+    res += '0'
+    res += minutes
+  } else {
+    res += minutes
+  }
+  res += ':'
+  const seconds = Math.floor((time / 1000) % 60)
+  res += seconds
+  return res
+}

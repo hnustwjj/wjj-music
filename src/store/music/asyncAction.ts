@@ -16,11 +16,11 @@ export const fetchHotRecommend = () => async (dispatch: AppDispatch) => {
   // 默认当前歌曲是第一个对象
   dispatch(changeCurrentMusic(tracks[1]))
   // 获取并修改currentLyric歌词
-  dispatch(fetchLyric(tracks[1].id))
+  dispatch(changeLyric(tracks[1].id))
 }
 
 // 根据id获取歌词
-export const fetchLyric = (id: number) => async (dispatch: AppDispatch) => {
+export const changeLyric = (id: number) => async (dispatch: AppDispatch) => {
   const {
     lrc: { lyric }
   } = await getLyric(id)

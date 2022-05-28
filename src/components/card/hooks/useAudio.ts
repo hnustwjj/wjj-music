@@ -1,5 +1,5 @@
 import { useAppDispatch } from './../../../store/index'
-import { changeCurrentMusic, fetchLyric } from '@/store/music'
+import { changeCurrentMusic, changeLyric } from '@/store/music'
 import { useState, useRef, SyntheticEvent, useEffect } from 'react'
 
 export const INITIAL_VOLUME = 0.66
@@ -44,7 +44,7 @@ export default function (musicList: any[], currentMusic: any) {
       if (currentIndex === musicList.length) currentIndex = 0
       const Music = musicList[currentIndex]
       dispatch(changeCurrentMusic(Music))
-      dispatch(fetchLyric(Music.id))
+      dispatch(changeLyric(Music.id))
       // 根据当前状态判断是否要播放
       isPlaying ? audioRef.current?.play() : audioRef.current?.pause()
     }

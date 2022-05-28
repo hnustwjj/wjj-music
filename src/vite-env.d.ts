@@ -3,6 +3,6 @@ import { AttributifyAttributes } from 'windicss/types/jsx'
 
 declare module 'react' {
   namespace JSX {
-    interface HTMLAttributes extends AttributifyAttributes {}
+    interface HTMLAttributes<T> extends AttributifyAttributes {}
   }
 }

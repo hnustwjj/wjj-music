@@ -1,12 +1,28 @@
-import React, { memo } from 'react'
-import DivWrapper from './style'
+import React, { memo, useState } from 'react'
+import DivWrapper, { NavButton } from './style'
+
+import Playing from './components/Playing'
+import Recommend from './components/Recommend'
+import Search from './components/Search'
+import Mine from './components/Mine'
+import Listened from './components/Listened'
 //TODO:手机端兼容
 // 1：header手机端看不清
+const navList = [
+  { title: '正在播放', element: <Playing /> },
+  { title: '推荐', element: <Recommend /> },
+  { title: '搜索', element: <Search /> },
+  { title: '我的歌单', element: <Mine /> },
+  { title: '我听过的', element: <Listened /> },
+]
 const Page = memo(() => {
-  const navList = ['正在播放', '推荐', '搜索', '我的歌单', '我听过的']
+  const [currentIndex, setCurrentIndex] = useState(0)
   return (
     <DivWrapper>
-      <div className='bg-page1 absolute' h='full' w='full' />
+      {/* 两张背景蒙版 */}
+      <div className='bg-page1 absolute' h='full' w='full' z='-2' />
+      <div className='bg-[rgba(0,0,0,.5)] absolute' z='-1' h='full' w='full' />
+      {/* 页头 */}
       <header className='leading-[60px] relative' h='60px' text='center white'>
         <a
           href='https://github.com/hnustwjj/wjj-music'
@@ -19,18 +35,29 @@ const Page = memo(() => {
           登录
         </button>
       </header>
-      <div flex='~ 1' m='x-20'>
-        <div flex='1'>
+      {/* 内容 */}
+      <div flex='~ 1' w='1700px' p='20px' mx='auto' overflow='auto'>
+        <div flex='~ 1 col'>
           <nav h='60px'>
-            {navList.map(title => (
-              <button h='60px' key={title} p='y-2 x-4'>
-                {title}
-              </button>
+            {navList.map((item, index) => (
+              <NavButton
+                className={index === currentIndex ? 'active' : ''}
+                onClick={() => setCurrentIndex(index)}
+                key={item.title}>
+                {item.title}
+              </NavButton>
             ))}
           </nav>
+          <div flex='1 ~ col' text='gray-300' overflow='auto'>
+            {navList[currentIndex].element}
+          </div>
         </div>
         <aside w='300px'></aside>
       </div>
+      {/* 控制栏 */}
+      <footer w='full' h='80px' px='200px'>
+        内容
+      </footer>
     </DivWrapper>
   )
 })

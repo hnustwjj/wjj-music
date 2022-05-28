@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import Card from './components/card'
 import Page from './components/page'
 
@@ -6,7 +6,7 @@ import { Provider } from 'react-redux'
 import { fetchHotRecommend } from '@/store/music'
 import store, { useAppDispatch } from '@/store'
 
-function App() {
+const App = memo(() => {
   const dispatch = useAppDispatch()
   useEffect(() => {
     // 请求热榜推荐歌曲的数据
@@ -19,13 +19,16 @@ function App() {
     <>
       <Card changePageActive={() => setPageActive(!pageActive)} />
       <div
-        className={`transition opacity-0` + (pageActive ? ' opacity-100' : '')}>
+        h='100vh'
+        w='100vw'
+        className={
+          `transition-opacity opacity-0` + (pageActive ? ' opacity-100' : '')
+        }>
         <Page />
       </div>
     </>
   )
-}
-
+})
 export default () => (
   <Provider store={store}>
     <App />

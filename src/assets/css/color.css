@@ -10,9 +10,25 @@ html{
 }
 
 .icon-color{
-  color:var(--white) !important;
+  color:rgb(209, 213, 219) !important;
 }
 
 .transition{
   transition:all .3s;
+}
+
+/* 自定义滚动条样式 */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 2px;
+}
+::-webkit-scrollbar-track {
+  background: hsla(0,0%,53.3%,.1);
+}
+::-webkit-scrollbar-thumb {
+  background: hsla(0,0%,53.3%,.4);
 }

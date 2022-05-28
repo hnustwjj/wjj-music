@@ -22,10 +22,10 @@ const Playing = memo(() => {
             border='b-1'
             className='border-[hsla(0,0%,100%,.1)]'
             leading='50px'>
-            <span w='55px' />
+            <span w='80px' />
             <span className='flex-[4]'>歌曲</span>
             <span className='flex-1'>歌手</span>
-            <span w='60px'>时长</span>
+            <span w='80px'>时长</span>
           </div>
           <div flex='1' overflow='auto'>
             {musicList.map((item, index) => (
@@ -37,18 +37,20 @@ const Playing = memo(() => {
                 cursor='pointer'
                 className='border-[hsla(0,0%,100%,.1)] hover:bg-[rgba(0,0,0,.05)]'
                 onClick={() => switchMusic(item)}>
-                <span w='55px' flex='~' items='center' justify='center'>
+                <span w='80px' flex='~' items='center' justify='center'>
                   {currentMusic === item ? <img src={img} /> : index + 1}
                 </span>
                 <span className='flex-[4]'>{item.name}</span>
                 <span className='flex-1'>{item.ar[0].name}</span>
-                <span w='60px'>{formatTime(item.dt)}</span>
+                <span w='80px'>{formatTime(item.dt)}</span>
               </div>
             ))}
           </div>
         </>
       ) : (
-        '暂无歌曲'
+        <div h='full' w='full' flex='~' justify='center' items='center'>
+          啥情况，咋啥都没有！！！
+        </div>
       )}
     </>
   )

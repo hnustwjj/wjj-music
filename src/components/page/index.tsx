@@ -27,7 +27,7 @@ const Page = memo(() => {
         <a
           href='https://github.com/hnustwjj/wjj-music'
           className='text-[1.35rem]'>
-          勾勾的音乐播放器
+          勾勾的音乐组件
         </a>
         <button
           className='absolute right-20px'

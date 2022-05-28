@@ -1,10 +1,11 @@
 import React, { memo } from 'react'
 import { useAppDispatch, useAppSelector } from '@/store'
 
+import img from '@/assets/img/playing.gif'
 import { formatTime } from '@/utils'
 import { changeCurrentMusic, changeLyric } from '@/store/music'
 const Playing = memo(() => {
-  const musicList = useAppSelector(state => state.music.musicList)
+  const { musicList, currentMusic } = useAppSelector(state => state.music)
   const dispatch = useAppDispatch()
 
   const switchMusic = item => {
@@ -36,8 +37,8 @@ const Playing = memo(() => {
                 cursor='pointer'
                 className='border-[hsla(0,0%,100%,.1)] hover:bg-[rgba(0,0,0,.05)]'
                 onClick={() => switchMusic(item)}>
-                <span w='55px' text='center'>
-                  {index + 1}
+                <span w='55px' flex='~' items='center' justify='center'>
+                  {currentMusic === item ? <img src={img} /> : index + 1}
                 </span>
                 <span className='flex-[4]'>{item.name}</span>
                 <span className='flex-1'>{item.ar[0].name}</span>

@@ -18,7 +18,11 @@ function App() {
   return (
     <>
       <Card changePageActive={() => setPageActive(!pageActive)} />
-      <Page />
+
+      <div
+        className={`transition opacity-0` + (pageActive ? ' opacity-100' : '')}>
+        <Page />
+      </div>
     </>
   )
 }

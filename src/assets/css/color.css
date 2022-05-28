@@ -12,3 +12,7 @@ html{
 .icon-color{
   color:var(--white) !important;
 }
+
+.transition{
+  transition:all .3s;
+}

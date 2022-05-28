@@ -11,6 +11,7 @@ import { useAppSelector } from '@/store'
 //TODO:手机端兼容
 // 1：header手机端看不清
 
+//TODO:登录
 const navList = [
   { title: '正在播放', element: <Playing /> },
   { title: '推荐', element: <Recommend /> },

@@ -1,9 +1,22 @@
-import { useAppDispatch, useAppSelector } from './../../../store/index'
+import { useAppDispatch, useAppSelector } from '../../../store/index'
 import { changeCurrentMusic, changeLyric, changeDuration } from '@/store/music'
 import { useState, useRef, SyntheticEvent, useEffect } from 'react'
-
+import { Dispatch, SetStateAction, RefObject } from 'react'
 export const INITIAL_VOLUME = 0.66
-export default function (musicList: any[], currentMusic: any) {
+
+export interface IAudio {
+  switchMusicStaus: () => void
+  isPlaying: boolean
+  setIsPlaying: Dispatch<SetStateAction<boolean>>
+  duration: number
+  audioRef: RefObject<HTMLAudioElement>
+  switchMusic: (type: 'pre' | 'next') => Promise<void>
+  canplay: (e: SyntheticEvent<HTMLAudioElement, Event>) => void
+  setVolume: Dispatch<SetStateAction<number>>
+  volume: number
+}
+
+export default function useAudio(musicList: any[], currentMusic: any) {
   const dispatch = useAppDispatch()
   const { duration } = useAppSelector(state => state.music)
 

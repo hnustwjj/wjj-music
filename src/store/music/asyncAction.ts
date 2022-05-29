@@ -5,9 +5,10 @@ import { changeMusicList, changeCurrentMusic, changeCurrentLyric } from '.'
 // 第一次
 export const fetchHotRecommend = () => async (dispatch: AppDispatch) => {
   const {
-    playlist: { tracks }
+    data: { dailySongs },
   } = await getLike()
   // 给歌曲对象上添加index下标
+  const tracks = dailySongs
   for (let i = 0; i < tracks.length; i++) {
     tracks[i]['index'] = i
   }
@@ -22,7 +23,7 @@ export const fetchHotRecommend = () => async (dispatch: AppDispatch) => {
 // 根据id获取歌词
 export const changeLyric = (id: number) => async (dispatch: AppDispatch) => {
   const {
-    lrc: { lyric }
+    lrc: { lyric },
   } = await getLyric(id)
   dispatch(changeCurrentLyric(lyric))
 }

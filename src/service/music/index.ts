@@ -3,7 +3,7 @@ import { request_util } from '..'
 // 获取我的喜欢音乐的所有id
 export function getLike() {
   return request_util.get({
-    url: 'playlist/detail?id=3778678',
+    url: '/recommend/songs',
   })
 }
 

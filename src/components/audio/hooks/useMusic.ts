@@ -6,9 +6,16 @@ interface Singers {
   tns: []
   alias: []
 }
-
+export interface IMusicInfo {
+  al: any
+  singers: string
+  name: any
+  url: any
+  currentMusic: any
+  musicList: any[]
+}
 export default function useMusicInfo() {
-  // 获取当前歌曲和当前歌词
+  // 获取当前歌曲和歌曲列表
   const { currentMusic, musicList } = useAppSelector(state => state.music)
   // 分别是id，歌曲信息，作者，歌曲名
   const { id, al, ar, name } = currentMusic

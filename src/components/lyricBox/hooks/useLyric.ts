@@ -2,6 +2,14 @@ import { parseLyric } from '@/utils'
 import { useAppSelector, useAppDispatch } from './../../../store/index'
 import { useEffect, useRef, useMemo } from 'react'
 import { changeCurrentTime, changeCurrentLyricIndex } from '@/store/music'
+import { lyricItem } from '@/utils'
+import { RefObject } from 'react'
+export interface ILyric {
+  updateTime: (e: any, fuzzy?: boolean) => void
+  currentLyricIndex: number
+  lyricList: lyricItem[]
+  lyricBox: RefObject<HTMLDivElement>
+}
 export default function useLyric() {
   const dispatch = useAppDispatch()
   // 获取当前歌曲和当前歌词

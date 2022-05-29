@@ -1,1 +1,7 @@
 node_modules
+src
+index.html
+tsconfig.json
+tsconfig.node.json
+vite.config.ts
+windi.config.js

@@ -1,5 +1,9 @@
 import { useAppDispatch, useAppSelector } from '../store/index'
-import { changeCurrentMusic, changeLyric, changeDuration } from '@/store/music'
+import {
+  changeCurrentMusic,
+  changeLyric,
+  changeDuration,
+} from '@/store/music'
 import { useState, useRef, SyntheticEvent, useEffect } from 'react'
 import { Dispatch, SetStateAction, RefObject } from 'react'
 export const INITIAL_VOLUME = 0.66
@@ -14,9 +18,15 @@ export interface IAudio {
   canplay: (e: SyntheticEvent<HTMLAudioElement, Event>) => void
   setVolume: Dispatch<SetStateAction<number>>
   volume: number
+  changeJingyin: () => void
 }
-
-export default function useAudio(musicList: any[], currentMusic: any) {
+//需要放在最外面，否则每次执行函数都会重新创建变量
+let volumeCache = 0
+let isJingyin = false
+export default function useAudio(
+  musicList: any[],
+  currentMusic: any
+) {
   const dispatch = useAppDispatch()
   const { duration } = useAppSelector(state => state.music)
 
@@ -69,10 +79,24 @@ export default function useAudio(musicList: any[], currentMusic: any) {
    */
   const canplay = (e: SyntheticEvent<HTMLAudioElement, Event>) => {
     // 修改duration
-    dispatch(changeDuration((e.target as HTMLAudioElement).duration * 1000))
+    dispatch(
+      changeDuration((e.target as HTMLAudioElement).duration * 1000)
+    )
     isPlaying ? audioRef.current?.play() : audioRef.current?.pause()
   }
+
+  const changeJingyin = () => {
+    // isJingyin和volumnCache放在函数外，防止每次执行函数都重新声明变量
+    if (!isJingyin) {
+      volumeCache = volume
+      setVolume(0)
+    } else {
+      setVolume(volumeCache)
+    }
+    isJingyin = !isJingyin
+  }
   return {
+    changeJingyin,
     switchMusicStaus,
     isPlaying,
     setIsPlaying,

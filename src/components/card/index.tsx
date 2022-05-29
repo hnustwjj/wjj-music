@@ -1,17 +1,12 @@
 import React, { memo, useState } from 'react'
 
-import Slider from '../../common/slider'
 import LyricBox from '../../common/lyricBox'
 import { PanWrapper, CardWrapper } from './style'
 import { imgUrl } from '@/utils'
 import { ILyric } from '@/common/lyricBox/hooks/useLyric'
 import { IMusicInfo } from '../../hooks/useMusic'
 import { IAudio } from '../../hooks/useAudio'
-import { INITIAL_VOLUME } from '../../hooks/useAudio'
 //TODO:添加pan的碟片的那根棍子= =
-//需要放在最外面，否则每次执行函数都会重新创建变量
-let volumeCache = 0
-let isJingyin = false
 
 const Card = memo(
   (props: {
@@ -20,38 +15,32 @@ const Card = memo(
     lyricInfo: ILyric
     audioInfo: IAudio
     TimeSlider: () => JSX.Element
+    VolumeSlider: () => JSX.Element
   }) => {
-    const { TimeSlider, changePageActive } = props
+    const {
+      TimeSlider,
+      changePageActive,
+      musicInfo,
+      lyricInfo,
+      audioInfo,
+      VolumeSlider,
+    } = props
+
     // 是否点击了pan显示card
     const [active, setPanActive] = useState(false)
 
     // 获取音乐信息相关
-    const { al, singers, name: songName } = props.musicInfo
+    const { al, singers, name: songName } = musicInfo
     // 获取歌词相关信息
-    const { currentLyricIndex, lyricList, lyricBox } = props.lyricInfo
+    const { currentLyricIndex, lyricList, lyricBox } = lyricInfo
     // 获取音频相关信息
     const {
       switchMusicStaus,
       isPlaying,
       switchMusic,
-      setVolume,
       volume,
-    } = props.audioInfo
-    // 音量进度条改变事件
-    const onVolumeliderChange = (percent: number) => {
-      setVolume(percent)
-    }
-
-    const changeJingyin = () => {
-      // isJingyin和volumnCache放在函数外，防止每次执行函数都重新声明变量
-      if (!isJingyin) {
-        volumeCache = volume
-        setVolume(0)
-      } else {
-        setVolume(volumeCache)
-      }
-      isJingyin = !isJingyin
-    }
+      changeJingyin,
+    } = audioInfo
 
     //TODO:检测背景图的明暗，设置不同的color
     return (
@@ -156,12 +145,7 @@ const Card = memo(
                   bottom='20px'
                   opacity='0'
                   hover='opacity-100'>
-                  <Slider
-                    direction='col'
-                    initialValue={INITIAL_VOLUME}
-                    value={volume}
-                    change={percent => onVolumeliderChange(percent)}
-                  />
+                  {VolumeSlider}
                 </div>
               </div>
             </div>

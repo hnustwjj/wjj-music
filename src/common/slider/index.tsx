@@ -10,6 +10,9 @@ type SliderProps = {
   value: number
   initialValue: number
   change?: (current: number) => void
+  onMouseDown?: () => void
+  onMouseUp?: () => void
+  onMouseMove?: () => void
 }
 
 //TODO:增加已加载的进度条（可选的）
@@ -62,12 +65,15 @@ const Slider = memo((props: SliderProps) => {
    */
   const mouseDown = () => {
     status = true
+    if (props.onMouseDown) props.onMouseDown()
     document.onmousemove = (e: any) => {
+      if (props.onMouseMove) props.onMouseMove()
       if (status) {
         setcurrent(getOffset(e, direction))
       }
     }
     document.onmouseup = () => {
+      if (props.onMouseUp) props.onMouseUp()
       status = false
       document.onmousemove = null
     }
@@ -99,7 +105,9 @@ const Slider = memo((props: SliderProps) => {
         justify='center'
         cursor='pointer'
         className='bg-[#454545] button'
-        style={direction === 'row' ? { marginLeft: -8 } : { marginTop: -8 }}
+        style={
+          direction === 'row' ? { marginLeft: -8 } : { marginTop: -8 }
+        }
         onMouseDown={() => mouseDown()}
         onClick={e => e.stopPropagation()}>
         <div w='8px' h='8px' rounded='full' bg='white' />

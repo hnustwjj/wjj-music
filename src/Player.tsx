@@ -9,6 +9,7 @@ import Slider from './common/slider'
 import useMusicInfo from './hooks/useMusic'
 import useLyric from './common/lyricBox/hooks/useLyric'
 import useAudio from './hooks/useAudio'
+import { INITIAL_VOLUME } from '@/hooks/useAudio'
 const App = memo(() => {
   const dispatch = useAppDispatch()
   // 请求热榜推荐歌曲的数据
@@ -23,30 +24,54 @@ const App = memo(() => {
   // 获取歌词信息的Hook
   const lyricInfo = useLyric()
   // 获取音频信息的Hook
-  const audioInfo = useAudio(musicInfo.musicList, musicInfo.currentMusic)
+  const audioInfo = useAudio(
+    musicInfo.musicList,
+    musicInfo.currentMusic
+  )
 
   // 时间百分比
   const { audioRef, duration } = audioInfo
-  const timePercent = ((audioRef.current?.currentTime ?? 0) * 1000) / duration
+  const timePercent =
+    ((audioRef.current?.currentTime ?? 0) * 1000) / duration
   // 时间进度条改变事件
   const onTimeSliderChange = (percent: number) => {
     const time = (duration * percent).toFixed()
     lyricInfo.updateTime(time, true)
-    audioRef.current && (audioRef.current.currentTime = parseInt(time) / 1000)
+    if (audioRef.current) {
+      audioRef.current.currentTime = parseInt(time) / 1000
+    }
   }
-  // Card和Page公用的Slider
+  // Card和Page公用的TimeSlider
   const TimeSlider = useMemo(
     () => (
       <Slider
         direction='row'
         initialValue={0}
+        onMouseDown={() => audioRef.current?.pause()}
+        onMouseMove={() => audioRef.current?.pause()}
+        onMouseUp={() => audioRef.current?.play()}
         change={percent => onTimeSliderChange(percent)}
         value={timePercent}
       />
     ),
     [onTimeSliderChange, timePercent]
   )
-
+  // 音量进度条改变事件
+  const onVolumeliderChange = (percent: number) => {
+    audioInfo.setVolume(percent)
+  }
+  // Card和Page公用的VolumeSlider
+  const VolumeSlider = useMemo(
+    () => (
+      <Slider
+        direction='col'
+        initialValue={INITIAL_VOLUME}
+        value={audioInfo.volume}
+        change={percent => onVolumeliderChange(percent)}
+      />
+    ),
+    [onTimeSliderChange, timePercent]
+  )
   return (
     <>
       <audio
@@ -62,15 +87,16 @@ const App = memo(() => {
         musicInfo={musicInfo}
         lyricInfo={lyricInfo}
         TimeSlider={TimeSlider}
+        VolumeSlider={VolumeSlider}
         changePageActive={() => setPageActive(!pageActive)}
       />
       <div
         h='100vh'
         w='100vw'
         className={
-          `transition-opacity opacity-0` + (pageActive ? ' opacity-100' : '')
+          `transition-opacity ` + (pageActive ? ' opacity-100' : '')
         }>
-        <Page TimeSlider={TimeSlider} />
+        <Page TimeSlider={TimeSlider} musicInfo={musicInfo} />
       </div>
     </>
   )

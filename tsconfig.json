@@ -17,6 +17,7 @@
       "removeComments": false,
       "declaration": true,
       "isolatedModules": true,
+      "emitDeclarationOnly": true,
       "declarationDir": "dist",
       "skipLibCheck": true,
       "jsx": "preserve",
@@ -25,7 +26,6 @@
       "rootDir": ".",
       "paths": {
           "@/*": ["src/*"],
-          "ungeui": ["src/"]
       }
   },
   "include": ["src"],

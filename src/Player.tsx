@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from 'react'
+import { memo, useCallback, useEffect, useState } from 'react'
 import Card from './components/card'
 import Page from './components/page'
 
@@ -24,8 +24,29 @@ const App = memo(() => {
   const lyricInfo = useLyric()
   // 获取音频信息的Hook
   const audioInfo = useAudio(musicInfo.musicList, musicInfo.currentMusic)
-  //TODO:抽离出Slider
-  // const timeSlider = <Slider />
+
+  // 时间百分比
+  const { audioRef, duration } = audioInfo
+  const timePercent = ((audioRef.current?.currentTime ?? 0) * 1000) / duration
+  // 时间进度条改变事件
+  const onTimeSliderChange = (percent: number) => {
+    const time = (duration * percent).toFixed()
+    lyricInfo.updateTime(time, true)
+    audioRef.current && (audioRef.current.currentTime = parseInt(time) / 1000)
+  }
+
+  // Card和Page公用的Slider（用useCallback进行缓存）
+  const TimeSlider = useCallback(
+    () => (
+      <Slider
+        direction='row'
+        initialValue={0}
+        change={percent => onTimeSliderChange(percent)}
+        value={timePercent}
+      />
+    ),
+    []
+  )
   return (
     <>
       <audio
@@ -40,6 +61,7 @@ const App = memo(() => {
         audioInfo={audioInfo}
         musicInfo={musicInfo}
         lyricInfo={lyricInfo}
+        TimeSlider={TimeSlider}
         changePageActive={() => setPageActive(!pageActive)}
       />
       <div
@@ -48,7 +70,7 @@ const App = memo(() => {
         className={
           `transition-opacity opacity-0` + (pageActive ? ' opacity-100' : '')
         }>
-        <Page />
+        <Page TimeSlider={TimeSlider} />
       </div>
     </>
   )

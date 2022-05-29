@@ -19,8 +19,9 @@ const Card = memo(
     musicInfo: IMusicInfo
     lyricInfo: ILyric
     audioInfo: IAudio
+    TimeSlider: () => JSX.Element
   }) => {
-    const { changePageActive } = props
+    const { TimeSlider, changePageActive } = props
     // 是否点击了pan显示card
     const [active, setPanActive] = useState(false)
 
@@ -28,33 +29,15 @@ const Card = memo(
     const { al, singers, name: songName } = props.musicInfo
 
     // 获取歌词相关信息的hook
-    const { updateTime, currentLyricIndex, lyricList, lyricBox } =
-      props.lyricInfo
+    const { currentLyricIndex, lyricList, lyricBox } = props.lyricInfo
 
     // 获取音频相关信息的hook
-    const {
-      switchMusicStaus,
-      isPlaying,
-      duration,
-      audioRef,
-      switchMusic,
-      setVolume,
-      volume,
-    } = props.audioInfo
-
-    // 时间百分比
-    const timePercent = ((audioRef.current?.currentTime ?? 0) * 1000) / duration
+    const { switchMusicStaus, isPlaying, switchMusic, setVolume, volume } =
+      props.audioInfo
 
     // 音量进度条改变事件
     const onVolumeliderChange = (percent: number) => {
       setVolume(percent)
-    }
-
-    // 时间进度条改变事件
-    const onTimeSliderChange = (percent: number) => {
-      const time = (duration * percent).toFixed()
-      updateTime(time, true)
-      audioRef.current && (audioRef.current.currentTime = parseInt(time) / 1000)
     }
 
     const changeJingyin = () => {
@@ -149,12 +132,7 @@ const Card = memo(
                 )}
               </div>
               <div w='240px' p='x-15px' flex='~' justify='center'>
-                <Slider
-                  direction='row'
-                  initialValue={0}
-                  change={percent => onTimeSliderChange(percent)}
-                  value={timePercent}
-                />
+                <TimeSlider />
               </div>
               <div className='icon' m='r-5px' relative='~'>
                 <i

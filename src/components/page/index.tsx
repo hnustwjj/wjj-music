@@ -20,13 +20,12 @@ const navList = [
   { title: '我的歌单', element: <Mine /> },
   { title: '我听过的', element: <Listened /> },
 ]
-const Page = memo(() => {
+const Page = memo((props: { TimeSlider: () => JSX.Element }) => {
   const {
     currentMusic: { al },
-    currentTime,
-    duration,
   } = useAppSelector(state => state.music)
   const [currentIndex, setCurrentIndex] = useState(0)
+  const { TimeSlider } = props
   return (
     <DivWrapper>
       {/* 两张背景蒙版 */}
@@ -80,11 +79,7 @@ const Page = memo(() => {
         flex='~'
         justify='center'
         items='center'>
-        <Slider
-          direction='row'
-          value={currentTime / duration}
-          initialValue={0}
-        />
+        <TimeSlider />
       </footer>
     </DivWrapper>
   )

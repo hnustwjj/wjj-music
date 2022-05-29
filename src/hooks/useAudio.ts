@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from '../../../store/index'
+import { useAppDispatch, useAppSelector } from '../store/index'
 import { changeCurrentMusic, changeLyric, changeDuration } from '@/store/music'
 import { useState, useRef, SyntheticEvent, useEffect } from 'react'
 import { Dispatch, SetStateAction, RefObject } from 'react'

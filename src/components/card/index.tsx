@@ -5,9 +5,9 @@ import LyricBox from '../lyricBox'
 import { PanWrapper, CardWrapper } from './style'
 import { imgUrl } from '@/utils'
 import { ILyric } from '@/components/lyricBox/hooks/useLyric'
-import { IMusicInfo } from '../audio/hooks/useMusic'
-import { IAudio } from '../audio/hooks/useAudio'
-import { INITIAL_VOLUME } from '../audio/hooks/useAudio'
+import { IMusicInfo } from '../../hooks/useMusic'
+import { IAudio } from '../../hooks/useAudio'
+import { INITIAL_VOLUME } from '../../hooks/useAudio'
 //TODO:添加pan的碟片的那根棍子= =
 //需要放在最外面，否则每次执行函数都会重新创建变量
 let volumeCache = 0

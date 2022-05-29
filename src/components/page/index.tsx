@@ -78,7 +78,7 @@ const Page = memo((props: { TimeSlider: () => JSX.Element }) => {
         flex='~'
         justify='center'
         items='center'>
-        <TimeSlider />
+        {TimeSlider}
       </footer>
     </DivWrapper>
   )

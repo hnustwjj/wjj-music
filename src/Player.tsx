@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useState } from 'react'
+import { memo, useMemo, useEffect, useState } from 'react'
 import Card from './components/card'
 import Page from './components/page'
 
@@ -11,8 +11,8 @@ import useLyric from './components/lyricBox/hooks/useLyric'
 import useAudio from './hooks/useAudio'
 const App = memo(() => {
   const dispatch = useAppDispatch()
+  // 请求热榜推荐歌曲的数据
   useEffect(() => {
-    // 请求热榜推荐歌曲的数据
     dispatch(fetchHotRecommend())
   }, [dispatch])
 
@@ -34,9 +34,8 @@ const App = memo(() => {
     lyricInfo.updateTime(time, true)
     audioRef.current && (audioRef.current.currentTime = parseInt(time) / 1000)
   }
-
-  // Card和Page公用的Slider（用useCallback进行缓存）
-  const TimeSlider = useCallback(
+  // Card和Page公用的Slider
+  const TimeSlider = useMemo(
     () => (
       <Slider
         direction='row'
@@ -45,8 +44,9 @@ const App = memo(() => {
         value={timePercent}
       />
     ),
-    []
+    [onTimeSliderChange, timePercent]
   )
+
   return (
     <>
       <audio

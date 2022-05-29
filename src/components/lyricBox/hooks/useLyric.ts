@@ -12,6 +12,7 @@ export interface ILyric {
 }
 export default function useLyric() {
   const dispatch = useAppDispatch()
+
   // 获取当前歌曲和当前歌词
   const { currentLyric, currentMusic, currentTime, currentLyricIndex } =
     useAppSelector(state => state.music)
@@ -25,6 +26,7 @@ export default function useLyric() {
    * @param e
    */
   const updateTime = (e: any, fuzzy = false) => {
+    //修改全局播放时间
     dispatch(
       changeCurrentTime(
         typeof e !== 'string'
@@ -32,10 +34,11 @@ export default function useLyric() {
           : parseInt(e)
       )
     )
-    const index = lyricList.findIndex(item => {
-      return Math.abs(item.time - currentTime) <= (fuzzy ? 1000 : 400)
-    })
+    const index = lyricList.findIndex(
+      item => Math.abs(item.time - currentTime) <= (fuzzy ? 1000 : 400)
+    )
     if (index !== -1) {
+      //修改当前的歌词下标
       dispatch(changeCurrentLyricIndex(index))
     }
   }

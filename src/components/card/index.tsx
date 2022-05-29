@@ -25,16 +25,13 @@ const Card = memo(
     // 是否点击了pan显示card
     const [active, setPanActive] = useState(false)
 
-    // 获取音乐信息相关的hook
+    // 获取音乐信息相关
     const { al, singers, name: songName } = props.musicInfo
-
-    // 获取歌词相关信息的hook
+    // 获取歌词相关信息
     const { currentLyricIndex, lyricList, lyricBox } = props.lyricInfo
-
-    // 获取音频相关信息的hook
+    // 获取音频相关信息
     const { switchMusicStaus, isPlaying, switchMusic, setVolume, volume } =
       props.audioInfo
-
     // 音量进度条改变事件
     const onVolumeliderChange = (percent: number) => {
       setVolume(percent)
@@ -132,7 +129,7 @@ const Card = memo(
                 )}
               </div>
               <div w='240px' p='x-15px' flex='~' justify='center'>
-                <TimeSlider />
+                {TimeSlider}
               </div>
               <div className='icon' m='r-5px' relative='~'>
                 <i

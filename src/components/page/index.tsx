@@ -7,7 +7,6 @@ import Recommend from './components/Recommend'
 import Search from './components/Search'
 import Mine from './components/Mine'
 import Listened from './components/Listened'
-import { useAppSelector } from '@/store'
 import { IMusicInfo } from '@/hooks/useMusic'
 //TODO:手机端兼容
 // 1：header手机端看不清

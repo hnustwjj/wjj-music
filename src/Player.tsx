@@ -101,7 +101,10 @@ const App = memo(() => {
         h='100vh'
         w='100vw'
         className={
-          `transition-opacity ` + (pageActive ? ' opacity-100' : '')
+          `transition transform ` +
+          (pageActive
+            ? ' scale-100 opacity-100'
+            : 'scale-0 opacity-0')
         }>
         <Page TimeSlider={TimeSlider} musicInfo={musicInfo} />
       </div>

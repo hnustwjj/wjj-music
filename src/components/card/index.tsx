@@ -75,7 +75,7 @@ const Card = memo(
             onClick={() => changePageActive()}
           />
           {/* 三张背景蒙版 */}
-          {[5, 8, 2].map(item => (
+          {[5, 2].map(item => (
             <img
               key={item}
               src={imgUrl(300, al?.picUrl)}

@@ -2,7 +2,7 @@
 html{
   /* css原生也支持变量的设置 */
   --white:#fff;
-  --lyric:#40ce8f;
+  --lyric:#fff;
   --slider:#15add3;
 }
 

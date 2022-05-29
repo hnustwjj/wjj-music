@@ -1,13 +1,11 @@
 import { parseLyric } from '@/utils'
 import { useAppSelector } from './../../../store/index'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 export default function useLyric() {
   // 获取当前歌曲和当前歌词
-  const { currentLyric, currentMusic } = useAppSelector(
-    state => state.music
-  )
+  const { currentLyric, currentMusic } = useAppSelector(state => state.music)
   // 转换歌词
-  const lyricList = parseLyric(currentLyric)
+  const lyricList = useMemo(() => parseLyric(currentLyric), [currentLyric])
   // 当前歌词下标
   const [currentLyricIndex, setcurrentLyricIndex] = useState(0)
 
@@ -18,19 +16,22 @@ export default function useLyric() {
    * 为了模糊匹配（可以缓解这个情况）
    * @param e
    */
-  const updateTime = (e: any, fuzzy = false) => {
-    setCurrentTime(
-      typeof e !== 'string'
-        ? parseInt((e.target.currentTime * 1000).toFixed())
-        : parseInt(e)
-    )
-    const index = lyricList.findIndex(item => {
-      return Math.abs(item.time - currentTime) <= (fuzzy ? 1000 : 400)
-    })
-    if (index !== -1) {
-      setcurrentLyricIndex(index)
-    }
-  }
+  const updateTime = useCallback(
+    (e: any, fuzzy = false) => {
+      setCurrentTime(
+        typeof e !== 'string'
+          ? parseInt((e.target.currentTime * 1000).toFixed())
+          : parseInt(e)
+      )
+      const index = lyricList.findIndex(item => {
+        return Math.abs(item.time - currentTime) <= (fuzzy ? 1000 : 400)
+      })
+      if (index !== -1) {
+        setcurrentLyricIndex(index)
+      }
+    },
+    [setCurrentTime]
+  )
 
   // 获取包裹歌词的盒子
   const lyricBox = useRef<HTMLDivElement>(null)
@@ -59,6 +60,6 @@ export default function useLyric() {
     updateTime,
     currentLyricIndex,
     lyricList,
-    lyricBox
+    lyricBox,
   }
 }

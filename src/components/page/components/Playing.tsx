@@ -35,6 +35,7 @@ const Playing = memo(() => {
                 leading='50px'
                 border='b-1'
                 cursor='pointer'
+                key={item.id}
                 className='border-[hsla(0,0%,100%,.1)] hover:bg-[rgba(0,0,0,.05)]'
                 onClick={() => switchMusic(item)}>
                 <span w='80px' flex='~' items='center' justify='center'>

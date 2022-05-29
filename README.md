@@ -12,15 +12,15 @@ npm i wjj-player
 import 'wjj-player/dist/style.css'
 ```
 
-- 任意一个组件中，导入`Card`并使用
+- 任意一个组件中，导入`Player`并使用
 
 ```tsx
 import React from 'react'
-import { Card } from 'wjj-player'
+import { Player } from 'wjj-player'
 function App() {
   return (
     <div className='App'>
-      <Card />
+      <Player />
     </div>
   )
 }

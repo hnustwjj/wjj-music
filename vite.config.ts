@@ -13,18 +13,18 @@ export default defineConfig({
   },
   define: {
     'process.env': {
-      BASE_URL: 'http://123.207.32.32:9001/',
+      BASE_URL: 'http://42.192.65.59:9000/',
     },
   },
   build: {
-    lib:{
-      entry:'./src/main.ts',
-      formats:['es','umd'],
-      name:pkg.name,
-      fileName:format=>`index.${format}.js`
+    lib: {
+      entry: './src/main.ts',
+      formats: ['es', 'umd'],
+      name: pkg.name,
+      fileName: format => `index.${format}.js`,
     },
     rollupOptions: {
       external: ['react', 'react-dom'],
     },
-  }
+  },
 })

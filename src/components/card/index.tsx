@@ -1,10 +1,11 @@
 import React, { memo, useState } from 'react'
 
 import Slider from '../slider'
-import { imgUrl } from '@/utils'
-import useLyric from './hooks/useLyric'
-import useMusicInfo from './hooks/useMusic'
+import LyricBox from '../lyricBox'
 import { PanWrapper, CardWrapper } from './style'
+import { imgUrl } from '@/utils'
+import useLyric from '@/components/lyricBox/hooks/useLyric'
+import useMusicInfo from './hooks/useMusic'
 import useAudio, { INITIAL_VOLUME } from './hooks/useAudio'
 
 //需要放在最外面，否则每次执行函数都会重新创建变量
@@ -25,6 +26,7 @@ const Card = memo((props: { changePageActive: () => void }) => {
     currentMusic,
     musicList,
   } = useMusicInfo()
+
   // 获取歌词相关信息的hook
   const { updateTime, currentLyricIndex, lyricList, lyricBox } = useLyric()
 
@@ -136,17 +138,11 @@ const Card = memo((props: { changePageActive: () => void }) => {
           </p>
           {/* 歌词 */}
           <div flex='1' overflow='hidden' relative='~' p='x-15px'>
-            <div ref={lyricBox}>
-              {lyricList.map((item, index) => (
-                <p
-                  text='12px center gray-300'
-                  leading='23px'
-                  className={currentLyricIndex === index ? 'active-lyric' : ''}
-                  key={item.time + item.content}>
-                  {item.content}
-                </p>
-              ))}
-            </div>
+            <LyricBox
+              currentLyricIndex={currentLyricIndex}
+              lyricList={lyricList}
+              lyricBox={lyricBox}
+            />
           </div>
           {/* 控制栏 */}
           <div h='40px' w='300px' flex='~' items='center'>

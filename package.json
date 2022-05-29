@@ -1,4 +1,3 @@
-
 {
   "name": "wjj-player",
   "version": "1.0.3",
@@ -6,11 +5,15 @@
   "main": "./dist/index.umd.js",
   "module": "./dist/index.es.js",
   "types": "./lib/main.d.ts",
-  "keywords": ["react","music","music-player"],
+  "keywords": [
+    "react",
+    "music",
+    "music-player"
+  ],
   "author": "hnustwjj",
   "repository": {
     "type": "git",
-    "url":"https://github.com/hnustwjj/wjj-music"
+    "url": "https://github.com/hnustwjj/wjj-music"
   },
   "scripts": {
     "dev": "vite",
@@ -31,6 +34,7 @@
     "@types/react-dom": "^18.0.0",
     "@types/styled-components": "^5.1.25",
     "@vitejs/plugin-react": "^1.3.0",
+    "@windicss/plugin-scrollbar": "^1.2.3",
     "typescript": "^4.6.3",
     "vite": "^2.9.9",
     "vite-plugin-windicss": "^1.8.4",

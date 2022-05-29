@@ -57,11 +57,7 @@ export const CardWrapper = styled.div`
   * {
     transition: all 0.5s;
   }
-  .active-lyric {
-    font-weight: 600;
-    color: rgb(229, 231, 235);
-    transform: scale(1.2);
-  }
+
   &.active {
     transform: scale(1) translate(0, 0);
     opacity: 1;

@@ -5,9 +5,9 @@ import Page from './components/page'
 import { Provider } from 'react-redux'
 import { fetchHotRecommend } from '@/store/music'
 import store, { useAppDispatch } from '@/store'
-import Slider from './components/slider'
+import Slider from './common/slider'
 import useMusicInfo from './hooks/useMusic'
-import useLyric from './components/lyricBox/hooks/useLyric'
+import useLyric from './common/lyricBox/hooks/useLyric'
 import useAudio from './hooks/useAudio'
 const App = memo(() => {
   const dispatch = useAppDispatch()

@@ -1,10 +1,10 @@
 import React, { memo, useState } from 'react'
 
-import Slider from '../slider'
-import LyricBox from '../lyricBox'
+import Slider from '../../common/slider'
+import LyricBox from '../../common/lyricBox'
 import { PanWrapper, CardWrapper } from './style'
 import { imgUrl } from '@/utils'
-import { ILyric } from '@/components/lyricBox/hooks/useLyric'
+import { ILyric } from '@/common/lyricBox/hooks/useLyric'
 import { IMusicInfo } from '../../hooks/useMusic'
 import { IAudio } from '../../hooks/useAudio'
 import { INITIAL_VOLUME } from '../../hooks/useAudio'
@@ -30,8 +30,13 @@ const Card = memo(
     // 获取歌词相关信息
     const { currentLyricIndex, lyricList, lyricBox } = props.lyricInfo
     // 获取音频相关信息
-    const { switchMusicStaus, isPlaying, switchMusic, setVolume, volume } =
-      props.audioInfo
+    const {
+      switchMusicStaus,
+      isPlaying,
+      switchMusic,
+      setVolume,
+      volume,
+    } = props.audioInfo
     // 音量进度条改变事件
     const onVolumeliderChange = (percent: number) => {
       setVolume(percent)
@@ -59,7 +64,10 @@ const Card = memo(
             h='80px'
             p='13px'
             onClick={() => setPanActive(!active)}>
-            <img className='rounded-full ' src={imgUrl(140, al?.picUrl)} />
+            <img
+              className='rounded-full '
+              src={imgUrl(140, al?.picUrl)}
+            />
           </div>
         </PanWrapper>
         <CardWrapper

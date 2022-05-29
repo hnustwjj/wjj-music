@@ -5,6 +5,7 @@ import Page from './components/page'
 import { Provider } from 'react-redux'
 import { fetchHotRecommend } from '@/store/music'
 import store, { useAppDispatch } from '@/store'
+import Slider from './components/slider'
 
 const App = memo(() => {
   const dispatch = useAppDispatch()
@@ -15,6 +16,9 @@ const App = memo(() => {
 
   // page是否显示
   const [pageActive, setPageActive] = useState(false)
+
+  //TODO:抽离出Slider和audio
+  // const timeSlider = <Slider />
   return (
     <>
       <Card changePageActive={() => setPageActive(!pageActive)} />

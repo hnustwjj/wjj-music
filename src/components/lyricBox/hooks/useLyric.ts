@@ -1,15 +1,15 @@
 import { parseLyric } from '@/utils'
-import { useAppSelector } from './../../../store/index'
-import { useState, useEffect, useRef, useMemo } from 'react'
+import { useAppSelector, useAppDispatch } from './../../../store/index'
+import { useEffect, useRef, useMemo } from 'react'
+import { changeCurrentTime, changeCurrentLyricIndex } from '@/store/music'
 export default function useLyric() {
+  const dispatch = useAppDispatch()
   // 获取当前歌曲和当前歌词
-  const { currentLyric, currentMusic } = useAppSelector(state => state.music)
+  const { currentLyric, currentMusic, currentTime, currentLyricIndex } =
+    useAppSelector(state => state.music)
   // 转换歌词
   const lyricList = useMemo(() => parseLyric(currentLyric), [currentLyric])
-  // 当前歌词下标
-  const [currentLyricIndex, setcurrentLyricIndex] = useState(0)
 
-  const [currentTime, setCurrentTime] = useState(0)
   /**
    * 更新播放时间和当前歌词下标的函数（会被audio的onUpdateTime调用）
    * 有时候直接点击进度条跳转会匹配不到导致index为-1，所以传入第二个参数
@@ -17,16 +17,18 @@ export default function useLyric() {
    * @param e
    */
   const updateTime = (e: any, fuzzy = false) => {
-    setCurrentTime(
-      typeof e !== 'string'
-        ? parseInt((e.target.currentTime * 1000).toFixed())
-        : parseInt(e)
+    dispatch(
+      changeCurrentTime(
+        typeof e !== 'string'
+          ? parseInt((e.target.currentTime * 1000).toFixed())
+          : parseInt(e)
+      )
     )
     const index = lyricList.findIndex(item => {
       return Math.abs(item.time - currentTime) <= (fuzzy ? 1000 : 400)
     })
     if (index !== -1) {
-      setcurrentLyricIndex(index)
+      dispatch(changeCurrentLyricIndex(index))
     }
   }
 

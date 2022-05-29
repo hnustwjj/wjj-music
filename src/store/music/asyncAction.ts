@@ -14,9 +14,9 @@ export const fetchHotRecommend = () => async (dispatch: AppDispatch) => {
   // 保存
   dispatch(changeMusicList(tracks))
   // 默认当前歌曲是第一个对象
-  dispatch(changeCurrentMusic(tracks[1]))
+  dispatch(changeCurrentMusic(tracks[0]))
   // 获取并修改currentLyric歌词
-  dispatch(changeLyric(tracks[1].id))
+  dispatch(changeLyric(tracks[0].id))
 }
 
 // 根据id获取歌词

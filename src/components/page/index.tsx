@@ -8,6 +8,7 @@ import Search from './components/Search'
 import Mine from './components/Mine'
 import Listened from './components/Listened'
 import { useAppSelector } from '@/store'
+import Slider from '../slider'
 //TODO:手机端兼容
 // 1：header手机端看不清
 
@@ -20,7 +21,11 @@ const navList = [
   { title: '我听过的', element: <Listened /> },
 ]
 const Page = memo(() => {
-  const { al } = useAppSelector(state => state.music.currentMusic)
+  const {
+    currentMusic: { al },
+    currentTime,
+    duration,
+  } = useAppSelector(state => state.music)
   const [currentIndex, setCurrentIndex] = useState(0)
   return (
     <DivWrapper>
@@ -68,8 +73,18 @@ const Page = memo(() => {
         <aside w='300px'></aside>
       </div>
       {/* 控制栏 */}
-      <footer w='full' h='80px' px='200px'>
-        内容
+      <footer
+        w='full'
+        h='80px'
+        px='200px'
+        flex='~'
+        justify='center'
+        items='center'>
+        <Slider
+          direction='row'
+          value={currentTime / duration}
+          initialValue={0}
+        />
       </footer>
     </DivWrapper>
   )

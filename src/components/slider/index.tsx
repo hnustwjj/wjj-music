@@ -11,6 +11,8 @@ type SliderProps = {
   initialValue: number
   change?: (current: number) => void
 }
+
+//TODO:增加已加载的进度条（可选的）
 const Slider = memo((props: SliderProps) => {
   const { value, initialValue, direction } = props
   // 当前进度条的百分比
@@ -84,7 +86,7 @@ const Slider = memo((props: SliderProps) => {
         className={
           (direction === 'row'
             ? 'h-5px rounded-l-full'
-            : 'w-5px rounded-t-full') + ' bg-blue line'
+            : 'w-5px rounded-t-full') + ' bg-$slider line'
         }
       />
       <div

@@ -1,8 +1,9 @@
 
 html{
   /* css原生也支持变量的设置 */
-  --blue:#15add3;
   --white:#fff;
+  --lyric:#40ce8f;
+  --slider:#15add3;
 }
 
 .bg-blue{

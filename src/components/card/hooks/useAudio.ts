@@ -1,12 +1,12 @@
-import { useAppDispatch } from './../../../store/index'
-import { changeCurrentMusic, changeLyric } from '@/store/music'
+import { useAppDispatch, useAppSelector } from './../../../store/index'
+import { changeCurrentMusic, changeLyric, changeDuration } from '@/store/music'
 import { useState, useRef, SyntheticEvent, useEffect } from 'react'
 
 export const INITIAL_VOLUME = 0.66
 export default function (musicList: any[], currentMusic: any) {
   const dispatch = useAppDispatch()
-  // 当前歌曲的时常（毫秒）
-  const [duration, setDuration] = useState(0)
+  const { duration } = useAppSelector(state => state.music)
+
   //是否正在播放歌曲
   const [isPlaying, setIsPlaying] = useState(false)
   // 播放
@@ -56,7 +56,7 @@ export default function (musicList: any[], currentMusic: any) {
    */
   const canplay = (e: SyntheticEvent<HTMLAudioElement, Event>) => {
     // 修改duration
-    setDuration((e.target as HTMLAudioElement).duration * 1000)
+    dispatch(changeDuration((e.target as HTMLAudioElement).duration * 1000))
     isPlaying ? audioRef.current?.play() : audioRef.current?.pause()
   }
   return {

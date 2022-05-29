@@ -10,6 +10,7 @@ import useMusicInfo from './hooks/useMusic'
 import useLyric from './common/lyricBox/hooks/useLyric'
 import useAudio from './hooks/useAudio'
 import { INITIAL_VOLUME } from '@/hooks/useAudio'
+let preVolume = 0
 const App = memo(() => {
   const dispatch = useAppDispatch()
   // 请求热榜推荐歌曲的数据
@@ -47,9 +48,15 @@ const App = memo(() => {
       <Slider
         direction='row'
         initialValue={0}
-        onMouseDown={() => audioRef.current?.pause()}
-        onMouseMove={() => audioRef.current?.pause()}
-        onMouseUp={() => audioRef.current?.play()}
+        onMouseDown={() => {
+          if (audioRef.current) {
+            preVolume = audioRef.current.volume
+            audioRef.current.volume = 0
+          }
+        }}
+        onMouseUp={() => {
+          if (audioRef.current) audioRef.current.volume = preVolume
+        }}
         change={percent => onTimeSliderChange(percent)}
         value={timePercent}
       />

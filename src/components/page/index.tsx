@@ -1,20 +1,24 @@
 import React, { memo, useState } from 'react'
-import DivWrapper, { NavButton } from './style'
 
 import { imgUrl } from '@/utils'
-import Playing from './components/Playing'
-import Recommend from './components/Recommend'
-import Search from './components/Search'
 import Mine from './components/Mine'
+import Search from './components/Search'
+import Playing from './components/Playing'
 import Listened from './components/Listened'
-import { IMusicInfo } from '@/hooks/useMusic'
+import DivWrapper, { NavButton } from './style'
+// import Recommend from './components/Recommend'
+
+import type { IMusicInfo } from '@/hooks/useMusic'
+
+
 //TODO:手机端兼容
 // 1：header手机端看不清
 
 //TODO:登录
+//TODO:使背景切换更自然
 const navList = [
-  { title: '正在播放', element: <Playing /> },
-  { title: '推荐', element: <Recommend /> },
+  { title: '每日推荐', element: <Playing /> },
+  // { title: '推荐', element: <Recommend /> },
   { title: '搜索', element: <Search /> },
   { title: '我的歌单', element: <Mine /> },
   { title: '我听过的', element: <Listened /> },

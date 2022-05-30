@@ -50,6 +50,11 @@ export const formatTime = (time: number) => {
   }
   res += ':'
   const seconds = Math.floor((time / 1000) % 60)
-  res += seconds
+  if (seconds < 10) {
+    res += '0'
+    res += seconds
+  } else {
+    res += seconds
+  }
   return res
 }

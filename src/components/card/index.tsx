@@ -1,11 +1,11 @@
 import React, { memo, useState } from 'react'
 
+import { imgUrl } from '@/utils'
 import LyricBox from '../../common/lyricBox'
 import { PanWrapper, CardWrapper } from './style'
-import { imgUrl } from '@/utils'
-import { ILyric } from '@/common/lyricBox/hooks/useLyric'
-import { IMusicInfo } from '../../hooks/useMusic'
-import { IAudio } from '../../hooks/useAudio'
+import type { ILyric } from '@/common/lyricBox/hooks/useLyric'
+import type { IMusicInfo } from '../../hooks/useMusic'
+import type { IAudio } from '../../hooks/useAudio'
 //TODO:添加pan的碟片的那根棍子= =
 
 const Card = memo(

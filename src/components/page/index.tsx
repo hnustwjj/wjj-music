@@ -60,15 +60,18 @@ const Page = memo(
         <header
           className='leading-[60px] relative'
           h='60px'
-          text='center white'>
+          text='center white'
+        >
           <a
             href='https://github.com/hnustwjj/wjj-music'
-            className='text-[1.35rem]'>
+            className='text-[1.35rem]'
+          >
             勾勾的音乐组件
           </a>
           <button
             className='absolute right-20px'
-            onClick={() => console.log('todo')}>
+            onClick={() => console.log('todo')}
+          >
             登录
           </button>
         </header>
@@ -80,7 +83,8 @@ const Page = memo(
                 <NavButton
                   className={index === currentIndex ? 'active' : ''}
                   onClick={() => setCurrentIndex(index)}
-                  key={item.title}>
+                  key={item.title}
+                >
                   {item.title}
                 </NavButton>
               ))}
@@ -89,20 +93,22 @@ const Page = memo(
               {navList[currentIndex].element}
             </div>
           </div>
-          <aside w='300px'>
+          <aside w='300px' flex='~ col' items='center'>
             <div
               w='250px'
               flex='~ col'
               items='center'
               h='full'
-              z='50'>
+              z='50'
+            >
               {/* 歌名 */}
               <div
                 h='40px'
                 text='15px center gray-200'
                 leading='60px'
                 m='b-20px'
-                z='55'>
+                z='55'
+              >
                 {songName}
               </div>
               {/* 歌手 */}
@@ -111,13 +117,14 @@ const Page = memo(
                 text='12px center gray-300'
                 leading='20px'
                 m='b-20px'
-                w='140px'>
+                w='140px'
+              >
                 歌手：{singers}
               </p>
               {/* 歌词 */}
               <div flex='1' overflow='hidden' relative='~' p='x-16px'>
                 <LyricBox
-                  leading={30}
+                  leading={35}
                   currentLyricIndex={currentLyricIndex}
                   lyricList={lyricList}
                   lyricBoxRef={lyricBoxRef}
@@ -133,7 +140,8 @@ const Page = memo(
           px='200px'
           flex='~'
           justify='center'
-          items='center'>
+          items='center'
+        >
           {TimeSlider}
         </footer>
       </DivWrapper>

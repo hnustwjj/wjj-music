@@ -20,6 +20,7 @@ export interface IAudio {
   volume: number
   changeJingyin: () => void
 }
+//TODO:考虑静音是否用muted属性实现
 //需要放在最外面，否则每次执行函数都会重新创建变量
 let volumeCache = 0
 let isJingyin = false
@@ -34,7 +35,7 @@ export default function useAudio(
   const [isPlaying, setIsPlaying] = useState(false)
   // 播放
   const audioRef = useRef<HTMLAudioElement>(null)
-
+  
   //音量
   const [volume, setVolume] = useState(INITIAL_VOLUME)
   useEffect(() => {

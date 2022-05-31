@@ -6,21 +6,24 @@ interface lyricBox {
   lyricBoxRef: any
   leading?: number
 }
+//TODO:考虑添加一个drag拖拽歌词功能
 const LyricBox = memo((props: lyricBox) => {
   // 获取歌词相关信息的hook
   const { currentLyricIndex, lyricList, lyricBoxRef, leading } = props
+  //样式类名
+  const pClass = (index: number) =>
+    currentLyricIndex === index ? 'active-lyric' : undefined
+  //样式对象
+  const style = { lineHeight: (leading ?? 23) + 'px' }
   return (
     <Wrapper ref={lyricBoxRef}>
       {lyricList.map((item, index) => (
         <p
           text='12px center gray-300'
-          className={
-            currentLyricIndex === index ? 'active-lyric' : ''
-          }
-          style={{
-            lineHeight: (leading ?? 23) + 'px',
-          }}
-          key={item.time + item.content}>
+          className={pClass(index)}
+          style={style}
+          key={item.time + item.content}
+        >
           {item.content}
         </p>
       ))}

@@ -1,16 +1,15 @@
-import { memo, useMemo, useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import Card from './components/card'
 import Page from './components/page'
 
 import { Provider } from 'react-redux'
 import { fetchHotRecommend } from '@/store/music'
 import store, { useAppDispatch } from '@/store'
-import Slider from './common/slider'
 import useMusicInfo from './hooks/useMusic'
 import useLyric from './common/lyricBox/hooks/useLyric'
 import useAudio from './hooks/useAudio'
-import { INITIAL_VOLUME } from '@/hooks/useAudio'
-let preVolume = 0
+import useSliders from './hooks/useSliders'
+
 const App = memo(() => {
   const dispatch = useAppDispatch()
   // 请求热榜推荐歌曲的数据
@@ -32,64 +31,20 @@ const App = memo(() => {
     musicInfo.currentMusic
   )
 
-  // 时间百分比
-  const { audioRef, duration } = audioInfo
-  const timePercent =
-    ((audioRef.current?.currentTime ?? 0) * 1000) / duration
-  // 时间进度条改变事件
-  const onTimeSliderChange = (percent: number) => {
-    const time = (duration * percent).toFixed()
-    lyricInfo.updateTime(time, true)
-    if (audioRef.current) {
-      audioRef.current.currentTime = parseInt(time) / 1000
-    }
-  }
-  // Card和Page公用的TimeSlider
-  const TimeSlider = useMemo(
-    () => (
-      <Slider
-        direction='row'
-        initialValue={0}
-        onMouseDown={() => {
-          if (audioRef.current) {
-            preVolume = audioRef.current.volume
-            audioRef.current.volume = 0
-          }
-        }}
-        onMouseUp={() => {
-          if (audioRef.current) audioRef.current.volume = preVolume
-        }}
-        change={percent => onTimeSliderChange(percent)}
-        value={timePercent}
-      />
-    ),
-    [onTimeSliderChange, timePercent]
-  )
-  // 音量进度条改变事件
-  const onVolumeliderChange = (percent: number) => {
-    audioInfo.setVolume(percent)
-  }
-  // Card和Page公用的VolumeSlider
-  const VolumeSlider = useMemo(
-    () => (
-      <Slider
-        direction='col'
-        initialValue={INITIAL_VOLUME}
-        value={audioInfo.volume}
-        change={percent => onVolumeliderChange(percent)}
-      />
-    ),
-    [onTimeSliderChange, timePercent]
+  const { audioRef, canplay, switchMusic } = audioInfo
+  const { TimeSlider, VolumeSlider } = useSliders(
+    audioInfo,
+    lyricInfo
   )
   return (
     <>
       <audio
+        ref={audioRef}
         src={musicInfo.url}
         onTimeUpdate={e => lyricInfo.updateTime(e)}
-        ref={audioInfo.audioRef}
-        onCanPlay={e => audioInfo.canplay(e)}
-        onEnded={() => audioInfo.switchMusic('next')}
-        onError={() => audioInfo.switchMusic('next')}
+        onCanPlay={e => canplay(e)}
+        onEnded={() => switchMusic('next')}
+        onError={() => switchMusic('next')}
       />
       <Card
         audioInfo={audioInfo}
@@ -107,7 +62,8 @@ const App = memo(() => {
           (pageActive
             ? ' scale-100 opacity-100'
             : 'scale-0 opacity-0')
-        }>
+        }
+      >
         <Page
           lyricInfo={lyricInfo2}
           TimeSlider={TimeSlider}

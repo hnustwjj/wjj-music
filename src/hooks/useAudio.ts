@@ -11,7 +11,6 @@ export const INITIAL_VOLUME = 0.66
 export interface IAudio {
   switchMusicStaus: () => void
   isPlaying: boolean
-  setIsPlaying: Dispatch<SetStateAction<boolean>>
   duration: number
   audioRef: RefObject<HTMLAudioElement>
   switchMusic: (type: 'pre' | 'next') => Promise<void>
@@ -101,7 +100,6 @@ export default function useAudio(
     changeJingyin,
     switchMusicStaus,
     isPlaying,
-    setIsPlaying,
     duration,
     audioRef,
     switchMusic,

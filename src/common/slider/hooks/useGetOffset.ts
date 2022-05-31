@@ -29,11 +29,12 @@ function getElementLeft(element: any) {
   return actualLeft
 }
 
+//返回获取偏移量的函数
 export default function useGetOffset(
   lineRef: React.RefObject<HTMLDivElement>,
 ) {
   /**
-   * 返回鼠标在进度条上的左侧偏移量百分比
+   * 返回鼠标在进度条上的左侧或垂直方向的偏移量百分比
    * @param e
    * @returns 百分比
    */

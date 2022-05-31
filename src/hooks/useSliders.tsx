@@ -38,6 +38,7 @@ export default function (audioInfo, lyricInfo) {
     ),
     [onTimeSliderChange, timePercent]
   )
+
   // 音量进度条改变事件
   const onVolumeliderChange = (percent: number) => {
     audioInfo.setVolume(percent)

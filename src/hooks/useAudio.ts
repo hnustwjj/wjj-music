@@ -29,14 +29,15 @@ export default function useAudio(
   currentMusic: any
 ) {
   const dispatch = useAppDispatch()
+  // 获取duration
   const { duration } = useAppSelector(state => state.music)
 
   //是否正在播放歌曲
   const [isPlaying, setIsPlaying] = useState(false)
-  // 播放
+  //获取audio元素
   const audioRef = useRef<HTMLAudioElement>(null)
-  
-  //音量
+
+  //音量状态
   const [volume, setVolume] = useState(INITIAL_VOLUME)
   useEffect(() => {
     if (audioRef.current) {

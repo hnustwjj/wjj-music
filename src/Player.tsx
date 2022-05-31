@@ -32,6 +32,7 @@ const App = memo(() => {
   )
 
   const { audioRef, canplay, switchMusic } = audioInfo
+  // 获取时间进度条和音量进度条
   const { TimeSlider, VolumeSlider } = useSliders(
     audioInfo,
     lyricInfo

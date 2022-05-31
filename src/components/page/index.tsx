@@ -117,6 +117,7 @@ const Page = memo(
               {/* 歌词 */}
               <div flex='1' overflow='hidden' relative='~' p='x-16px'>
                 <LyricBox
+                  leading={30}
                   currentLyricIndex={currentLyricIndex}
                   lyricList={lyricList}
                   lyricBoxRef={lyricBoxRef}

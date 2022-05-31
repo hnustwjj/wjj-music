@@ -4,20 +4,22 @@ interface lyricBox {
   currentLyricIndex: number
   lyricList: any[]
   lyricBoxRef: any
+  leading?: number
 }
 const LyricBox = memo((props: lyricBox) => {
   // 获取歌词相关信息的hook
-  const { currentLyricIndex, lyricList, lyricBoxRef } = props
-  console.log(lyricBoxRef.current)
+  const { currentLyricIndex, lyricList, lyricBoxRef, leading } = props
   return (
     <Wrapper ref={lyricBoxRef}>
       {lyricList.map((item, index) => (
         <p
           text='12px center gray-300'
-          leading='23px'
           className={
             currentLyricIndex === index ? 'active-lyric' : ''
           }
+          style={{
+            lineHeight: (leading ?? 23) + 'px',
+          }}
           key={item.time + item.content}>
           {item.content}
         </p>

@@ -24,6 +24,8 @@ const App = memo(() => {
   const musicInfo = useMusicInfo()
   // 获取歌词信息的Hook
   const lyricInfo = useLyric()
+  // 为了控制page页面的LyricBox，需要两个LyricBoxRef，所以再调用一次
+  const lyricInfo2 = useLyric()
   // 获取音频信息的Hook
   const audioInfo = useAudio(
     musicInfo.musicList,
@@ -106,7 +108,11 @@ const App = memo(() => {
             ? ' scale-100 opacity-100'
             : 'scale-0 opacity-0')
         }>
-        <Page TimeSlider={TimeSlider} musicInfo={musicInfo} />
+        <Page
+          lyricInfo={lyricInfo2}
+          TimeSlider={TimeSlider}
+          musicInfo={musicInfo}
+        />
       </div>
     </>
   )

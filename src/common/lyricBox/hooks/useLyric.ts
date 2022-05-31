@@ -1,23 +1,33 @@
 import { parseLyric } from '@/utils'
 import { useAppSelector, useAppDispatch } from '../../../store'
 import { useEffect, useRef, useMemo } from 'react'
-import { changeCurrentTime, changeCurrentLyricIndex } from '@/store/music'
+import {
+  changeCurrentTime,
+  changeCurrentLyricIndex,
+} from '@/store/music'
 import { lyricItem } from '@/utils'
 import { RefObject } from 'react'
 export interface ILyric {
   updateTime: (e: any, fuzzy?: boolean) => void
   currentLyricIndex: number
   lyricList: lyricItem[]
-  lyricBox: RefObject<HTMLDivElement>
+  lyricBoxRef: RefObject<HTMLDivElement>
 }
 export default function useLyric() {
   const dispatch = useAppDispatch()
 
   // 获取当前歌曲和当前歌词
-  const { currentLyric, currentMusic, currentTime, currentLyricIndex } =
-    useAppSelector(state => state.music)
+  const {
+    currentLyric,
+    currentMusic,
+    currentTime,
+    currentLyricIndex,
+  } = useAppSelector(state => state.music)
   // 转换歌词
-  const lyricList = useMemo(() => parseLyric(currentLyric), [currentLyric])
+  const lyricList = useMemo(
+    () => parseLyric(currentLyric),
+    [currentLyric]
+  )
 
   /**
    * 更新播放时间和当前歌词下标的函数（会被audio的onUpdateTime调用）
@@ -35,7 +45,8 @@ export default function useLyric() {
       )
     )
     const index = lyricList.findIndex(
-      item => Math.abs(item.time - currentTime) <= (fuzzy ? 1000 : 400)
+      item =>
+        Math.abs(item.time - currentTime) <= (fuzzy ? 1000 : 400)
     )
     if (index !== -1) {
       //修改当前的歌词下标
@@ -44,16 +55,16 @@ export default function useLyric() {
   }
 
   // 获取包裹歌词的盒子
-  const lyricBox = useRef<HTMLDivElement>(null)
+  const lyricBoxRef = useRef<HTMLDivElement>(null)
 
   /**
    * 滚动歌词的副作用函数
    */
   useEffect(() => {
-    if (lyricBox.current) {
+    if (lyricBoxRef.current) {
       // 获取子元素中当前
       //TODO: (不知道为啥currentWrapper可能是undefined，所以下面进行了??判断)
-      const currentLyricWrapper = lyricBox.current.children[
+      const currentLyricWrapper = lyricBoxRef.current.children[
         currentLyricIndex
       ] as HTMLElement
 
@@ -62,7 +73,7 @@ export default function useLyric() {
         (currentLyricWrapper?.offsetTop ?? 0) -
         70 +
         (currentLyricWrapper?.clientHeight ?? 18) / 2
-      lyricBox.current.style.transform = `translateY(${-offsetTop}px)`
+      lyricBoxRef.current.style.transform = `translateY(${-offsetTop}px)`
     }
     // 在当前歌词Index改变，或者是歌曲改变时执行
   }, [currentLyricIndex, currentMusic])
@@ -70,6 +81,6 @@ export default function useLyric() {
     updateTime,
     currentLyricIndex,
     lyricList,
-    lyricBox,
+    lyricBoxRef,
   }
 }

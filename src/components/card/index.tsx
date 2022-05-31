@@ -32,7 +32,7 @@ const Card = memo(
     // 获取音乐信息相关
     const { al, singers, name: songName } = musicInfo
     // 获取歌词相关信息
-    const { currentLyricIndex, lyricList, lyricBox } = lyricInfo
+    const { currentLyricIndex, lyricList, lyricBoxRef } = lyricInfo
     // 获取音频相关信息
     const {
       switchMusicStaus,
@@ -86,6 +86,13 @@ const Card = memo(
               w='full'
             />
           ))}
+          <div
+            className='bg-[rgba(0,0,0,.1)]'
+            absolute='~'
+            rounded='md'
+            h='full'
+            w='full'
+          />
           <div w='250px' flex='~ col' items='center' h='full' z='50'>
             {/* 歌名 */}
             <div
@@ -110,7 +117,7 @@ const Card = memo(
               <LyricBox
                 currentLyricIndex={currentLyricIndex}
                 lyricList={lyricList}
-                lyricBox={lyricBox}
+                lyricBoxRef={lyricBoxRef}
               />
             </div>
             {/* 控制栏 */}

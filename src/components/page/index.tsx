@@ -6,10 +6,11 @@ import Search from './components/Search'
 import Playing from './components/Playing'
 import Listened from './components/Listened'
 import DivWrapper, { NavButton } from './style'
+import LyricBox from '@/common/lyricBox'
 // import Recommend from './components/Recommend'
 
 import type { IMusicInfo } from '@/hooks/useMusic'
-
+import { ILyric } from '@/common/lyricBox/hooks/useLyric'
 
 //TODO:手机端兼容
 // 1：header手机端看不清
@@ -27,12 +28,14 @@ const Page = memo(
   (props: {
     TimeSlider: () => JSX.Element
     musicInfo: IMusicInfo
+    lyricInfo: ILyric
   }) => {
     const [currentIndex, setCurrentIndex] = useState(0)
-    const {
-      musicInfo: { al },
-      TimeSlider,
-    } = props
+    const { TimeSlider, musicInfo, lyricInfo } = props
+    // 获取音乐信息相关
+    const { al, singers, name: songName } = musicInfo
+    // 获取歌词相关信息
+    const { currentLyricIndex, lyricList, lyricBoxRef } = lyricInfo
     return (
       <DivWrapper>
         {/* 两张背景蒙版 */}
@@ -86,7 +89,41 @@ const Page = memo(
               {navList[currentIndex].element}
             </div>
           </div>
-          <aside w='300px'></aside>
+          <aside w='300px'>
+            <div
+              w='250px'
+              flex='~ col'
+              items='center'
+              h='full'
+              z='50'>
+              {/* 歌名 */}
+              <div
+                h='40px'
+                text='15px center gray-200'
+                leading='60px'
+                m='b-20px'
+                z='55'>
+                {songName}
+              </div>
+              {/* 歌手 */}
+              <p
+                h='40px'
+                text='12px center gray-300'
+                leading='20px'
+                m='b-20px'
+                w='140px'>
+                歌手：{singers}
+              </p>
+              {/* 歌词 */}
+              <div flex='1' overflow='hidden' relative='~' p='x-16px'>
+                <LyricBox
+                  currentLyricIndex={currentLyricIndex}
+                  lyricList={lyricList}
+                  lyricBoxRef={lyricBoxRef}
+                />
+              </div>
+            </div>
+          </aside>
         </div>
         {/* 控制栏 */}
         <footer

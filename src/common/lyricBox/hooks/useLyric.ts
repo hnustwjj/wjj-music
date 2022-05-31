@@ -57,6 +57,7 @@ export default function useLyric() {
   // 获取包裹歌词的盒子
   const lyricBoxRef = useRef<HTMLDivElement>(null)
 
+  //TODO:修改计算偏移量公式
   /**
    * 滚动歌词的副作用函数
    */
@@ -67,13 +68,17 @@ export default function useLyric() {
       const currentLyricWrapper = lyricBoxRef.current.children[
         currentLyricIndex
       ] as HTMLElement
-
-      // 当前歌词偏移到盒子中心的偏移量 = 举例父亲顶部的距离 - 父亲高度的一半(固定的70px) + 自身高度的一半
-      const offsetTop =
-        (currentLyricWrapper?.offsetTop ?? 0) -
-        70 +
-        (currentLyricWrapper?.clientHeight ?? 18) / 2
-      lyricBoxRef.current.style.transform = `translateY(${-offsetTop}px)`
+      if (currentLyricWrapper) {
+        console.log()
+        // 当前歌词偏移到盒子中心的偏移量 = 距离父亲顶部的距离 - 歌词容器高度的一半(card的歌词容器高度是140px) + 自身高度的一半
+        const offsetTop =
+          currentLyricWrapper.offsetTop -
+          (currentLyricWrapper.parentElement?.parentElement
+            ?.clientHeight ?? 140) /
+            2 +
+          currentLyricWrapper?.clientHeight / 2
+        lyricBoxRef.current.style.transform = `translateY(${-offsetTop}px)`
+      }
     }
     // 在当前歌词Index改变，或者是歌曲改变时执行
   }, [currentLyricIndex, currentMusic])

@@ -96,7 +96,7 @@ const Slider = memo((props: SliderProps) => {
           (direction === 'row'
             ? 'h-5px rounded-full'
             : 'w-5px rounded-full') +
-          ' bg-$slider-buffer transition-none absolute z-1'
+          ' bg-$slider-buffer transition absolute z-1'
         }
       />
       <div

@@ -3,7 +3,7 @@ import useGetOffset from './hooks/useGetOffset'
 import DivWrapper from './style'
 /**
  * setValue:回调函数，在拖动进度条或者点击进度条导致发生改变时会执行
- * bufferValue：可选，默认为0，设置进度条的缓冲长度
+ * bufferValue：可选，传入百分比，设置进度条的缓冲长度
  * value:外部指定的宽度百分比
  */
 type SliderProps = {

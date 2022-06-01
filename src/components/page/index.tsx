@@ -147,19 +147,24 @@ const Page = memo(
         >
           <div flex='~' justify='center' m='b-10px'>
             <p
+              className='iconfont icon-random icon text-18px'
+              //TODO: 播放顺序控制
+            />
+            <p
               className='iconfont icon-pre icon text-18px'
               onClick={() => switchMusic('pre')}
             />
             <p
-              className={`iconfont icon text-23px rounded-bg ${
+              className={`iconfont icon text-22px rounded-bg ${
                 isPlaying ? 'icon-pause' : 'icon-play'
               }`}
               onClick={() => switchMusicStaus()}
             />
             <p
               className='iconfont icon-next icon text-18px'
-              onClick={() => switchMusic('pre')}
+              //TODO: 音乐控制
             />
+            <p className='iconfont icon-laba icon text-18px' />
           </div>
           <div w='full' flex='~' justify='center' px='200px'>
             {TimeSlider}

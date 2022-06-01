@@ -20,8 +20,8 @@ export default styled.div`
     cursor: pointer;
     margin: 0 10px;
   }
-  .text-23px {
-    font-size: 23px;
+  .text-22px {
+    font-size: 22px;
   }
   .rounded-bg {
     background-color: rgba(42, 42, 45, 0.5);

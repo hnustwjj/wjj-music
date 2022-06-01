@@ -1,22 +1,20 @@
 import { memo, useEffect, useState } from 'react'
+import { Provider } from 'react-redux'
 import Card from './components/card'
 import Page from './components/page'
 
-import { Provider } from 'react-redux'
 import { fetchHotRecommend } from '@/store/music'
 import store, { useAppDispatch } from '@/store'
 import useMusicInfo from './hooks/useMusic'
 import useLyric from './common/lyricBox/hooks/useLyric'
 import useAudio from './hooks/useAudio'
-import useSliders from './hooks/useSliders'
-
+import getTimeAndAudioSlider from './common/slider/impSliders'
 const App = memo(() => {
   const dispatch = useAppDispatch()
   // 请求热榜推荐歌曲的数据
   useEffect(() => {
     dispatch(fetchHotRecommend())
   }, [dispatch])
-
   // page是否显示
   const [pageActive, setPageActive] = useState(false)
   // 获取音乐信息的Hook
@@ -31,34 +29,24 @@ const App = memo(() => {
     musicInfo.currentMusic
   )
 
-  const { audioRef, canplay, switchMusic, duration } = audioInfo
+  const {
+    audioRef,
+    canplay,
+    switchMusic,
+    audioTimeUpdate,
+  } = audioInfo
   // 获取时间进度条和音量进度条
-  const { TimeSlider, VolumeSlider } = useSliders(
+  const { TimeSlider, VolumeSlider } = getTimeAndAudioSlider(
     audioInfo,
     lyricInfo
   )
 
-  const audioTimeUpdate = (e: any) => {
-    if (audioRef.current) {
-      // 获取timeRange
-      const timeRanges = audioRef.current.buffered
-      // 最后一个timeRange对象
-      const last = timeRanges.length - 1
-      // 当最后一个timeRange对象存在时，可以获取到当前缓冲区的长度（单位是s）
-      if (last >= 0) {
-        //TODO:增加已加载的进度条功能
-        // console.log(timeRanges.end(last), duration)
-      }
-    }
-    // 会修改全局的currentTime和currentLyricIndex
-    lyricInfo.updateTime(e)
-  }
   return (
     <>
       <audio
         ref={audioRef}
         src={musicInfo.url}
-        onTimeUpdate={e => audioTimeUpdate(e)}
+        onTimeUpdate={e => audioTimeUpdate(e, lyricInfo.updateTime)}
         onCanPlay={e => canplay(e)}
         onEnded={() => switchMusic('next')}
         onError={() => switchMusic('next')}

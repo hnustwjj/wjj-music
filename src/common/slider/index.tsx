@@ -3,23 +3,25 @@ import useGetOffset from './hooks/useGetOffset'
 import DivWrapper from './style'
 /**
  * setValue:回调函数，在拖动进度条或者点击进度条导致发生改变时会执行
+ * bufferValue：可选，默认为0，设置进度条的缓冲长度
  * value:外部指定的宽度百分比
  */
 type SliderProps = {
   direction: 'col' | 'row'
   value: number
+  bufferValue?: number
   setValue: (current: number) => void
   onMouseDown?: () => void
   onMouseUp?: () => void
   onMouseMove?: () => void
 }
-
+//FIXME:修改缓存进度条逻辑，修改z-index层级
 //TODO:增加已加载的进度条（可选的）
 const Slider = memo((props: SliderProps) => {
   // value是传入的进度条百分比
-  const { value, direction, setValue } = props
-  // 进度条长度
-  const [length, setLength] = useState(0)
+  const { value, direction, setValue, bufferValue } = props
+  // value对应的进度条长度
+  const [currentLength, setCurrentLength] = useState(0)
   // 实际进度条的div
   const lineRef = useRef<HTMLDivElement>(null)
 
@@ -27,7 +29,7 @@ const Slider = memo((props: SliderProps) => {
   useEffect(() => {
     if (lineRef.current) {
       if (value !== undefined) {
-        setLength(
+        setCurrentLength(
           value *
             (direction === 'row'
               ? lineRef.current.clientWidth //获取宽度
@@ -36,7 +38,6 @@ const Slider = memo((props: SliderProps) => {
       }
     }
   }, [value])
-
   // 返回获取偏移量百分比的函数
   const getOffset = useGetOffset(lineRef)
 
@@ -60,10 +61,18 @@ const Slider = memo((props: SliderProps) => {
       document.onmousemove = null
     }
   }
-  const widthOrHeight = length =>
-    direction === 'col'
+  const widthOrHeight = (length, isPercent = false) => {
+    if (isPercent && lineRef.current) {
+      length =
+        length *
+        (direction === 'row'
+          ? lineRef.current.clientWidth //获取宽度
+          : lineRef.current.clientHeight) //获取高度
+    }
+    return direction === 'col'
       ? { height: length }
       : { width: isNaN(length) ? 0 : length }
+  }
   return (
     <DivWrapper
       ref={lineRef}
@@ -72,22 +81,22 @@ const Slider = memo((props: SliderProps) => {
     >
       {/* 播放进度条 */}
       <div
-        style={widthOrHeight(length)}
-        className={
-          (direction === 'row'
-            ? 'h-5px rounded-l-full'
-            : 'w-5px rounded-t-full') + ' bg-$slider transition-none'
-        }
-      />
-      {/* 加载进度条 */}
-      <div
-        style={widthOrHeight(length)}
-        z='-1'
+        style={widthOrHeight(currentLength)}
         className={
           (direction === 'row'
             ? 'h-5px rounded-l-full'
             : 'w-5px rounded-t-full') +
-          ' bg-$slider transition-none absolute '
+          ' bg-$slider-current transition-none z-2'
+        }
+      />
+      {/* 加载进度条 */}
+      <div
+        style={widthOrHeight(bufferValue ?? 0, true)}
+        className={
+          (direction === 'row'
+            ? 'h-5px rounded-full'
+            : 'w-5px rounded-full') +
+          ' bg-$slider-buffer transition-none absolute z-1'
         }
       />
       <div
@@ -96,6 +105,7 @@ const Slider = memo((props: SliderProps) => {
         rounded='full'
         transition='none'
         flex='~'
+        z='3'
         items='center'
         justify='center'
         cursor='pointer'

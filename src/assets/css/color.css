@@ -3,6 +3,8 @@ html{
   /* css原生也支持变量的设置 */
   --white:#fff;
   --lyric:#fff;
-  --slider:#15add3;
+  --slider-current:#15add3;
+  --slider-buffer:#c7c7c7;
+  --slider-all:gray；
 }
 

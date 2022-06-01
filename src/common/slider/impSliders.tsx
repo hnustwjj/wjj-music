@@ -1,9 +1,16 @@
 import Slider from '@/common/slider'
+import { IAudio } from '@/hooks/useAudio'
 import { useMemo } from 'react'
 
 let preVolume = 0
-export default function (audioInfo, lyricInfo) {
-  const { audioRef, duration } = audioInfo
+/**
+ * 用于返回时间和音量的Slider
+ * @param audioInfo 音频信息
+ * @param lyricInfo 歌词信息
+ * @returns
+ */
+export default function (audioInfo: IAudio, lyricInfo) {
+  const { audioRef, duration, bufferPercent } = audioInfo
   // 时间百分比
   const timePercent =
     ((audioRef.current?.currentTime ?? 0) * 1000) / duration
@@ -19,6 +26,7 @@ export default function (audioInfo, lyricInfo) {
     () => (
       <Slider
         direction='row'
+        bufferValue={bufferPercent}
         onMouseDown={() => {
           // 在拖动进度条时，音量设置为0
           if (audioRef.current) {

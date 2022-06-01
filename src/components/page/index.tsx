@@ -13,7 +13,6 @@ import type { IMusicInfo } from '@/hooks/useMusic'
 import { ILyric } from '@/common/lyricBox/hooks/useLyric'
 
 //TODO:手机端兼容
-// 1：header手机端看不清
 
 //TODO:登录
 //TODO:使背景切换更自然

@@ -36,7 +36,8 @@ const App = memo(() => {
     audioTimeUpdate,
   } = audioInfo
   // 获取时间进度条和音量进度条
-  const { TimeSlider, VolumeSlider } = getTimeAndAudioSlider(
+  const { TimeSlider, VolumeSlider } =
+   getTimeAndAudioSlider(
     audioInfo,
     lyricInfo
   )

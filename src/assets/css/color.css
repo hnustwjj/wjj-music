@@ -3,6 +3,7 @@ html{
   /* css原生也支持变量的设置 */
   --white:#fff;
   --lyric:#fff;
+  --icon: rgb(212,212,213);
   --slider-current:#15add3;
   --slider-buffer:rgb(219, 216, 216);
   --slider-all: #918f8f;

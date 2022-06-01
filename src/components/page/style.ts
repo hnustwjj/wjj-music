@@ -8,6 +8,31 @@ export default styled.div`
   transition: all 0.5s;
   display: flex;
   flex-direction: column;
+  .icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    color: white;
+    cursor: pointer;
+    margin: 0 10px;
+  }
+  .text-23px {
+    font-size: 23px;
+  }
+  .rounded-bg {
+    background-color: rgba(42, 42, 45, 0.5);
+    border-radius: 8888px;
+    &:hover {
+      background-color: rgb(55, 55, 58);
+    }
+  }
+  .text-18px {
+    font-size: 18px;
+  }
 `
 
 export const NavButton = styled.button`

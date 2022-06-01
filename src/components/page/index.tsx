@@ -10,7 +10,8 @@ import LyricBox from '@/common/lyricBox'
 // import Recommend from './components/Recommend'
 
 import type { IMusicInfo } from '@/hooks/useMusic'
-import { ILyric } from '@/common/lyricBox/hooks/useLyric'
+import type { ILyric } from '@/common/lyricBox/hooks/useLyric'
+import type { IAudio } from '@/hooks/useAudio'
 
 //TODO:手机端兼容
 
@@ -28,13 +29,16 @@ const Page = memo(
     TimeSlider: () => JSX.Element
     musicInfo: IMusicInfo
     lyricInfo: ILyric
+    audioInfo: IAudio
   }) => {
     const [currentIndex, setCurrentIndex] = useState(0)
-    const { TimeSlider, musicInfo, lyricInfo } = props
+    const { TimeSlider, musicInfo, lyricInfo, audioInfo } = props
     // 获取音乐信息相关
     const { al, singers, name: songName } = musicInfo
     // 获取歌词相关信息
     const { currentLyricIndex, lyricList, lyricBoxRef } = lyricInfo
+    // 获取音频相关信息
+    const { switchMusic, switchMusicStaus, isPlaying } = audioInfo
     return (
       <DivWrapper>
         {/* 两张背景蒙版 */}
@@ -89,6 +93,7 @@ const Page = memo(
               ))}
             </nav>
             <div flex='1 ~ col' text='gray-300' overflow='auto'>
+              {/* 达到类似路由的效果 */}
               {navList[currentIndex].element}
             </div>
           </div>
@@ -135,13 +140,30 @@ const Page = memo(
         {/* 控制栏 */}
         <footer
           w='full'
-          h='80px'
-          px='200px'
-          flex='~'
+          h='100px'
+          flex='~ col'
           justify='center'
           items='center'
         >
-          {TimeSlider}
+          <div flex='~' justify='center' m='b-10px'>
+            <p
+              className='iconfont icon-pre icon text-18px'
+              onClick={() => switchMusic('pre')}
+            />
+            <p
+              className={`iconfont icon text-23px rounded-bg ${
+                isPlaying ? 'icon-pause' : 'icon-play'
+              }`}
+              onClick={() => switchMusicStaus()}
+            />
+            <p
+              className='iconfont icon-next icon text-18px'
+              onClick={() => switchMusic('pre')}
+            />
+          </div>
+          <div w='full' flex='~' justify='center' px='200px'>
+            {TimeSlider}
+          </div>
         </footer>
       </DivWrapper>
     )

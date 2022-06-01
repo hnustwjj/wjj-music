@@ -35,9 +35,6 @@
   background:var(--blue) !important;
 }
 
-.icon-color{
-  color:white !important;
-}
 
 .transition{
   transition:all .3s;

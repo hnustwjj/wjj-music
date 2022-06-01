@@ -52,7 +52,8 @@ const Card = memo(
             w='80px'
             h='80px'
             p='13px'
-            onClick={() => setPanActive(!active)}>
+            onClick={() => setPanActive(!active)}
+          >
             <img
               className='rounded-full '
               src={imgUrl(140, al?.picUrl)}
@@ -64,9 +65,10 @@ const Card = memo(
           select='none'
           style={{
             background: `url(${imgUrl(300, al?.picUrl)})`,
-          }}>
+          }}
+        >
           <i
-            className='iconfont icon-gengduo icon-color'
+            className='iconfont icon-gengduo text-$icon'
             z='52'
             top='15px'
             right='15px'
@@ -100,7 +102,8 @@ const Card = memo(
               text='15px center gray-200'
               leading='60px'
               m='b-20px'
-              z='55'>
+              z='55'
+            >
               {songName}
             </div>
             {/* 歌手 */}
@@ -109,7 +112,8 @@ const Card = memo(
               text='12px center gray-300'
               leading='20px'
               m='b-20px'
-              w='140px'>
+              w='140px'
+            >
               歌手：{singers}
             </p>
             {/* 歌词 */}
@@ -125,11 +129,12 @@ const Card = memo(
               <div
                 m='l-5px'
                 onClick={() => switchMusicStaus()}
-                className='icon'>
+                className='icon-wrapper'
+              >
                 {isPlaying ? (
-                  <i className='iconfont icon-pause text-[13px] icon-color' />
+                  <i className='iconfont icon-pause text-[13px] text-$icon' />
                 ) : (
-                  <i className='iconfont icon-play text-[13px] icon-color' />
+                  <i className='iconfont icon-play text-[13px] text-$icon' />
                 )}
               </div>
               <div w='240px' p='x-15px' flex='~' justify='center'>
@@ -138,7 +143,7 @@ const Card = memo(
               <div className='icon' m='r-5px' relative='~'>
                 <i
                   className={
-                    'iconfont volume-slider-hover icon-color ' +
+                    'iconfont volume-slider-hover text-$icon ' +
                     (volume === 0 ? 'icon-jingyin' : 'icon-laba')
                   }
                   onClick={() => changeJingyin()}
@@ -151,7 +156,8 @@ const Card = memo(
                   items='center'
                   bottom='20px'
                   opacity='0'
-                  hover='opacity-100'>
+                  hover='opacity-100'
+                >
                   {VolumeSlider}
                 </div>
               </div>
@@ -160,11 +166,11 @@ const Card = memo(
 
           {/* 切换歌曲的箭头 */}
           <i
-            className='iconfont icon-left arrow left-5px icon-color'
+            className='iconfont icon-left arrow left-5px text-$icon'
             onClick={() => switchMusic('pre')}
           />
           <i
-            className='iconfont icon-right arrow right-5px icon-color'
+            className='iconfont icon-right arrow right-5px text-$icon'
             onClick={() => switchMusic('next')}
           />
         </CardWrapper>

@@ -29,15 +29,10 @@ const App = memo(() => {
     musicInfo.currentMusic
   )
 
-  const {
-    audioRef,
-    canplay,
-    switchMusic,
-    audioTimeUpdate,
-  } = audioInfo
+  const { audioRef, canplay, switchMusic, audioTimeUpdate } =
+    audioInfo
   // 获取时间进度条和音量进度条
-  const { TimeSlider, VolumeSlider } =
-   getTimeAndAudioSlider(
+  const { TimeSlider, VolumeSlider } = getTimeAndAudioSlider(
     audioInfo,
     lyricInfo
   )
@@ -71,6 +66,7 @@ const App = memo(() => {
         }
       >
         <Page
+          audioInfo={audioInfo}
           lyricInfo={lyricInfo2}
           TimeSlider={TimeSlider}
           musicInfo={musicInfo}

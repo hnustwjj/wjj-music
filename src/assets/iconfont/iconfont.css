@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 3405053 */
-  src: url('iconfont.woff2?t=1653721611301') format('woff2'),
-       url('iconfont.woff?t=1653721611301') format('woff'),
-       url('iconfont.ttf?t=1653721611301') format('truetype');
+  src: url('iconfont.woff2?t=1654080242885') format('woff2'),
+       url('iconfont.woff?t=1654080242885') format('woff'),
+       url('iconfont.ttf?t=1654080242885') format('truetype');
 }
 
 .iconfont {
@@ -13,19 +13,29 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-gengduo:before {
-  content: "\e719";
+.icon-play:before {
+  content: "\e87c";
+  margin-left: 5px;
 }
-.icon-jingyin:before {
-  content: "\e747";
+
+.icon-pre:before {
+  content: "\e603";
+}
+
+.icon-next:before {
+  content: "\e602";
 }
 
 .icon-pause:before {
-  content: "\e7fe";
+  content: "\ea81";
 }
 
-.icon-play:before {
-  content: "\e670";
+.icon-gengduo:before {
+  content: "\e719";
+}
+
+.icon-jingyin:before {
+  content: "\e747";
 }
 
 .icon-left:before {
@@ -39,13 +49,4 @@
 .icon-laba:before {
   content: "\e600";
 }
-
-.icon-pre:before {
-  content: "\e78a";
-}
-
-.icon-next:before {
-  content: "\e7a5";
-}
-
 

@@ -75,7 +75,7 @@ export const CardWrapper = styled.div`
   .blur-2px {
     filter: blur(2px);
   }
-  .icon {
+  .icon-wrapper {
     height: 30px;
     width: 30px;
     border-radius: 50%;

@@ -4,7 +4,7 @@ html{
   --white:#fff;
   --lyric:#fff;
   --slider-current:#15add3;
-  --slider-buffer:#c7c7c7;
-  --slider-all:gray；
+  --slider-buffer:rgb(219, 216, 216);
+  --slider-all: #918f8f;
 }
 

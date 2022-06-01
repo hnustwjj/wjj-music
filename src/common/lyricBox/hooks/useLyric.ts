@@ -69,7 +69,6 @@ export default function useLyric() {
         currentLyricIndex
       ] as HTMLElement
       if (currentLyricWrapper) {
-        console.log()
         // 当前歌词偏移到盒子中心的偏移量 = 距离父亲顶部的距离 - 歌词容器高度的一半(card的歌词容器高度是140px) + 自身高度的一半
         const offsetTop =
           currentLyricWrapper.offsetTop -

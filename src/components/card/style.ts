@@ -13,11 +13,7 @@ export const PanWrapper = styled.div`
   &:hover.deactive {
     transform: translateX(0);
   }
-  * {
-    transition: all 0.5s;
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica Neue,
-      Lato, Roboto, PingFang SC, Microsoft YaHei, sans-serif !important;
-  }
+
   @keyframes cycle {
     from {
       transform: rotate(0);
@@ -53,10 +49,6 @@ export const CardWrapper = styled.div`
   transform: scale(0) translate(-500px, 500px);
   opacity: 0;
   background-size: 100%;
-  transition: all 0.5s;
-  * {
-    transition: all 0.5s;
-  }
 
   &.active {
     transform: scale(1) translate(0, 0);

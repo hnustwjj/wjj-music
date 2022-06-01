@@ -1,6 +1,5 @@
 import Slider from '@/common/slider'
 import { useMemo } from 'react'
-import { INITIAL_VOLUME } from '@/hooks/useAudio'
 
 let preVolume = 0
 export default function (audioInfo, lyricInfo) {
@@ -20,7 +19,6 @@ export default function (audioInfo, lyricInfo) {
     () => (
       <Slider
         direction='row'
-        initialValue={0}
         onMouseDown={() => {
           // 在拖动进度条时，音量设置为0
           if (audioRef.current) {
@@ -32,7 +30,7 @@ export default function (audioInfo, lyricInfo) {
           // 拖动进度条结束时，恢复音量
           if (audioRef.current) audioRef.current.volume = preVolume
         }}
-        change={percent => onTimeSliderChange(percent)}
+        setValue={percent => onTimeSliderChange(percent)}
         value={timePercent}
       />
     ),
@@ -48,9 +46,8 @@ export default function (audioInfo, lyricInfo) {
     () => (
       <Slider
         direction='col'
-        initialValue={INITIAL_VOLUME}
         value={audioInfo.volume}
-        change={percent => onVolumeliderChange(percent)}
+        setValue={percent => onVolumeliderChange(percent)}
       />
     ),
     [onTimeSliderChange, timePercent]

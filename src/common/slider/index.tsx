@@ -2,14 +2,13 @@ import React, { memo, useRef, useState, useEffect } from 'react'
 import useGetOffset from './hooks/useGetOffset'
 import DivWrapper from './style'
 /**
- * change:回调函数，在进度条（current百分比）发生改变时会执行
+ * setValue:回调函数，在拖动进度条或者点击进度条导致发生改变时会执行
  * value:外部指定的宽度百分比
  */
 type SliderProps = {
   direction: 'col' | 'row'
   value: number
-  initialValue: number
-  change?: (current: number) => void
+  setValue: (current: number) => void
   onMouseDown?: () => void
   onMouseUp?: () => void
   onMouseMove?: () => void
@@ -17,31 +16,14 @@ type SliderProps = {
 
 //TODO:增加已加载的进度条（可选的）
 const Slider = memo((props: SliderProps) => {
-  const { value, initialValue, direction } = props
-  // 当前进度条的百分比
-  const [current, setcurrent] = useState(initialValue)
+  // value是传入的进度条百分比
+  const { value, direction, setValue } = props
   // 进度条长度
   const [length, setLength] = useState(0)
-
   // 实际进度条的div
   const lineRef = useRef<HTMLDivElement>(null)
 
-  // current百分比改变时，会自动修改进度条的有效宽度
-  useEffect(() => {
-    if (lineRef.current) {
-      if (current > 1) setcurrent(1)
-      setLength(
-        current *
-          (direction === 'row'
-            ? lineRef.current.clientWidth //获取宽度
-            : lineRef.current.clientHeight) //获取高度
-      )
-      // 如果传入了change就执行
-      props.change && props.change(current)
-    }
-  }, [current])
-
-  // value改变时的副作用函数，用于修改宽度
+  // 传入的value改变时，修改进度条宽度的副作用
   useEffect(() => {
     if (lineRef.current) {
       if (value !== undefined) {
@@ -69,7 +51,7 @@ const Slider = memo((props: SliderProps) => {
     document.onmousemove = (e: any) => {
       if (props.onMouseMove) props.onMouseMove()
       if (status) {
-        setcurrent(getOffset(e, direction))
+        setValue(getOffset(e, direction))
       }
     }
     document.onmouseup = () => {
@@ -78,7 +60,7 @@ const Slider = memo((props: SliderProps) => {
       document.onmousemove = null
     }
   }
-  const widthOrHeight =
+  const widthOrHeight = length =>
     direction === 'col'
       ? { height: length }
       : { width: isNaN(length) ? 0 : length }
@@ -86,13 +68,26 @@ const Slider = memo((props: SliderProps) => {
     <DivWrapper
       ref={lineRef}
       className={direction}
-      onClick={(e: any) => setcurrent(getOffset(e, direction))}>
+      onClick={(e: any) => setValue(getOffset(e, direction))}
+    >
+      {/* 播放进度条 */}
       <div
-        style={widthOrHeight}
+        style={widthOrHeight(length)}
         className={
           (direction === 'row'
             ? 'h-5px rounded-l-full'
-            : 'w-5px rounded-t-full') + ' bg-$slider line'
+            : 'w-5px rounded-t-full') + ' bg-$slider transition-none'
+        }
+      />
+      {/* 加载进度条 */}
+      <div
+        style={widthOrHeight(length)}
+        z='-1'
+        className={
+          (direction === 'row'
+            ? 'h-5px rounded-l-full'
+            : 'w-5px rounded-t-full') +
+          ' bg-$slider transition-none absolute '
         }
       />
       <div
@@ -109,7 +104,8 @@ const Slider = memo((props: SliderProps) => {
           direction === 'row' ? { marginLeft: -8 } : { marginTop: -8 }
         }
         onMouseDown={() => mouseDown()}
-        onClick={e => e.stopPropagation()}>
+        onClick={e => e.stopPropagation()}
+      >
         <div w='8px' h='8px' rounded='full' bg='white' />
       </div>
     </DivWrapper>

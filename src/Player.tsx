@@ -31,18 +31,34 @@ const App = memo(() => {
     musicInfo.currentMusic
   )
 
-  const { audioRef, canplay, switchMusic } = audioInfo
+  const { audioRef, canplay, switchMusic, duration } = audioInfo
   // 获取时间进度条和音量进度条
   const { TimeSlider, VolumeSlider } = useSliders(
     audioInfo,
     lyricInfo
   )
+
+  const audioTimeUpdate = (e: any) => {
+    if (audioRef.current) {
+      // 获取timeRange
+      const timeRanges = audioRef.current.buffered
+      // 最后一个timeRange对象
+      const last = timeRanges.length - 1
+      // 当最后一个timeRange对象存在时，可以获取到当前缓冲区的长度（单位是s）
+      if (last >= 0) {
+        //TODO:增加已加载的进度条功能
+        // console.log(timeRanges.end(last), duration)
+      }
+    }
+    // 会修改全局的currentTime和currentLyricIndex
+    lyricInfo.updateTime(e)
+  }
   return (
     <>
       <audio
         ref={audioRef}
         src={musicInfo.url}
-        onTimeUpdate={e => lyricInfo.updateTime(e)}
+        onTimeUpdate={e => audioTimeUpdate(e)}
         onCanPlay={e => canplay(e)}
         onEnded={() => switchMusic('next')}
         onError={() => switchMusic('next')}

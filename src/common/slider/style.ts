@@ -30,7 +30,4 @@ export default styled.div`
       height: 10px;
     }
   }
-  .line {
-    transition: none;
-  }
 `

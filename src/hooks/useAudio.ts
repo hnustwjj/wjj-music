@@ -111,7 +111,6 @@ export default function useAudio(
       const last = timeRanges.length - 1
       // 当最后一个timeRange对象存在时，可以获取到当前缓冲区的长度（单位是s）
       if (last >= 0) {
-        //TODO:增加已加载的进度条功能
         setBufferPercent((timeRanges.end(last) / duration) * 1000)
       }
     }

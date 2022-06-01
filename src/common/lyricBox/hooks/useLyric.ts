@@ -57,7 +57,6 @@ export default function useLyric() {
   // 获取包裹歌词的盒子
   const lyricBoxRef = useRef<HTMLDivElement>(null)
 
-  //TODO:修改计算偏移量公式
   /**
    * 滚动歌词的副作用函数
    */

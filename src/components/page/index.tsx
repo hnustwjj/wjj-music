@@ -162,9 +162,12 @@ const Page = memo(
             />
             <p
               className='iconfont icon-next icon text-18px'
-              //TODO: 音乐控制
+              onClick={() => switchMusic('next')}
             />
-            <p className='iconfont icon-laba icon text-18px' />
+            <p
+              className='iconfont icon-laba icon text-18px'
+              //TODO: 音量控制
+            />
           </div>
           <div w='full' flex='~' justify='center' px='200px'>
             {TimeSlider}

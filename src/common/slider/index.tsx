@@ -15,8 +15,6 @@ type SliderProps = {
   onMouseUp?: () => void
   onMouseMove?: () => void
 }
-//FIXME:修改缓存进度条逻辑，修改z-index层级
-//TODO:增加已加载的进度条（可选的）
 const Slider = memo((props: SliderProps) => {
   // value是传入的进度条百分比
   const { value, direction, setValue, bufferValue } = props

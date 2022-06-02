@@ -20,6 +20,7 @@ const LyricBox = memo((props: lyricBox) => {
       {lyricList.map((item, index) => (
         <p
           text='12px center gray-300'
+          leading='18px'
           className={pClass(index)}
           style={style}
           key={item.time + item.content}

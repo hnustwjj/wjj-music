@@ -18,7 +18,7 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: './src/main.ts',
+      entry: './src/main.tsx',
       formats: ['es', 'umd'],
       name: pkg.name,
       fileName: format => `index.${format}.js`,

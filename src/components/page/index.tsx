@@ -55,7 +55,7 @@ const Page = memo(
     return (
       <DivWrapper>
         {/* 两张背景蒙版 */}
-        <img
+        <div
           className='bg-page1 absolute'
           style={{
             backgroundImage: al

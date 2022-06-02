@@ -58,6 +58,9 @@ const App = memo(() => {
       <div
         h='100vh'
         w='100vw'
+        fixed='~'
+        top='0'
+        z='50'
         className={
           `transition transform ` +
           (pageActive

@@ -125,22 +125,40 @@ const Card = memo(
               />
             </div>
             {/* 控制栏 */}
-            <div h='40px' w='300px' flex='~' items='center'>
+            <div
+              h='40px'
+              w='300px'
+              flex='~'
+              justify='center'
+              items='center'
+              cursor='pointer'
+            >
               <div
-                m='l-5px'
+                w='20px'
+                h='20px'
+                flex='~'
+                justify='center'
+                items='center'
                 onClick={() => switchMusicStaus()}
                 className='icon-wrapper'
               >
-                {isPlaying ? (
-                  <i className='iconfont icon-pause text-[13px] text-$icon' />
-                ) : (
-                  <i className='iconfont icon-play text-[13px] text-$icon' />
-                )}
+                <i
+                  className={`${
+                    isPlaying ? 'icon-pause' : 'icon-play'
+                  } iconfont text-[13px] text-$icon`}
+                />
               </div>
               <div w='240px' p='x-15px' flex='~' justify='center'>
                 {TimeSlider}
               </div>
-              <div className='icon-wrapper' m='r-5px' relative='~'>
+              <div
+                flex='~'
+                items='center'
+                justify='center'
+                m='r-5px'
+                cursor='pointer'
+                relative='~'
+              >
                 <i
                   className={
                     'iconfont volume-slider-hover text-$icon ' +
@@ -151,7 +169,7 @@ const Card = memo(
                 <div
                   absolute='~'
                   h='80px'
-                  p='y-10px x-10px'
+                  p='10px'
                   flex='~ col'
                   items='center'
                   bottom='20px'

@@ -4,7 +4,10 @@ import Player from './Player'
 import 'virtual:windi.css'
 import '@/assets/css/base.css'
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <Player />
+  <>
+    <div>jzsp</div>
+    <Player />
+  </>
 )
 //TODO:数据持久化（我听过的模块）
 

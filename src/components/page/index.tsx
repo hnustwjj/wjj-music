@@ -64,13 +64,12 @@ const Page = memo(
           }}
           h='full'
           w='full'
-          z='-2'
         />
         <div
           className='bg-[rgba(0,0,0,.5)] absolute'
-          z='-1'
           h='full'
           w='full'
+          z='-1'
         />
         {/* 页头 */}
         <header
@@ -111,20 +110,13 @@ const Page = memo(
             </div>
           </div>
           <aside w='300px' flex='~ col' items='center'>
-            <div
-              w='250px'
-              flex='~ col'
-              items='center'
-              h='full'
-              z='50'
-            >
+            <div w='250px' flex='~ col' items='center' h='full'>
               {/* 歌名 */}
               <div
                 h='40px'
                 text='15px center gray-200'
                 leading='60px'
                 m='b-20px'
-                z='55'
               >
                 {songName}
               </div>
@@ -178,25 +170,32 @@ const Page = memo(
               className='iconfont icon-next icon text-18px'
               onClick={() => switchMusic('next')}
             />
-            <p
-              className={`iconfont volume-slider-hover icon text-18px relative ${
-                volume === 0 ? 'icon-jingyin' : 'icon-laba'
-              } `}
-              onClick={() => changeJingyin()}
+            <div
+              m='r-5px'
+              relative='~'
+              flex='~'
+              items='center'
+              justify='center'
             >
+              <i
+                className={`iconfont volume-slider-hover icon text-18px ${
+                  volume === 0 ? 'icon-jingyin' : 'icon-laba'
+                } `}
+                onClick={() => changeJingyin()}
+              />
               <div
                 absolute='~'
                 h='80px'
-                p='y-10px x-10px'
+                p='10px'
                 flex='~ col'
                 items='center'
-                bottom='20px'
+                bottom='25px'
                 opacity='0'
                 hover='opacity-100'
               >
                 {VolumeSlider}
               </div>
-            </p>
+            </div>
           </div>
           <div w='full' flex='~' justify='center' px='200px'>
             {TimeSlider}

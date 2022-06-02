@@ -34,7 +34,7 @@ export default styled.div`
     font-size: 18px;
   }
   .volume-slider-hover {
-    &:hover > div {
+    &:hover + div {
       opacity: 1;
     }
   }

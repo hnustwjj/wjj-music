@@ -75,17 +75,6 @@ export const CardWrapper = styled.div`
   .blur-2px {
     filter: blur(2px);
   }
-  .icon-wrapper {
-    height: 30px;
-    width: 30px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 50;
-    color: white;
-    cursor: pointer;
-  }
 
   .volume-slider-hover {
     &:hover + div {

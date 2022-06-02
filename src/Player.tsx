@@ -38,7 +38,7 @@ const App = memo(() => {
   )
 
   return (
-    <>
+    <div fixed='~' top='0' left='0'>
       <audio
         ref={audioRef}
         src={musicInfo.url}
@@ -55,18 +55,15 @@ const App = memo(() => {
         VolumeSlider={VolumeSlider}
         changePageActive={() => setPageActive(!pageActive)}
       />
+
       <div
         h='100vh'
         w='100vw'
         fixed='~'
-        top='0'
-        z='50'
-        className={
-          `transition transform ` +
-          (pageActive
-            ? ' scale-100 opacity-100'
-            : 'scale-0 opacity-0')
-        }
+        z='$page-index'
+        className={`transition transform ${
+          pageActive ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
+        }`}
       >
         <Page
           VolumeSlider={VolumeSlider}
@@ -76,7 +73,7 @@ const App = memo(() => {
           musicInfo={musicInfo}
         />
       </div>
-    </>
+    </div>
   )
 })
 export default () => (

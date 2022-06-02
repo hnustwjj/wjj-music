@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 export const PanWrapper = styled.div`
-  z-index: 52;
+  z-index: var(--pan-index);
   transition: all 0.5s;
   position: fixed;
   left: 3px;
@@ -45,7 +45,7 @@ export const CardWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   border-radius: 0.375rem;
-  z-index: 51;
+  z-index: var(--card-index);
   transform: scale(0) translate(-500px, 500px);
   opacity: 0;
   background-size: 100%;

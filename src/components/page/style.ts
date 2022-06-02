@@ -4,10 +4,11 @@ export default styled.div`
   width: 100%;
   height: 100%;
   position: fixed;
-  z-index: 50;
   transition: all 0.5s;
   display: flex;
   flex-direction: column;
+  /* 增加背景色，为了达到覆盖效果 */
+  background: white;
   .icon {
     width: 45px;
     height: 45px;

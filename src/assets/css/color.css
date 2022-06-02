@@ -7,5 +7,8 @@ html{
   --slider-current:#15add3;
   --slider-buffer:rgb(219, 216, 216);
   --slider-all: #918f8f;
+  --pan-index:52;
+  --card-index:51;
+  --page-index:50;
 }
 

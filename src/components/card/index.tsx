@@ -67,15 +67,6 @@ const Card = memo(
             background: `url(${imgUrl(300, al?.picUrl)})`,
           }}
         >
-          <i
-            className='iconfont icon-gengduo text-$icon'
-            z='52'
-            top='15px'
-            right='15px'
-            cursor='pointer'
-            absolute='~'
-            onClick={() => changePageActive()}
-          />
           {/* 三张背景蒙版 */}
           {[5, 2].map(item => (
             <img
@@ -95,14 +86,13 @@ const Card = memo(
             h='full'
             w='full'
           />
-          <div w='250px' flex='~ col' items='center' h='full' z='50'>
+          <div w='250px' flex='~ col' items='center' z='1' h='full'>
             {/* 歌名 */}
             <div
               h='40px'
               text='15px center gray-200'
               leading='60px'
               m='b-20px'
-              z='55'
             >
               {songName}
             </div>
@@ -140,7 +130,6 @@ const Card = memo(
                 justify='center'
                 items='center'
                 onClick={() => switchMusicStaus()}
-                className='icon-wrapper'
               >
                 <i
                   className={`${
@@ -152,10 +141,11 @@ const Card = memo(
                 {TimeSlider}
               </div>
               <div
+                w='20px'
+                h='20px'
                 flex='~'
                 items='center'
                 justify='center'
-                m='r-5px'
                 cursor='pointer'
                 relative='~'
               >
@@ -181,7 +171,14 @@ const Card = memo(
               </div>
             </div>
           </div>
-
+          <i
+            className='iconfont icon-gengduo text-$icon'
+            top='15px'
+            right='15px'
+            cursor='pointer'
+            absolute='~'
+            onClick={() => changePageActive()}
+          />
           {/* 切换歌曲的箭头 */}
           <i
             className='iconfont icon-left arrow left-5px text-$icon'

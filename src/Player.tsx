@@ -66,6 +66,7 @@ const App = memo(() => {
         }
       >
         <Page
+          VolumeSlider={VolumeSlider}
           audioInfo={audioInfo}
           lyricInfo={lyricInfo2}
           TimeSlider={TimeSlider}

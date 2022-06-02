@@ -14,7 +14,7 @@ const LyricBox = memo((props: lyricBox) => {
   const pClass = (index: number) =>
     currentLyricIndex === index ? 'active-lyric' : undefined
   //样式对象
-  const style = { lineHeight: (leading ?? 23) + 'px' }
+  const style = { padding: `${leading ?? 5}px 0` }
   return (
     <Wrapper ref={lyricBoxRef}>
       {lyricList.map((item, index) => (

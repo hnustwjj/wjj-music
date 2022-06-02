@@ -27,18 +27,31 @@ const navList = [
 const Page = memo(
   (props: {
     TimeSlider: () => JSX.Element
+    VolumeSlider: () => JSX.Element
     musicInfo: IMusicInfo
     lyricInfo: ILyric
     audioInfo: IAudio
   }) => {
     const [currentIndex, setCurrentIndex] = useState(0)
-    const { TimeSlider, musicInfo, lyricInfo, audioInfo } = props
+    const {
+      TimeSlider,
+      musicInfo,
+      lyricInfo,
+      audioInfo,
+      VolumeSlider,
+    } = props
     // 获取音乐信息相关
     const { al, singers, name: songName } = musicInfo
     // 获取歌词相关信息
     const { currentLyricIndex, lyricList, lyricBoxRef } = lyricInfo
     // 获取音频相关信息
-    const { switchMusic, switchMusicStaus, isPlaying } = audioInfo
+    const {
+      switchMusic,
+      switchMusicStaus,
+      isPlaying,
+      volume,
+      changeJingyin,
+    } = audioInfo
     return (
       <DivWrapper>
         {/* 两张背景蒙版 */}
@@ -128,7 +141,7 @@ const Page = memo(
               {/* 歌词 */}
               <div flex='1' overflow='hidden' relative='~' p='x-16px'>
                 <LyricBox
-                  leading={35}
+                  leading={10}
                   currentLyricIndex={currentLyricIndex}
                   lyricList={lyricList}
                   lyricBoxRef={lyricBoxRef}
@@ -149,6 +162,7 @@ const Page = memo(
             <p
               className='iconfont icon-random icon text-18px'
               //TODO: 播放顺序控制
+              onClick={() => alert('todo')}
             />
             <p
               className='iconfont icon-pre icon text-18px'
@@ -165,9 +179,24 @@ const Page = memo(
               onClick={() => switchMusic('next')}
             />
             <p
-              className='iconfont icon-laba icon text-18px'
-              //TODO: 音量控制
-            />
+              className={`iconfont volume-slider-hover icon text-18px relative ${
+                volume === 0 ? 'icon-jingyin' : 'icon-laba'
+              } `}
+              onClick={() => changeJingyin()}
+            >
+              <div
+                absolute='~'
+                h='80px'
+                p='y-10px x-10px'
+                flex='~ col'
+                items='center'
+                bottom='20px'
+                opacity='0'
+                hover='opacity-100'
+              >
+                {VolumeSlider}
+              </div>
+            </p>
           </div>
           <div w='full' flex='~' justify='center' px='200px'>
             {TimeSlider}

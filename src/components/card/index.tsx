@@ -140,7 +140,7 @@ const Card = memo(
               <div w='240px' p='x-15px' flex='~' justify='center'>
                 {TimeSlider}
               </div>
-              <div className='icon' m='r-5px' relative='~'>
+              <div className='icon-wrapper' m='r-5px' relative='~'>
                 <i
                   className={
                     'iconfont volume-slider-hover text-$icon ' +

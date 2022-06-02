@@ -4,7 +4,7 @@ import { useMemo } from 'react'
 
 let preVolume = 0
 /**
- * 用于返回时间和音量的Slider
+ * 用于返回已经实现的时间和音量的Slider
  * @param audioInfo 音频信息
  * @param lyricInfo 歌词信息
  * @returns

@@ -84,7 +84,7 @@ const Slider = memo((props: SliderProps) => {
           (direction === 'row'
             ? 'h-5px rounded-l-full'
             : 'w-5px rounded-t-full') +
-          ' bg-$slider-current transition-none z-2'
+          ' bg-$slider-current transition z-2'
         }
       />
       {/* 加载进度条 */}

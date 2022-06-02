@@ -33,6 +33,11 @@ export default styled.div`
   .text-18px {
     font-size: 18px;
   }
+  .volume-slider-hover {
+    &:hover > div {
+      opacity: 1;
+    }
+  }
 `
 
 export const NavButton = styled.button`

@@ -1,6 +1,7 @@
 import Slider from '@/common/slider'
-import { IAudio } from '@/hooks/useAudio'
 import { useMemo } from 'react'
+
+import type { IAudio } from '@/hooks/useAudio'
 
 let preVolume = 0
 /**

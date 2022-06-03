@@ -3,11 +3,11 @@ import { Provider } from 'react-redux'
 import Card from './card'
 import Page from './page'
 
-import { fetchHotRecommend } from '@/store/music'
-import store, { useAppDispatch } from '@/store'
 import useMusicInfo from '../hooks/useMusic'
 import useLyric from '../hooks/useLyric'
 import useAudio from '../hooks/useAudio'
+import { fetchHotRecommend } from '@/store/music'
+import store, { useAppDispatch } from '@/store'
 import getTimeAndAudioSlider from '../common/slider/implement/impSliders'
 const App = memo(() => {
   const dispatch = useAppDispatch()

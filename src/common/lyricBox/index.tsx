@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
-import { Wrapper } from './style'
 
+import { Wrapper } from './style'
 import { LYRICLIST_NULL_TEXT } from '@/constant'
 
 interface lyricBox {

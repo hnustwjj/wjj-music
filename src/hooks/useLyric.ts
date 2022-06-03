@@ -63,7 +63,6 @@ export default function useLyric() {
   useEffect(() => {
     if (lyricBoxRef.current) {
       // 获取子元素中当前
-      //TODO: (不知道为啥currentWrapper可能是undefined，所以下面进行了??判断)
       const currentLyricWrapper = lyricBoxRef.current.children[
         currentLyricIndex
       ] as HTMLElement

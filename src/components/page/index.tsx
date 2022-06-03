@@ -1,13 +1,13 @@
 import React, { memo, useState } from 'react'
 
 import { imgUrl } from '@/utils'
-import Mine from './components/Mine'
-import Search from './components/Search'
-import Recommend from './components/Recommend'
-import Listened from './components/Listened'
+import Mine from './child-views/Mine'
+import Search from './child-views/Search'
+import Recommend from './child-views/Recommend'
+import Listened from './child-views/Listened'
 import DivWrapper, { NavButton } from './style'
 import LyricBox from '@/common/lyricBox'
-import Playing from './components/Playing'
+import Playing from './child-views/Playing'
 
 import type { IMusicInfo } from '@/hooks/useMusic'
 import type { ILyric } from '@/hooks/useLyric'
@@ -17,6 +17,7 @@ import {
   PAGE_SONG_NULL_TEXT,
 } from '@/constant'
 
+//TODO:在Slider左右添加歌名、时间戳等显示信息
 //TODO:手机端兼容
 
 //TODO:登录

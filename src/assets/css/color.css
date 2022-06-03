@@ -2,11 +2,22 @@
 html{
   /* css原生也支持变量的设置 */
   --white:#fff;
-  --lyric:#fff;
-  --icon: rgb(212,212,213);
+  --icon: white;
+  --font:white;
+
+  --song:rgb(229, 231, 235);
+  --singer:rgb(209, 213, 219);
+  
+  --lyric:rgb(209, 213, 219);
+  --lyric-active:#fff;
+
   --slider-current:#15add3;
   --slider-buffer:rgb(219, 216, 216);
   --slider-all: #918f8f;
+
+  --card-height:300px;
+  --card-width:300px;
+
   --pan-index:52;
   --card-index:51;
   --page-index:50;

@@ -1,4 +1,4 @@
-import img from '@/assets/img/bg-page1.jpg'
+import img from '@/assets/img/bg-page2.jpg'
 const parseExp = /\[(\d{2}):(\d{2})\.(\d{2,3})\]/
 export interface lyricItem {
   time: number

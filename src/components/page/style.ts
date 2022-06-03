@@ -17,7 +17,7 @@ export default styled.div`
     align-items: center;
     justify-content: center;
     z-index: 50;
-    color: white;
+    color: var(--icon);
     cursor: pointer;
     margin: 0 10px;
   }

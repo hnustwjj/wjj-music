@@ -1,5 +1,8 @@
 import React, { memo } from 'react'
 import { Wrapper } from './style'
+
+import { LYRICLIST_NULL_TEXT } from '@/constant'
+
 interface lyricBox {
   currentLyricIndex: number
   lyricList: any[]
@@ -17,17 +20,21 @@ const LyricBox = memo((props: lyricBox) => {
   const style = { padding: `${leading ?? 5}px 0` }
   return (
     <Wrapper ref={lyricBoxRef}>
-      {lyricList.map((item, index) => (
-        <p
-          text='12px center gray-300'
-          leading='18px'
-          className={pClass(index)}
-          style={style}
-          key={item.time + item.content}
-        >
-          {item.content}
-        </p>
-      ))}
+      {lyricList.length ? (
+        lyricList.map((item, index) => (
+          <p
+            text='12px center $lyric'
+            leading='18px'
+            className={pClass(index)}
+            style={style}
+            key={item.time + item.content}
+          >
+            {item.content}
+          </p>
+        ))
+      ) : (
+        <div text='$font center 15px'>{LYRICLIST_NULL_TEXT}</div>
+      )}
     </Wrapper>
   )
 })

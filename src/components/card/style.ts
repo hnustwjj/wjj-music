@@ -36,8 +36,8 @@ export const PanWrapper = styled.div`
 `
 
 export const CardWrapper = styled.div`
-  height: 300px;
-  width: 300px;
+  height: var(--card-height);
+  width: var(--card-width);
   position: fixed;
   left: 20px;
   bottom: 20px;

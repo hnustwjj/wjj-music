@@ -12,6 +12,10 @@ import Playing from './components/Playing'
 import type { IMusicInfo } from '@/hooks/useMusic'
 import type { ILyric } from '@/common/lyricBox/hooks/useLyric'
 import type { IAudio } from '@/hooks/useAudio'
+import {
+  PAGE_SINGER_NULL_TEXT,
+  PAGE_SONG_NULL_TEXT,
+} from '@/constant'
 
 //TODO:手机端兼容
 
@@ -113,22 +117,25 @@ const Page = memo(
             <div w='250px' flex='~ col' items='center' h='full'>
               {/* 歌名 */}
               <div
-                h='40px'
-                text='15px center gray-200'
-                leading='60px'
-                m='b-20px'
+                h='60px'
+                text='15px center $song'
+                flex='~'
+                leading='20px'
+                overflow='hidden'
+                items='center'
+                m='b-10px'
               >
-                {songName}
+                {songName || PAGE_SONG_NULL_TEXT}
               </div>
               {/* 歌手 */}
               <p
                 h='40px'
-                text='12px center gray-300'
+                text='12px center $singer'
                 leading='20px'
                 m='b-20px'
                 w='140px'
               >
-                歌手：{singers}
+                歌手：{singers || PAGE_SINGER_NULL_TEXT}
               </p>
               {/* 歌词 */}
               <div flex='1' overflow='hidden' relative='~' p='x-16px'>

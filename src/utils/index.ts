@@ -1,3 +1,4 @@
+import img from '@/assets/img/bg-page1.jpg'
 const parseExp = /\[(\d{2}):(\d{2})\.(\d{2,3})\]/
 export interface lyricItem {
   time: number
@@ -32,7 +33,7 @@ export function parseLyric(lyric: string): lyricItem[] {
  * @returns 指定大小的图片的url
  */
 export const imgUrl = (size: number, url?: string) =>
-  url ? `${url}?param=${size}y${size}` : undefined
+  url ? `${url}?param=${size}y${size}` : img
 
 /**
  * 给出毫秒数，返回时间格式: mm:ss

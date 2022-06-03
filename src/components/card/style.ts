@@ -48,8 +48,8 @@ export const CardWrapper = styled.div`
   z-index: var(--card-index);
   transform: scale(0) translate(-500px, 500px);
   opacity: 0;
-  background-size: 100%;
-
+  background-size: cover;
+  background-repeat: no-repeat;
   &.active {
     transform: scale(1) translate(0, 0);
     opacity: 1;

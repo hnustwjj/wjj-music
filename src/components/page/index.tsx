@@ -3,11 +3,11 @@ import React, { memo, useState } from 'react'
 import { imgUrl } from '@/utils'
 import Mine from './components/Mine'
 import Search from './components/Search'
-import Playing from './components/Playing'
+import Recommend from './components/Recommend'
 import Listened from './components/Listened'
 import DivWrapper, { NavButton } from './style'
 import LyricBox from '@/common/lyricBox'
-// import Recommend from './components/Recommend'
+import Playing from './components/Playing'
 
 import type { IMusicInfo } from '@/hooks/useMusic'
 import type { ILyric } from '@/common/lyricBox/hooks/useLyric'
@@ -18,8 +18,8 @@ import type { IAudio } from '@/hooks/useAudio'
 //TODO:登录
 //TODO:使背景切换更自然
 const navList = [
-  { title: '每日推荐', element: <Playing /> },
-  // { title: '推荐', element: <Recommend /> },
+  { title: '正在播放', element: <Playing /> },
+  { title: '每日推荐', element: <Recommend /> },
   { title: '搜索', element: <Search /> },
   { title: '我的歌单', element: <Mine /> },
   { title: '我听过的', element: <Listened /> },
@@ -85,7 +85,7 @@ const Page = memo(
           </a>
           <button
             className='absolute right-20px'
-            onClick={() => console.log('todo')}
+            onClick={() => alert('todo')}
           >
             登录
           </button>

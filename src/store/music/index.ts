@@ -1,12 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import type { MusicListItem } from './types'
 
 export interface musicState {
-  musicList: any[]
-  currentMusic: any
+  // 正在播放音乐列表
+  musicList: MusicListItem[]
+  // 当前音乐信息
+  currentMusic: MusicListItem
+  // 当前音乐的歌词
   currentLyric: string
+  // 当前音乐的时长
   duration: number
+  // 当前音乐的事件
   currentTime: number
-  currentLyricIndex:number
+  // 当前音乐的歌词下标
+  currentLyricIndex: number
 }
 
 const initialState: musicState = {
@@ -15,29 +22,47 @@ const initialState: musicState = {
   currentLyric: '',
   duration: 0,
   currentTime: 0,
-  currentLyricIndex:0
+  currentLyricIndex: 0,
 }
 
 const music = createSlice({
   name: 'music',
   initialState,
   reducers: {
-    changeMusicList(state: musicState, actions: PayloadAction<any[]>) {
+    changeMusicList(
+      state: musicState,
+      actions: PayloadAction<any[]>
+    ) {
       state.musicList = actions.payload
     },
-    changeCurrentMusic(state: musicState, actions: PayloadAction<any>) {
+    changeCurrentMusic(
+      state: musicState,
+      actions: PayloadAction<any>
+    ) {
       state.currentMusic = actions.payload
     },
-    changeCurrentLyric(state: musicState, actions: PayloadAction<any>) {
+    changeCurrentLyric(
+      state: musicState,
+      actions: PayloadAction<any>
+    ) {
       state.currentLyric = actions.payload
     },
-    changeDuration(state: musicState, actions: PayloadAction<number>) {
+    changeDuration(
+      state: musicState,
+      actions: PayloadAction<number>
+    ) {
       state.duration = actions.payload
     },
-    changeCurrentTime(state: musicState, actions: PayloadAction<number>) {
+    changeCurrentTime(
+      state: musicState,
+      actions: PayloadAction<number>
+    ) {
       state.currentTime = actions.payload
     },
-    changeCurrentLyricIndex(state: musicState, actions: PayloadAction<number>) {
+    changeCurrentLyricIndex(
+      state: musicState,
+      actions: PayloadAction<number>
+    ) {
       state.currentLyricIndex = actions.payload
     },
   },
@@ -51,7 +76,7 @@ export const {
   changeCurrentLyric,
   changeCurrentTime,
   changeDuration,
-  changeCurrentLyricIndex
+  changeCurrentLyricIndex,
 } = music.actions
 
 // 导出定义的所有异步action

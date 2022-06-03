@@ -42,6 +42,9 @@ const Card = memo(
       changeJingyin,
     } = audioInfo
 
+    const BG_STYLE = {
+      backgroundImage: `url(${imgUrl(300, al?.picUrl)})`,
+    }
     //TODO:检测背景图的明暗，设置不同的color
     return (
       <>
@@ -55,7 +58,7 @@ const Card = memo(
             onClick={() => setPanActive(!active)}
           >
             <img
-              className='rounded-full '
+              className='rounded-full object-cover h-full w-full'
               src={imgUrl(140, al?.picUrl)}
             />
           </div>
@@ -63,15 +66,14 @@ const Card = memo(
         <CardWrapper
           className={active ? 'active' : ''}
           select='none'
-          style={{
-            background: `url(${imgUrl(300, al?.picUrl)})`,
-          }}
+          style={BG_STYLE}
         >
           {/* 三张背景蒙版 */}
           {[5, 2].map(item => (
-            <img
+            <div
               key={item}
-              src={imgUrl(300, al?.picUrl)}
+              style={BG_STYLE}
+              bg='no-repeat cover'
               className={`blur-${item}px`}
               absolute='~'
               rounded='md'

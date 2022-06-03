@@ -57,15 +57,18 @@ export default function useAudio(
       setIsPlaying(!isPlaying)
     }
   }
+  //TODO: 播放顺序控制
   /**
    *  切换歌曲
    * @param type 切换到前一首还是后一首
    */
   const switchMusic = async (type: 'pre' | 'next') => {
-    if (musicList.length) {
+    // 如果有歌曲，并且currentMusic不为空对象（有index就不为空）就执行
+    if (musicList.length && 'index' in currentMusic) {
       let currentIndex = currentMusic.index
       currentIndex += type === 'pre' ? -1 : 1
       if (currentIndex < 0) currentIndex = musicList.length - 1
+      //循环播放
       if (currentIndex === musicList.length) currentIndex = 0
       const Music = musicList[currentIndex]
       dispatch(changeCurrentMusic(Music))

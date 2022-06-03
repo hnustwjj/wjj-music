@@ -10,7 +10,7 @@ import LyricBox from '@/common/lyricBox'
 import Playing from './components/Playing'
 
 import type { IMusicInfo } from '@/hooks/useMusic'
-import type { ILyric } from '@/common/lyricBox/hooks/useLyric'
+import type { ILyric } from '@/hooks/useLyric'
 import type { IAudio } from '@/hooks/useAudio'
 import {
   PAGE_SINGER_NULL_TEXT,

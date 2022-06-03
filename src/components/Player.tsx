@@ -1,14 +1,14 @@
 import { memo, useEffect, useState } from 'react'
 import { Provider } from 'react-redux'
-import Card from './components/card'
-import Page from './components/page'
+import Card from './card'
+import Page from './page'
 
 import { fetchHotRecommend } from '@/store/music'
 import store, { useAppDispatch } from '@/store'
-import useMusicInfo from './hooks/useMusic'
-import useLyric from './common/lyricBox/hooks/useLyric'
-import useAudio from './hooks/useAudio'
-import getTimeAndAudioSlider from './common/slider/impSliders'
+import useMusicInfo from '../hooks/useMusic'
+import useLyric from '../hooks/useLyric'
+import useAudio from '../hooks/useAudio'
+import getTimeAndAudioSlider from '../common/slider/implement/impSliders'
 const App = memo(() => {
   const dispatch = useAppDispatch()
   // 请求热榜推荐歌曲的数据

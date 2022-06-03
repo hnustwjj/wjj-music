@@ -1,5 +1,5 @@
 import { parseLyric } from '@/utils'
-import { useAppSelector, useAppDispatch } from '../../../store'
+import { useAppSelector, useAppDispatch } from '../store'
 import { useEffect, useRef, useMemo } from 'react'
 import {
   changeCurrentTime,

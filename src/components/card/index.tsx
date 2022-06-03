@@ -3,7 +3,8 @@ import React, { memo, useState } from 'react'
 import { imgUrl } from '@/utils'
 import LyricBox from '../../common/lyricBox'
 import { PanWrapper, CardWrapper } from './style'
-import type { ILyric } from '@/common/lyricBox/hooks/useLyric'
+
+import type { ILyric } from '@/hooks/useLyric'
 import type { IMusicInfo } from '../../hooks/useMusic'
 import type { IAudio } from '../../hooks/useAudio'
 //TODO:添加pan的碟片的那根棍子= =

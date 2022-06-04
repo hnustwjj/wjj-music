@@ -26,6 +26,18 @@ export function getMusic(ids: number) {
   })
 }
 
+// 根据id获取音乐信息
+export function search(keywords: string, limit = 30, offset = 0) {
+  return request_util.get({
+    url: '/search',
+    params: {
+      keywords,
+      limit,
+      offset,
+    },
+  })
+}
+
 // 根据id获取音乐url
 export function getMusicUrl(id: number) {
   return `https://music.163.com/song/media/outer/url?id=${id}.mp3`

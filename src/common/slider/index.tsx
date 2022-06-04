@@ -105,6 +105,7 @@ const Slider = memo((props: SliderProps) => {
           transform='~ -translate-y-full'
           text='$font 13px'
           leading='30px'
+          whitespace='nowrap'
         >
           {slot}
         </div>

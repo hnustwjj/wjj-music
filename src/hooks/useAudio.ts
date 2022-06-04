@@ -1,9 +1,5 @@
 import { useAppDispatch, useAppSelector } from '../store/index'
-import {
-  changeCurrentMusic,
-  changeLyric,
-  changeDuration,
-} from '@/store/music'
+import { switchCurrentMusic } from '@/store/music'
 import { useState, useRef, SyntheticEvent, useEffect } from 'react'
 import { Dispatch, SetStateAction, RefObject } from 'react'
 export const INITIAL_VOLUME = 0.66
@@ -49,7 +45,6 @@ export default function useAudio() {
   const switchMusicStaus = () => {
     if (audioRef.current) {
       isPlaying ? audioRef.current.pause() : audioRef.current.play()
-
       setIsPlaying(!isPlaying)
     }
   }
@@ -70,8 +65,8 @@ export default function useAudio() {
         currentIndex = 0
       }
       const Music = playingMusicList[currentIndex]
-      dispatch(changeCurrentMusic(Music))
-      dispatch(changeLyric(Music))
+      // 改变当前音乐
+      dispatch(switchCurrentMusic(Music))
       // 根据当前状态判断是否要播放
       isPlaying ? audioRef.current?.play() : audioRef.current?.pause()
     }
@@ -82,10 +77,6 @@ export default function useAudio() {
    * @param e
    */
   const canplay = (e: SyntheticEvent<HTMLAudioElement, Event>) => {
-    // 修改duration
-    dispatch(
-      changeDuration((e.target as HTMLAudioElement).duration * 1000)
-    )
     isPlaying ? audioRef.current?.play() : audioRef.current?.pause()
   }
 

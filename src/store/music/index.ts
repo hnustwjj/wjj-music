@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import useStorage from '@/hooks/useStorage'
 import type { MusicListItem } from './types'
-
 export interface musicState {
   // 每日推荐音乐列表
   dailyMusicList: MusicListItem[]

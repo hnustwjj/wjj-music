@@ -24,10 +24,7 @@ const App = memo(() => {
   // 为了控制page页面的LyricBox，需要两个LyricBoxRef，所以再调用一次
   const lyricInfo2 = useLyric()
   // 获取音频信息的Hook
-  const audioInfo = useAudio(
-    musicInfo.dailyMusicList,
-    musicInfo.currentMusic
-  )
+  const audioInfo = useAudio()
 
   const { audioRef, canplay, switchMusic, audioTimeUpdate } =
     audioInfo

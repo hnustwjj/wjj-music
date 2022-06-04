@@ -12,11 +12,13 @@ export interface IMusicInfo {
   name: any
   url: any
   currentMusic: any
-  musicList: any[]
+  dailyMusicList: any[]
 }
 export default function useMusicInfo() {
   // 获取当前歌曲和歌曲列表
-  const { currentMusic, musicList } = useAppSelector(state => state.music)
+  const { currentMusic, dailyMusicList } = useAppSelector(
+    state => state.music
+  )
   // 分别是id，歌曲信息，作者，歌曲名
   const { id, al, ar, name } = currentMusic
   // 根据id获取url
@@ -30,5 +32,5 @@ export default function useMusicInfo() {
       singers += ar.length === index + 1 ? '' : ' / '
     })
 
-  return { al, singers, name, url, currentMusic, musicList }
+  return { al, singers, name, url, currentMusic, dailyMusicList }
 }

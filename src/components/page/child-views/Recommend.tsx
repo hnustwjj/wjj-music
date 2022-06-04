@@ -1,81 +1,32 @@
-import React, { memo } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '@/store'
-
-import img from '@/assets/img/playing.gif'
-import { formatTime } from '@/utils'
-import { changeCurrentMusic, changeLyric } from '@/store/music'
-const Playing = memo(() => {
-  const { musicList, currentMusic } = useAppSelector(
-    state => state.music
-  )
+import { pushPlayingMusicList } from '@/store/music'
+import MusicList from '@/common/musicList'
+const Recommend = memo(() => {
+  // 修改音乐
+  // TODO:改成将音乐添加到palyingMusicList列表中
   const dispatch = useAppDispatch()
+  const { playingMusicList } = useAppSelector(state => state.music)
+  // 阻止第一次执行effect副作用
+  const [first, setfirst] = useState(true)
+  useEffect(() => {
+    if (first) {
+      setfirst(false)
+    } else {
+      //TODO:push成功的dialog
+      alert('push成功')
+    }
+  }, [playingMusicList])
 
-  const switchMusic = item => {
-    dispatch(changeCurrentMusic(item))
-    dispatch(changeLyric(item.id))
+  const pushIntoPlayingMusicList = item => {
+    dispatch(pushPlayingMusicList(item))
   }
   return (
-    <>
-      {musicList.length ? (
-        <>
-          <div
-            flex='~'
-            text='14px thin'
-            border='b-1'
-            className='border-[hsla(0,0%,100%,.1)]'
-            leading='50px'
-          >
-            <span w='80px' />
-            <span className='flex-[4]'>歌曲</span>
-            <span className='flex-1'>歌手</span>
-            <span w='80px'>时长</span>
-          </div>
-          <div flex='1' overflow='auto'>
-            {musicList.map((item, index) => (
-              <div
-                flex='~'
-                text='14px thin'
-                leading='50px'
-                border='b-1'
-                cursor='pointer'
-                key={item.id}
-                className='border-[hsla(0,0%,100%,.1)] hover:bg-[rgba(0,0,0,.05)]'
-                onClick={() => switchMusic(item)}
-              >
-                <span
-                  w='80px'
-                  flex='~'
-                  items='center'
-                  justify='center'
-                >
-                  {currentMusic === item ? (
-                    <img src={img} />
-                  ) : (
-                    index + 1
-                  )}
-                </span>
-                <span className='flex-[4]'>{item.name}</span>
-                <span className='flex-1'>
-                  {item.ar && item.ar[0].name}
-                </span>
-                <span w='80px'>{formatTime(item.dt ?? 0)}</span>
-              </div>
-            ))}
-          </div>
-        </>
-      ) : (
-        <div
-          h='full'
-          w='full'
-          flex='~'
-          justify='center'
-          items='center'
-        >
-          啥情况，咋啥都没有！！！
-        </div>
-      )}
-    </>
+    <MusicList
+      source='dailyMusicList'
+      rowClick={pushIntoPlayingMusicList}
+    />
   )
 })
 
-export default Playing
+export default Recommend

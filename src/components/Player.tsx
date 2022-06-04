@@ -25,7 +25,7 @@ const App = memo(() => {
   const lyricInfo2 = useLyric()
   // 获取音频信息的Hook
   const audioInfo = useAudio(
-    musicInfo.musicList,
+    musicInfo.dailyMusicList,
     musicInfo.currentMusic
   )
 

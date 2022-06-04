@@ -2,8 +2,10 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { MusicListItem } from './types'
 
 export interface musicState {
+  // 每日推荐音乐列表
+  dailyMusicList: MusicListItem[]
   // 正在播放音乐列表
-  musicList: MusicListItem[]
+  playingMusicList: MusicListItem[]
   // 当前音乐信息
   currentMusic: MusicListItem
   // 当前音乐的歌词
@@ -17,8 +19,9 @@ export interface musicState {
 }
 
 const initialState: musicState = {
-  musicList: [],
-  currentMusic: {},
+  dailyMusicList: [],
+  playingMusicList: [],
+  currentMusic: { index: -1 },
   currentLyric: '',
   duration: 0,
   currentTime: 0,
@@ -29,11 +32,22 @@ const music = createSlice({
   name: 'music',
   initialState,
   reducers: {
-    changeMusicList(
+    changeDailyMusicList(
       state: musicState,
       actions: PayloadAction<any[]>
     ) {
-      state.musicList = actions.payload
+      state.dailyMusicList = actions.payload
+    },
+    pushPlayingMusicList(
+      state: musicState,
+      actions: PayloadAction<MusicListItem>
+    ) {
+      //去重插入
+      !state.playingMusicList.find(
+        item => item.id === actions.payload.id
+      )
+        ? state.playingMusicList.push(actions.payload)
+        : null
     },
     changeCurrentMusic(
       state: musicState,
@@ -71,7 +85,8 @@ export default music.reducer
 
 //导出所有的普通action
 export const {
-  changeMusicList,
+  changeDailyMusicList,
+  pushPlayingMusicList,
   changeCurrentMusic,
   changeCurrentLyric,
   changeCurrentTime,

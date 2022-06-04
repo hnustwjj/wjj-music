@@ -1,7 +1,8 @@
+import { MusicListItem } from '@/store/music/types'
 import { AppDispatch } from './../index'
 import { getLike, getLyric } from '@/service/music'
 import {
-  changeMusicList,
+  changeDailyMusicList,
   changeCurrentMusic,
   changeCurrentLyric,
 } from '.'
@@ -18,7 +19,7 @@ export const fetchHotRecommend =
       tracks[i]['index'] = i
     }
     // 保存
-    dispatch(changeMusicList(tracks))
+    dispatch(changeDailyMusicList(tracks))
     // 默认当前歌曲是第一个对象
     // dispatch(changeCurrentMusic(tracks[0]))
     // 获取并修改currentLyric歌词
@@ -27,9 +28,9 @@ export const fetchHotRecommend =
 
 // 根据id获取歌词
 export const changeLyric =
-  (id: number) => async (dispatch: AppDispatch) => {
+  (item: MusicListItem) => async (dispatch: AppDispatch) => {
     const {
       lrc: { lyric },
-    } = await getLyric(id)
+    } = await getLyric(item.id ?? 0)
     dispatch(changeCurrentLyric(lyric))
   }

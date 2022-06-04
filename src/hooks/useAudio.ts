@@ -24,13 +24,11 @@ export interface IAudio {
 //需要放在最外面，否则每次执行函数都会重新创建变量
 let volumeCache = 0
 let isJingyin = false
-export default function useAudio(
-  musicList: any[],
-  currentMusic: any
-) {
+export default function useAudio() {
   const dispatch = useAppDispatch()
   // 获取duration
-  const { duration } = useAppSelector(state => state.music)
+  const { duration, dailyMusicList, playingMusicList, currentMusic } =
+    useAppSelector(state => state.music)
 
   //是否正在播放歌曲
   const [isPlaying, setIsPlaying] = useState(false)
@@ -49,11 +47,8 @@ export default function useAudio(
    */
   const switchMusicStaus = () => {
     if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause()
-      } else {
-        audioRef.current.play()
-      }
+      isPlaying ? audioRef.current.pause() : audioRef.current.play()
+
       setIsPlaying(!isPlaying)
     }
   }
@@ -63,16 +58,16 @@ export default function useAudio(
    * @param type 切换到前一首还是后一首
    */
   const switchMusic = async (type: 'pre' | 'next') => {
-    // 如果有歌曲，并且currentMusic不为空对象（有index就不为空）就执行
-    if (musicList.length && 'index' in currentMusic) {
+    // 如果有歌曲，并且currentMusic不为空对象（index不为-1）就执行
+    if (playingMusicList.length && currentMusic.index !== -1) {
       let currentIndex = currentMusic.index
       currentIndex += type === 'pre' ? -1 : 1
-      if (currentIndex < 0) currentIndex = musicList.length - 1
+      if (currentIndex < 0) currentIndex = playingMusicList.length - 1
       //循环播放
-      if (currentIndex === musicList.length) currentIndex = 0
-      const Music = musicList[currentIndex]
+      if (currentIndex === playingMusicList.length) currentIndex = 0
+      const Music = playingMusicList[currentIndex]
       dispatch(changeCurrentMusic(Music))
-      dispatch(changeLyric(Music.id))
+      dispatch(changeLyric(Music))
       // 根据当前状态判断是否要播放
       isPlaying ? audioRef.current?.play() : audioRef.current?.pause()
     }

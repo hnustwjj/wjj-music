@@ -30,7 +30,7 @@ const Card = memo(
     const [active, setPanActive] = useState(false)
 
     // 获取音乐信息相关
-    const { al, singers, name: songName } = musicInfo
+    const { al, singers, name: songName, currentMusic } = musicInfo
     // 获取歌词相关信息
     const { currentLyricIndex, lyricList, lyricBoxRef } = lyricInfo
     // 获取音频相关信息
@@ -193,7 +193,7 @@ const Card = memo(
             h='full'
             w='full'
           />
-          {!musicInfo.currentMusic ? (
+          {!currentMusic.initFlag ? (
             content
           ) : (
             <div

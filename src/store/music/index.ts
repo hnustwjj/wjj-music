@@ -21,7 +21,7 @@ export interface musicState {
 const initialState: musicState = {
   dailyMusicList: [],
   playingMusicList: useStorage().getItem('playingMusicList', '[]'),
-  currentMusic: {},
+  currentMusic: { initFlag: true },
   currentLyric: '',
   duration: 0,
   currentTime: 0,

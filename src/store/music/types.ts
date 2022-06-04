@@ -12,4 +12,5 @@ export interface MusicListItem {
   }
   dt?: number
   lyric?: string
+  initFlag?: boolean
 }

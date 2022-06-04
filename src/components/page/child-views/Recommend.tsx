@@ -5,10 +5,11 @@ import {
   switchCurrentMusic,
 } from '@/store/music'
 import MusicList from '@/common/musicList'
+import type { MusicListItem } from '@/store/music/types'
 const Recommend = memo(() => {
   // 修改音乐
   const dispatch = useAppDispatch()
-  const pushIntoPlayingMusicList = item => {
+  const pushIntoPlayingMusicList = (item: MusicListItem) => {
     dispatch(switchCurrentMusic(item))
     dispatch(pushPlayingMusicList(item))
 

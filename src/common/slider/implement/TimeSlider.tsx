@@ -1,7 +1,8 @@
 import Slider from '@/common/slider'
 import { useMemo } from 'react'
-
+import { formatTime } from '@/utils'
 import type { IAudio } from '@/hooks/useAudio'
+import type { ILyric } from '@/hooks/useLyric'
 
 let preVolume = 0
 /**
@@ -10,11 +11,10 @@ let preVolume = 0
  * @param lyricInfo 歌词信息
  * @returns
  */
-export default function (audioInfo: IAudio, lyricInfo) {
-  const { audioRef, duration, bufferPercent } = audioInfo
+export default function (audioInfo: IAudio, lyricInfo: ILyric) {
+  const { audioRef, duration, bufferPercent, currentTime } = audioInfo
   // 时间百分比
-  const timePercent =
-    ((audioRef.current?.currentTime ?? 0) * 1000) / duration
+  const timePercent = currentTime / duration
   // 时间进度条改变事件
   const onTimeSliderChange = (percent: number) => {
     const time = (duration * percent).toFixed()
@@ -23,6 +23,7 @@ export default function (audioInfo: IAudio, lyricInfo) {
       audioRef.current.currentTime = parseInt(time) / 1000
     }
   }
+
   const TimeSlider = useMemo(
     () => (
       <Slider
@@ -41,28 +42,11 @@ export default function (audioInfo: IAudio, lyricInfo) {
         }}
         setValue={percent => onTimeSliderChange(percent)}
         value={timePercent}
+        slot={formatTime(currentTime) + ' / ' + formatTime(duration)}
       />
     ),
     [onTimeSliderChange, timePercent]
   )
 
-  // 音量进度条改变事件
-  const onVolumeliderChange = (percent: number) => {
-    audioInfo.setVolume(percent)
-  }
-
-  const VolumeSlider = useMemo(
-    () => (
-      <Slider
-        direction='col'
-        value={audioInfo.volume}
-        setValue={percent => onVolumeliderChange(percent)}
-      />
-    ),
-    [onTimeSliderChange, timePercent]
-  )
-  return {
-    VolumeSlider,
-    TimeSlider,
-  }
+  return TimeSlider
 }

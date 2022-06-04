@@ -67,13 +67,19 @@ const Card = memo(
             h='40px'
             text='12px center $singer'
             leading='20px'
-            m='b-20px'
+            m='b-10px'
             w='140px'
           >
             歌手：{singers}
           </p>
           {/* 歌词 */}
-          <div flex='1' overflow='hidden' relative='~' p='x-15px'>
+          <div
+            flex='1'
+            overflow='hidden'
+            m='b-25px'
+            relative='~'
+            p='x-15px'
+          >
             <LyricBox
               currentLyricIndex={currentLyricIndex}
               lyricList={lyricList}

@@ -4,8 +4,6 @@ import { useAppSelector } from '@/store'
 import img from '@/assets/img/playing.gif'
 import { formatTime } from '@/utils'
 import { MusicListItem } from '@/store/music/types'
-
-//TODO:考虑要不要根据使用到这个组件的地方来决定是否显示每一行前面的播放动画
 interface MusicList {
   //TODO:source决定取的是每日推荐的列表还是正在播放的列表（或者后期会添加我听过的列表）
   source: 'dailyMusicList' | 'playingMusicList'
@@ -58,7 +56,7 @@ const MusicList = memo((props: MusicList) => {
                 key={item.id}
                 className='border-[hsla(0,0%,100%,.1)] hover:bg-[rgba(0,0,0,.05)]'
                 onClick={() => single(item)}
-                onDoubleClick={e => double(item)}
+                onDoubleClick={() => double(item)}
               >
                 <span
                   w='80px'

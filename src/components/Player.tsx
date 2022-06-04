@@ -8,7 +8,8 @@ import useLyric from '../hooks/useLyric'
 import useAudio from '../hooks/useAudio'
 import { fetchHotRecommend } from '@/store/music'
 import store, { useAppDispatch } from '@/store'
-import getTimeAndAudioSlider from '../common/slider/implement/impSliders'
+import getImpTimeSlider from '../common/slider/implement/TimeSlider'
+import getImpVolumeSlider from '../common/slider/implement/VolumeSlider'
 const App = memo(() => {
   const dispatch = useAppDispatch()
   // 请求热榜推荐歌曲的数据
@@ -28,11 +29,10 @@ const App = memo(() => {
 
   const { audioRef, canplay, switchMusic, audioTimeUpdate } =
     audioInfo
-  // 获取时间进度条和音量进度条
-  const { TimeSlider, VolumeSlider } = getTimeAndAudioSlider(
-    audioInfo,
-    lyricInfo
-  )
+  // 获取时间进度条
+  const TimeSlider = getImpTimeSlider(audioInfo, lyricInfo)
+  // 获取音乐进度条
+  const VolumeSlider = getImpVolumeSlider(audioInfo)
 
   return (
     <div fixed='~' top='0' left='0'>

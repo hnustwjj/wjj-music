@@ -10,6 +10,7 @@ type SliderProps = {
   direction: 'col' | 'row'
   value: number
   bufferValue?: number
+  slot?: string
   setValue: (current: number) => void
   onMouseDown?: () => void
   onMouseUp?: () => void
@@ -17,7 +18,7 @@ type SliderProps = {
 }
 const Slider = memo((props: SliderProps) => {
   // value是传入的进度条百分比
-  const { value, direction, setValue, bufferValue } = props
+  const { value, direction, setValue, bufferValue, slot } = props
   // value对应的进度条长度
   const [currentLength, setCurrentLength] = useState(0)
   // 实际进度条的div
@@ -84,7 +85,7 @@ const Slider = memo((props: SliderProps) => {
           (direction === 'row'
             ? 'h-5px rounded-l-full'
             : 'w-5px rounded-t-full') +
-          ' bg-$slider-current transition z-2'
+          ' bg-$slider-current transition  z-2'
         }
       />
       {/* 加载进度条 */}
@@ -96,7 +97,19 @@ const Slider = memo((props: SliderProps) => {
             : 'w-5px rounded-full') +
           ' bg-$slider-buffer transition absolute z-1'
         }
-      />
+      >
+        <div
+          absolute='~'
+          top='0'
+          left='0'
+          transform='~ -translate-y-full'
+          text='$font 13px'
+          leading='30px'
+        >
+          {slot}
+        </div>
+      </div>
+      {/* 圆圈按钮 */}
       <div
         w='16px'
         h='16px'

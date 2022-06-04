@@ -15,17 +15,18 @@ export interface IAudio {
   volume: number
   bufferPercent: number
   changeJingyin: () => void
+  audioTimeUpdate: (e: any, fn?: (e) => void) => void
+  currentTime: number
 }
 //TODO:考虑静音是否用muted属性实现
 //需要放在最外面，否则每次执行函数都会重新创建变量
 let volumeCache = 0
 let isJingyin = false
-export default function useAudio() {
+export default function useAudio(): IAudio {
   const dispatch = useAppDispatch()
   // 获取duration
-  const { duration, playingMusicList, currentMusic } = useAppSelector(
-    state => state.music
-  )
+  const { duration, playingMusicList, currentMusic, currentTime } =
+    useAppSelector(state => state.music)
 
   //是否正在播放歌曲
   const [isPlaying, setIsPlaying] = useState(false)
@@ -122,5 +123,6 @@ export default function useAudio() {
     canplay,
     setVolume,
     volume,
+    currentTime,
   }
 }

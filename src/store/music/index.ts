@@ -17,11 +17,11 @@ export interface musicState {
   // 当前音乐的歌词下标
   currentLyricIndex: number
 }
-
+export const initialCurrentMusic = { initFlag: true }
 const initialState: musicState = {
   dailyMusicList: [],
   playingMusicList: useStorage().getItem('playingMusicList', '[]'),
-  currentMusic: { initFlag: true },
+  currentMusic: initialCurrentMusic,
   currentLyric: '',
   duration: 0,
   currentTime: 0,

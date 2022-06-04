@@ -48,7 +48,7 @@ const App = memo(() => {
     <div fixed='~' top='0' left='0'>
       <audio
         ref={audioRef}
-        src={musicInfo.url}
+        src={musicInfo.url ?? ''}
         onTimeUpdate={e => audioTimeUpdate(e, lyricInfo.updateTime)}
         onCanPlay={e => canplay(e)}
         onEnded={() => switchMusic('next')}

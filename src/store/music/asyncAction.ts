@@ -23,10 +23,14 @@ export const fetchHotRecommend =
 // 根据id获取歌词
 export const changeLyric =
   (item: MusicListItem) => async (dispatch: AppDispatch) => {
-    const {
-      lrc: { lyric },
-    } = await getLyric(item.id ?? 0)
-    dispatch(changeCurrentLyric(lyric))
+    if (item.id) {
+      const {
+        lrc: { lyric },
+      } = await getLyric(item.id)
+      dispatch(changeCurrentLyric(lyric))
+    } else {
+      dispatch(changeCurrentLyric(''))
+    }
   }
 
 //切换歌曲

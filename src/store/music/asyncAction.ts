@@ -3,7 +3,6 @@ import { AppDispatch } from './../index'
 import { getLike, getLyric } from '@/service/music'
 import {
   changeDailyMusicList,
-  changeCurrentMusic,
   changeCurrentLyric,
 } from '.'
 

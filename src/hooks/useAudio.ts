@@ -27,7 +27,7 @@ let isJingyin = false
 export default function useAudio() {
   const dispatch = useAppDispatch()
   // 获取duration
-  const { duration, dailyMusicList, playingMusicList, currentMusic } =
+  const { duration, playingMusicList, currentMusic } =
     useAppSelector(state => state.music)
 
   //是否正在播放歌曲

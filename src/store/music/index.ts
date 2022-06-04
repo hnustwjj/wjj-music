@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import useStorage from '@/hooks/useStorage'
 import type { MusicListItem } from './types'
 
 export interface musicState {
@@ -20,7 +21,7 @@ export interface musicState {
 
 const initialState: musicState = {
   dailyMusicList: [],
-  playingMusicList: [],
+  playingMusicList: useStorage().getItem('playingMusicList', '[]'),
   currentMusic: { index: -1 },
   currentLyric: '',
   duration: 0,

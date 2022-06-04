@@ -14,7 +14,7 @@ class WjjStorage {
   }
 }
 const storage = new WjjStorage()
-
+// 在Player.tsx中，会在每次playingMusicList改变时重新存储
 export default function useStorage() {
   return storage
 }

@@ -11,6 +11,8 @@ import store, { useAppDispatch, useAppSelector } from '@/store'
 import getImpTimeSlider from '../common/slider/implement/TimeSlider'
 import getImpVolumeSlider from '../common/slider/implement/VolumeSlider'
 import useStorage from '@/hooks/useStorage'
+
+//TODO: 在error的时候提示音乐无法播放，否则效果很不好
 const App = memo(() => {
   const dispatch = useAppDispatch()
   // 请求热榜推荐歌曲的数据
@@ -23,7 +25,6 @@ const App = memo(() => {
   const { playingMusicList } = useAppSelector(state => state.music)
   useEffect(() => {
     storage.setItem('playingMusicList', playingMusicList)
-    console.log('重新存储')
   }, [playingMusicList])
 
   // page是否显示

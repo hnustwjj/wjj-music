@@ -193,7 +193,7 @@ const Card = memo(
             h='full'
             w='full'
           />
-          {musicInfo.currentMusic.index !== -1 ? (
+          {!musicInfo.currentMusic ? (
             content
           ) : (
             <div

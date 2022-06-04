@@ -24,7 +24,6 @@ let volumeCache = 0
 let isJingyin = false
 export default function useAudio(): IAudio {
   const dispatch = useAppDispatch()
-  // 获取duration
   const { duration, playingMusicList, currentMusic, currentTime } =
     useAppSelector(state => state.music)
 
@@ -32,7 +31,6 @@ export default function useAudio(): IAudio {
   const [isPlaying, setIsPlaying] = useState(false)
   //获取audio元素
   const audioRef = useRef<HTMLAudioElement>(null)
-
   //音量状态
   const [volume, setVolume] = useState(INITIAL_VOLUME)
   useEffect(() => {
@@ -40,6 +38,7 @@ export default function useAudio(): IAudio {
       audioRef.current.volume = volume
     }
   }, [volume])
+
   /**
    * 暂停或播放
    */
@@ -49,15 +48,21 @@ export default function useAudio(): IAudio {
       setIsPlaying(!isPlaying)
     }
   }
+
   //TODO: 播放顺序控制
   /**
    *  切换歌曲
    * @param type 切换到前一首还是后一首
    */
-  const switchMusic = async (type: 'pre' | 'next') => {
-    // 如果有歌曲，并且currentMusic不为空对象（index不为-1）就执行
-    if (playingMusicList.length && currentMusic.index !== -1) {
-      let currentIndex = currentMusic.index
+  const switchMusic = async (
+    type: 'pre' | 'next',
+    order: 'cycle' | 'single' | 'random' = 'cycle'
+  ) => {
+    // 如果有歌曲就执行
+    if (playingMusicList.length) {
+      let currentIndex = playingMusicList.findIndex(
+        item => item === currentMusic
+      )
       currentIndex += type === 'pre' ? -1 : 1
       //循环播放
       if (currentIndex < 0) {

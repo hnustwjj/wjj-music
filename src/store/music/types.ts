@@ -11,6 +11,5 @@ export interface MusicListItem {
     picUrl: string
   }
   dt?: number
-  index: number
   lyric?: string
 }

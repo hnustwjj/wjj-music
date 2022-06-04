@@ -21,7 +21,7 @@ export interface musicState {
 const initialState: musicState = {
   dailyMusicList: [],
   playingMusicList: useStorage().getItem('playingMusicList', '[]'),
-  currentMusic: { index: -1 },
+  currentMusic: {},
   currentLyric: '',
   duration: 0,
   currentTime: 0,
@@ -45,11 +45,17 @@ const music = createSlice({
       const { playingMusicList } = state
       //去重插入
       !playingMusicList.find(item => item.id === actions.payload.id)
-        ? playingMusicList.push({
-            ...actions.payload,
-            index: playingMusicList.length,
-          })
+        ? playingMusicList.push(actions.payload)
         : null
+    },
+    removeFromPlayingMusicList(
+      state: musicState,
+      actions: PayloadAction<MusicListItem>
+    ) {
+      const index = state.playingMusicList.findIndex(
+        item => item.id === actions.payload.id
+      )
+      state.playingMusicList.splice(index, 1)
     },
     changeCurrentMusic(
       state: musicState,
@@ -94,6 +100,7 @@ export const {
   changeCurrentTime,
   changeDuration,
   changeCurrentLyricIndex,
+  removeFromPlayingMusicList,
 } = music.actions
 
 // 导出定义的所有异步action

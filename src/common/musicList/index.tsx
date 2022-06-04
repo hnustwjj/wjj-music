@@ -2,6 +2,7 @@ import React, { memo } from 'react'
 import { useAppSelector } from '@/store'
 
 import img from '@/assets/img/playing.gif'
+import { SingerSpan } from './style'
 import { formatTime } from '@/utils'
 import { MusicListItem } from '@/store/music/types'
 interface MusicList {
@@ -9,11 +10,12 @@ interface MusicList {
   source: 'dailyMusicList' | 'playingMusicList'
   rowClick?: (item: MusicListItem) => void
   rowDoubleClick?: (item: MusicListItem) => void
+  deleteClick?: (item: MusicListItem) => void
 }
 let timer: any = null
 const MusicList = memo((props: MusicList) => {
   const music = useAppSelector(state => state.music)
-  const { rowClick, source, rowDoubleClick } = props
+  const { rowClick, source, rowDoubleClick, deleteClick } = props
   const { currentMusic } = music
   const dataList = music[source]
   //TODO: 如果后面需要，会抽离到hook中，如果不需要就将这个TODO删掉
@@ -28,6 +30,13 @@ const MusicList = memo((props: MusicList) => {
   const double = (item: MusicListItem) => {
     clearTimeout(timer) // 清除第一次单击事件
     rowDoubleClick && rowDoubleClick(item)
+  }
+
+  //点击delete按钮触发事件
+  const deleteFn = (e: Event, item: MusicListItem) => {
+    e.stopPropagation()
+    //TODO:删除的提示
+    deleteClick && deleteClick(item)
   }
   return (
     <>
@@ -58,6 +67,7 @@ const MusicList = memo((props: MusicList) => {
                 onClick={() => single(item)}
                 onDoubleClick={() => double(item)}
               >
+                {/* 序号 */}
                 <span
                   w='80px'
                   flex='~'
@@ -70,10 +80,21 @@ const MusicList = memo((props: MusicList) => {
                     index + 1
                   )}
                 </span>
-                <span className='flex-[4]'>{item.name}</span>
+                {/* 歌名 */}
+                <SingerSpan>
+                  {item.name}
+                  {deleteClick !== undefined ? (
+                    <span
+                      className='delete'
+                      onClick={e => deleteFn(e, item)}
+                    />
+                  ) : null}
+                </SingerSpan>
+                {/* 歌手 */}
                 <span className='flex-1'>
                   {item.ar && item.ar[0].name}
                 </span>
+                {/* 时常 */}
                 <span w='80px'>{formatTime(item.dt ?? 0)}</span>
               </div>
             ))}

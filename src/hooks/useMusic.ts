@@ -1,3 +1,4 @@
+import { MusicListItem } from '@/store/music/types'
 import { useAppSelector } from '@/store/index'
 import { getMusicUrl } from '@/service/music'
 interface Singers {
@@ -11,8 +12,8 @@ export interface IMusicInfo {
   singers: string
   name: any
   url: any
-  currentMusic: any
-  dailyMusicList: any[]
+  currentMusic: MusicListItem
+  dailyMusicList: MusicListItem[]
 }
 export default function useMusicInfo() {
   // 获取当前歌曲和歌曲列表

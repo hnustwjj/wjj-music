@@ -7,15 +7,25 @@ import useMusicInfo from '../hooks/useMusic'
 import useLyric from '../hooks/useLyric'
 import useAudio from '../hooks/useAudio'
 import { fetchHotRecommend } from '@/store/music'
-import store, { useAppDispatch } from '@/store'
+import store, { useAppDispatch, useAppSelector } from '@/store'
 import getImpTimeSlider from '../common/slider/implement/TimeSlider'
 import getImpVolumeSlider from '../common/slider/implement/VolumeSlider'
+import useStorage from '@/hooks/useStorage'
 const App = memo(() => {
   const dispatch = useAppDispatch()
   // 请求热榜推荐歌曲的数据
   useEffect(() => {
     dispatch(fetchHotRecommend())
   }, [dispatch])
+
+  // 如果正在播放数组改变，就重新缓存
+  const storage = useStorage()
+  const { playingMusicList } = useAppSelector(state => state.music)
+  useEffect(() => {
+    storage.setItem('playingMusicList', playingMusicList)
+    console.log('重新存储')
+  }, [playingMusicList])
+
   // page是否显示
   const [pageActive, setPageActive] = useState(false)
   // 获取音乐信息的Hook
@@ -26,7 +36,6 @@ const App = memo(() => {
   const lyricInfo2 = useLyric()
   // 获取音频信息的Hook
   const audioInfo = useAudio()
-
   const { audioRef, canplay, switchMusic, audioTimeUpdate } =
     audioInfo
   // 获取时间进度条

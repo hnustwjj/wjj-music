@@ -1,10 +1,7 @@
 import { MusicListItem } from '@/store/music/types'
 import { AppDispatch } from './../index'
 import { getLike, getLyric } from '@/service/music'
-import {
-  changeDailyMusicList,
-  changeCurrentLyric,
-} from '.'
+import { changeDailyMusicList, changeCurrentLyric } from '.'
 
 // 获取每日推荐歌曲
 export const fetchHotRecommend =
@@ -12,13 +9,8 @@ export const fetchHotRecommend =
     const {
       data: { dailySongs },
     } = await getLike()
-    // 给歌曲对象上添加index下标
-    const tracks = dailySongs
-    for (let i = 0; i < tracks.length; i++) {
-      tracks[i]['index'] = i
-    }
     // 保存
-    dispatch(changeDailyMusicList(tracks))
+    dispatch(changeDailyMusicList(dailySongs))
     // 默认当前歌曲是第一个对象
     // dispatch(changeCurrentMusic(tracks[0]))
     // 获取并修改currentLyric歌词

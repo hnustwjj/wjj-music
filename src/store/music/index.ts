@@ -43,11 +43,13 @@ const music = createSlice({
       state: musicState,
       actions: PayloadAction<MusicListItem>
     ) {
+      const { playingMusicList } = state
       //去重插入
-      !state.playingMusicList.find(
-        item => item.id === actions.payload.id
-      )
-        ? state.playingMusicList.push(actions.payload)
+      !playingMusicList.find(item => item.id === actions.payload.id)
+        ? playingMusicList.push({
+            ...actions.payload,
+            index: playingMusicList.length,
+          })
         : null
     },
     changeCurrentMusic(

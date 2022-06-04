@@ -27,8 +27,9 @@ let isJingyin = false
 export default function useAudio() {
   const dispatch = useAppDispatch()
   // 获取duration
-  const { duration, playingMusicList, currentMusic } =
-    useAppSelector(state => state.music)
+  const { duration, playingMusicList, currentMusic } = useAppSelector(
+    state => state.music
+  )
 
   //是否正在播放歌曲
   const [isPlaying, setIsPlaying] = useState(false)
@@ -62,9 +63,12 @@ export default function useAudio() {
     if (playingMusicList.length && currentMusic.index !== -1) {
       let currentIndex = currentMusic.index
       currentIndex += type === 'pre' ? -1 : 1
-      if (currentIndex < 0) currentIndex = playingMusicList.length - 1
       //循环播放
-      if (currentIndex === playingMusicList.length) currentIndex = 0
+      if (currentIndex < 0) {
+        currentIndex = playingMusicList.length - 1
+      } else if (currentIndex === playingMusicList.length) {
+        currentIndex = 0
+      }
       const Music = playingMusicList[currentIndex]
       dispatch(changeCurrentMusic(Music))
       dispatch(changeLyric(Music))

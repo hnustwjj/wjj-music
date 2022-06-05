@@ -24,12 +24,15 @@ export const fetchHotRecommend =
 export const changeLyric =
   (item: MusicListItem) => async (dispatch: AppDispatch) => {
     if (item.id) {
-      const {
+      let {
         lrc: { lyric },
       } = await getLyric(item.id)
+      if (lyric === '') {
+        lyric = '[99:00.00]纯音乐，请欣赏\n'
+      }
       dispatch(changeCurrentLyric(lyric))
     } else {
-      dispatch(changeCurrentLyric(''))
+      dispatch(changeCurrentLyric(' '))
     }
   }
 

@@ -4,6 +4,7 @@ html{
   --white:#fff;
   --icon: white;
   --font:white;
+  --low-font:rgba(235,235,235,0.7);
 
   --deactive-color:rgba(235,235,235,0.7);
   --active-color:white;

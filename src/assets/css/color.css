@@ -5,6 +5,9 @@ html{
   --icon: white;
   --font:white;
 
+  --deactive-color:rgba(235,235,235,0.7);
+  --active-color:white;
+
   --song:rgb(229, 231, 235);
   --singer:rgb(209, 213, 219);
   

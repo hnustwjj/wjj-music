@@ -17,6 +17,8 @@ export interface IAudio {
   changeJingyin: () => void
   audioTimeUpdate: (e: any, fn?: (e) => void) => void
   currentTime: number
+  onError: () => void
+  onEnd: () => void
 }
 //TODO:考虑静音是否用muted属性实现
 //需要放在最外面，否则每次执行函数都会重新创建变量
@@ -116,6 +118,15 @@ export default function useAudio(): IAudio {
     // 会修改全局的currentTime和currentLyricIndex
     fn && fn(e)
   }
+
+  const onError = () => {
+    //console.log(1)
+    //switchMusic('next')
+    //TODO:Error时发出提示，并且不在切换音乐
+  }
+  const onEnd = () => {
+    switchMusic('next')
+  }
   return {
     audioTimeUpdate,
     bufferPercent,
@@ -129,5 +140,7 @@ export default function useAudio(): IAudio {
     setVolume,
     volume,
     currentTime,
+    onError,
+    onEnd,
   }
 }

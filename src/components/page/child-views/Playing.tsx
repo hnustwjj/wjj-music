@@ -6,8 +6,8 @@ import {
   switchCurrentMusic,
 } from '@/store/music'
 import MusicList from '@/common/musicList'
-import { MusicListItem } from '@/store/music/types'
 import useAudio from '@/hooks/useAudio'
+import type { MusicListItem } from '@/store/music/types'
 const Playing = memo(() => {
   const { currentMusic, playingMusicList } = useAppSelector(
     state => state.music

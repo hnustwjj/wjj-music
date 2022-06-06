@@ -6,7 +6,6 @@ import { SingerSpan } from './style'
 import { formatTime } from '@/utils'
 import { MusicListItem } from '@/store/music/types'
 interface MusicList {
-  //TODO:source决定取的是每日推荐的列表还是正在播放的列表（或者后期会添加我听过的列表）
   source: 'dailyMusicList' | 'playingMusicList'
   rowClick?: (item: MusicListItem) => void
   rowDoubleClick?: (item: MusicListItem) => void

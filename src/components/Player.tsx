@@ -37,7 +37,7 @@ const App = memo(() => {
   const lyricInfo2 = useLyric()
   // 获取音频信息的Hook
   const audioInfo = useAudio()
-  const { audioRef, canplay, switchMusic, audioTimeUpdate } =
+  const { audioRef, canplay, audioTimeUpdate, onEnd, onError } =
     audioInfo
   // 获取时间进度条
   const TimeSlider = getImpTimeSlider(audioInfo, lyricInfo)
@@ -51,8 +51,8 @@ const App = memo(() => {
         src={musicInfo.url ?? ''}
         onTimeUpdate={e => audioTimeUpdate(e, lyricInfo.updateTime)}
         onCanPlay={e => canplay(e)}
-        onEnded={() => switchMusic('next')}
-        onError={() => switchMusic('next')}
+        onEnded={() => onEnd()}
+        onError={() => onError()}
       />
       <Card
         audioInfo={audioInfo}

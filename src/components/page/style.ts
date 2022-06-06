@@ -46,13 +46,13 @@ export const NavButton = styled.button`
   padding: 0 23px;
   border-radius: 2px;
   margin-right: 8px;
-  border: 1px solid rgba(235, 235, 235, 0.7);
-  color: rgba(235, 235, 235, 0.7);
+  border: 1px solid var(--deactive-color);
+  color: var(--deactive-color);
   font-weight: 100;
   font-size: 14px;
   &:hover,
   &.active {
-    border-color: white;
-    color: white;
+    border-color: var(--active-color);
+    color: var(--active-color);
   }
 `

@@ -16,8 +16,6 @@ import {
   PAGE_SINGER_NULL_TEXT,
   PAGE_SONG_NULL_TEXT,
 } from '@/constant'
-
-//TODO:在Slider左右添加歌名、时间戳等显示信息
 //TODO:手机端兼容
 
 //TODO:登录(使用uid获取信息)

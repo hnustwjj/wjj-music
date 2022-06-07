@@ -49,7 +49,6 @@ const Card = memo(
     const BG_STYLE = {
       backgroundImage: `url(${imgUrl(300, al?.picUrl)})`,
     }
-    //TODO:检测背景图的明暗，设置不同的color
 
     //TODO:优化歌名的样式问题
     const content = (

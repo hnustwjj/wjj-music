@@ -24,7 +24,6 @@ export const RGBContext = createContext({
   B: 0,
   average: 0,
 })
-//TODO: 在error的时候提示音乐无法播放，否则效果很不好
 const App = memo(() => {
   const dispatch = useAppDispatch()
   // 请求热榜推荐歌曲的数据

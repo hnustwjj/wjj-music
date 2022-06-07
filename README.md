@@ -46,6 +46,8 @@ export default App
 
 5、使用`vite打包`成库，即插即用
 
+6、使用canvas获取背景图的平均RGB值，动态修改颜色
+
 
 
 # 待完成

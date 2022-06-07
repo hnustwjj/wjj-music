@@ -1,8 +1,9 @@
-import React, { memo, useState } from 'react'
+import React, { memo, useContext, useEffect, useState } from 'react'
 
 import { imgUrl } from '@/utils'
 import LyricBox from '../../common/lyricBox'
 import { PanWrapper, CardWrapper } from './style'
+import { RGBContext } from '../Player'
 
 import type { ILyric } from '@/hooks/useLyric'
 import type { IMusicInfo } from '../../hooks/useMusic'
@@ -27,10 +28,12 @@ const Card = memo(
       VolumeSlider,
       ImgRef,
     } = props
-
+    const RGB = useContext(RGBContext)
+    useEffect(() => {
+      console.log(RGB)
+    }, [RGB])
     // 是否点击了pan显示card
     const [active, setPanActive] = useState(false)
-
     // 获取音乐信息相关
     const { al, singers, name: songName, currentMusic } = musicInfo
     // 获取歌词相关信息
@@ -47,6 +50,7 @@ const Card = memo(
       backgroundImage: `url(${imgUrl(300, al?.picUrl)})`,
     }
     //TODO:检测背景图的明暗，设置不同的color
+
     //TODO:优化歌名的样式问题
     const content = (
       <>
@@ -189,7 +193,11 @@ const Card = memo(
             />
           ))}
           <div
-            className='bg-[rgba(0,0,0,.1)]'
+            className={
+              RGB.average > 160
+                ? 'bg-[rgba(0,0,0,.35)]'
+                : 'bg-[rgba(0,0,0,.1)]'
+            }
             absolute='~'
             rounded='md'
             h='full'

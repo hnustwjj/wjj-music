@@ -1,4 +1,9 @@
-import { memo, useEffect, useState } from 'react'
+import React, {
+  createContext,
+  memo,
+  useEffect,
+  useState,
+} from 'react'
 import { Provider } from 'react-redux'
 import Card from './card'
 import Page from './page'
@@ -13,6 +18,12 @@ import getImpVolumeSlider from '../common/slider/implement/VolumeSlider'
 import useStorage from '@/hooks/useStorage'
 import useCanvas from '@/hooks/useCanvas'
 
+export const RGBContext = createContext({
+  R: 0,
+  G: 0,
+  B: 0,
+  average: 0,
+})
 //TODO: 在error的时候提示音乐无法播放，否则效果很不好
 const App = memo(() => {
   const dispatch = useAppDispatch()
@@ -45,52 +56,55 @@ const App = memo(() => {
   // 获取音乐进度条
   const VolumeSlider = getImpVolumeSlider(audioInfo)
   // 获取图片RGB平均值
-  const { CanvasRef, ImgRef } = useCanvas()
-  return (
-    <div fixed='~' top='0' left='0'>
-      <canvas
-        ref={CanvasRef}
-        width='80px'
-        height='80px'
-        fixed='~'
-        invisible='~'
-      />
-      <audio
-        ref={audioRef}
-        src={musicInfo.url ?? ''}
-        onTimeUpdate={e => audioTimeUpdate(e, lyricInfo.updateTime)}
-        onCanPlay={e => canplay(e)}
-        onEnded={() => onEnd()}
-        onError={() => onError()}
-      />
-      <Card
-        audioInfo={audioInfo}
-        musicInfo={musicInfo}
-        lyricInfo={lyricInfo}
-        ImgRef={ImgRef}
-        TimeSlider={TimeSlider}
-        VolumeSlider={VolumeSlider}
-        changePageActive={() => setPageActive(!pageActive)}
-      />
+  const { CanvasRef, ImgRef, RGB } = useCanvas()
 
-      <div
-        h='100vh'
-        w='100vw'
-        fixed='~'
-        z='$page-index'
-        className={`transition transform ${
-          pageActive ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
-        }`}
-      >
-        <Page
-          VolumeSlider={VolumeSlider}
-          audioInfo={audioInfo}
-          lyricInfo={lyricInfo2}
-          TimeSlider={TimeSlider}
-          musicInfo={musicInfo}
+  return (
+    <RGBContext.Provider value={RGB}>
+      <div fixed='~' top='0' left='0'>
+        <canvas
+          ref={CanvasRef}
+          width='80px'
+          height='80px'
+          fixed='~'
+          invisible='~'
         />
+        <audio
+          ref={audioRef}
+          src={musicInfo.url ?? ''}
+          onTimeUpdate={e => audioTimeUpdate(e, lyricInfo.updateTime)}
+          onCanPlay={e => canplay(e)}
+          onEnded={() => onEnd()}
+          onError={() => onError()}
+        />
+        <Card
+          audioInfo={audioInfo}
+          musicInfo={musicInfo}
+          lyricInfo={lyricInfo}
+          ImgRef={ImgRef}
+          TimeSlider={TimeSlider}
+          VolumeSlider={VolumeSlider}
+          changePageActive={() => setPageActive(!pageActive)}
+        />
+
+        <div
+          h='100vh'
+          w='100vw'
+          fixed='~'
+          z='$page-index'
+          className={`transition transform ${
+            pageActive ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
+          }`}
+        >
+          <Page
+            VolumeSlider={VolumeSlider}
+            audioInfo={audioInfo}
+            lyricInfo={lyricInfo2}
+            TimeSlider={TimeSlider}
+            musicInfo={musicInfo}
+          />
+        </div>
       </div>
-    </div>
+    </RGBContext.Provider>
   )
 })
 export default () => (

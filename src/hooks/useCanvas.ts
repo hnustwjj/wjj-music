@@ -7,7 +7,7 @@ export default function useCanvas() {
   const img = ImgRef.current
   const canvas = CanvasRef.current
   //RGB平均值
-  const [RGB, setRGB] = useState({ R: 0, G: 0, B: 0 })
+  const [RGB, setRGB] = useState({ R: 0, G: 0, B: 0, average: 0 })
   if (img && canvas) {
     img.crossOrigin = 'anonymous'
     const ctx = canvas.getContext('2d')
@@ -40,7 +40,12 @@ export default function useCanvas() {
           b += data[2]
         }
       }
-      setRGB({ R: r / area, G: g / area, B: b / area })
+      setRGB({
+        R: r / area,
+        G: g / area,
+        B: b / area,
+        average: (r / area + g / area + b / area) / 3,
+      })
     }
   }
   return { ImgRef, CanvasRef, RGB }

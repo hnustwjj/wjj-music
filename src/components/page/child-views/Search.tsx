@@ -38,7 +38,7 @@ const Search = memo(() => {
         items='center'
       >
         <input
-          className='placeholder-$low-font'
+          className='placeholder-$deactive-color'
           flex='1'
           type='text'
           h='40px'

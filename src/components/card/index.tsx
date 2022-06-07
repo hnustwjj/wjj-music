@@ -1,4 +1,4 @@
-import React, { memo, useContext, useEffect, useState } from 'react'
+import React, { memo, useContext, useState } from 'react'
 
 import { imgUrl } from '@/utils'
 import LyricBox from '../../common/lyricBox'
@@ -29,9 +29,6 @@ const Card = memo(
       ImgRef,
     } = props
     const RGB = useContext(RGBContext)
-    useEffect(() => {
-      console.log(RGB)
-    }, [RGB])
     // 是否点击了pan显示card
     const [active, setPanActive] = useState(false)
     // 获取音乐信息相关

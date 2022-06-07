@@ -120,7 +120,6 @@ export default function useAudio(): IAudio {
   }
 
   const onError = () => {
-    //console.log(1)
     if (!currentMusic.initFlag) {
       switchMusic('next')
       //TODO:Error时发出提示，并且不在切换音乐

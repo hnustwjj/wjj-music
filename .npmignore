@@ -1,6 +1,6 @@
 node_modules
-src
 index.html
+src
 tsconfig.json
 tsconfig.node.json
 vite.config.ts

@@ -17,6 +17,7 @@ export interface musicState {
   // 当前音乐的歌词下标
   currentLyricIndex: number
 }
+// 初始化状态（initFlag为了判断是否是第一次）
 export const initialCurrentMusic = { initFlag: true }
 const initialState: musicState = {
   dailyMusicList: [],

@@ -11,6 +11,7 @@ import store, { useAppDispatch, useAppSelector } from '@/store'
 import getImpTimeSlider from '../common/slider/implement/TimeSlider'
 import getImpVolumeSlider from '../common/slider/implement/VolumeSlider'
 import useStorage from '@/hooks/useStorage'
+import useCanvas from '@/hooks/useCanvas'
 
 //TODO: 在error的时候提示音乐无法播放，否则效果很不好
 const App = memo(() => {
@@ -43,9 +44,17 @@ const App = memo(() => {
   const TimeSlider = getImpTimeSlider(audioInfo, lyricInfo)
   // 获取音乐进度条
   const VolumeSlider = getImpVolumeSlider(audioInfo)
-
+  // 获取图片RGB平均值
+  const { CanvasRef, ImgRef } = useCanvas()
   return (
     <div fixed='~' top='0' left='0'>
+      <canvas
+        ref={CanvasRef}
+        width='80px'
+        height='80px'
+        fixed='~'
+        invisible='~'
+      />
       <audio
         ref={audioRef}
         src={musicInfo.url ?? ''}
@@ -58,6 +67,7 @@ const App = memo(() => {
         audioInfo={audioInfo}
         musicInfo={musicInfo}
         lyricInfo={lyricInfo}
+        ImgRef={ImgRef}
         TimeSlider={TimeSlider}
         VolumeSlider={VolumeSlider}
         changePageActive={() => setPageActive(!pageActive)}

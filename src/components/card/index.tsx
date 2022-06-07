@@ -13,6 +13,7 @@ const Card = memo(
     changePageActive: () => void
     musicInfo: IMusicInfo
     lyricInfo: ILyric
+    ImgRef: React.RefObject<HTMLImageElement>
     audioInfo: IAudio
     TimeSlider: () => JSX.Element
     VolumeSlider: () => JSX.Element
@@ -24,6 +25,7 @@ const Card = memo(
       lyricInfo,
       audioInfo,
       VolumeSlider,
+      ImgRef,
     } = props
 
     // 是否点击了pan显示card
@@ -41,7 +43,6 @@ const Card = memo(
       volume,
       changeJingyin,
     } = audioInfo
-
     const BG_STYLE = {
       backgroundImage: `url(${imgUrl(300, al?.picUrl)})`,
     }
@@ -167,8 +168,9 @@ const Card = memo(
             onClick={() => setPanActive(!active)}
           >
             <img
+              ref={ImgRef}
               className='rounded-full object-cover h-full w-full'
-              src={imgUrl(140, al?.picUrl)}
+              src={imgUrl(80, al?.picUrl)}
             />
           </div>
         </PanWrapper>

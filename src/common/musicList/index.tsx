@@ -5,6 +5,7 @@ import img from '@/assets/img/playing.gif'
 import { SingerSpan } from './style'
 import { formatTime } from '@/utils'
 import { MusicListItem } from '@/store/music/types'
+import { LIST_NULL_TEXT } from '@/constant'
 interface MusicList {
   source: 'dailyMusicList' | 'playingMusicList'
   rowClick?: (item: MusicListItem) => void
@@ -107,7 +108,7 @@ const MusicList = memo((props: MusicList) => {
           justify='center'
           items='center'
         >
-          啥情况，咋啥都没有！！！
+          {LIST_NULL_TEXT}
         </div>
       )}
     </>

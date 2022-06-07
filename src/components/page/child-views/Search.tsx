@@ -1,22 +1,32 @@
-import { search } from '@/service/music'
 import React, { memo, useEffect, useState } from 'react'
-
+import { getMusic, search } from '@/service/music'
+import { formatTime } from '@/utils'
+import { pushPlayingMusicList } from '@/store/music'
+import { useAppDispatch } from '@/store'
+import { LIST_NULL_TEXT } from '@/constant'
 const Search = memo(() => {
+  const dispatch = useAppDispatch()
   const [isFocus, setIsFocus] = useState(false)
   // 保存表单数据
   const [value, setValue] = useState('')
-
+  const [dataList, setDataList] = useState([] as any[])
   useEffect(() => {
-    // 防抖
+    // 防抖，获取搜索结果
     const timer = setTimeout(() => {
       search(value).then(res => {
-        console.log(res)
+        setDataList(res?.result?.songs)
       })
     }, 300)
     return () => clearTimeout(timer)
   }, [value])
+
+  // 点击歌曲，添加到正在播放列表中
+  const add = async (item: any) => {
+    const res = await getMusic(item.id)
+    dispatch(pushPlayingMusicList(res.songs[0]))
+  }
   return (
-    <div w='full' h='full'>
+    <div w='full' h='full' flex='~ col'>
       <div
         className={
           !isFocus ? 'border-$deactive-color' : 'border-$active-color'
@@ -43,6 +53,58 @@ const Search = memo(() => {
           onChange={e => setValue(e.target.value)}
         />
       </div>
+      {dataList ? (
+        <div flex='1' w='full'>
+          <div
+            flex='~'
+            text='14px thin'
+            border='b-1'
+            className='border-[hsla(0,0%,100%,.1)]'
+            leading='50px'
+          >
+            <span w='80px' />
+            <span className='flex-[4]'>歌曲</span>
+            <span className='flex-1'>歌手</span>
+            <span w='80px'>时长</span>
+          </div>
+          <div flex='1' overflow='auto'>
+            {dataList.map((item, index) => (
+              <div
+                flex='~'
+                text='14px thin'
+                leading='50px'
+                border='b-1'
+                cursor='pointer'
+                key={item.id}
+                className='border-[hsla(0,0%,100%,.1)] hover:bg-[rgba(0,0,0,.05)]'
+                onClick={() => add(item)}
+              >
+                {/* 序号 */}
+                <span
+                  w='80px'
+                  flex='~'
+                  items='center'
+                  justify='center'
+                >
+                  {index + 1}
+                </span>
+                {/* 歌名 */}
+                <span className='flex-[4]'>{item.name}</span>
+                {/* 歌手 */}
+                <span className='flex-1'>
+                  {item.artists && item.artists[0].name}
+                </span>
+                {/* 时常 */}
+                <span w='80px'>{formatTime(item.duration ?? 0)}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : (
+        <div w='full' flex='~ 1' justify='center' items='center'>
+          {LIST_NULL_TEXT}
+        </div>
+      )}
     </div>
   )
 })

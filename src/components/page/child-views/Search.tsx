@@ -14,7 +14,7 @@ const Search = memo(() => {
     // 防抖，获取搜索结果
     const timer = setTimeout(() => {
       search(value).then(res => {
-        setDataList(res?.result?.songs)
+        setDataList(res?.result?.songs ?? ([] as any[]))
       })
     }, 300)
     return () => clearTimeout(timer)
@@ -53,7 +53,7 @@ const Search = memo(() => {
           onChange={e => setValue(e.target.value)}
         />
       </div>
-      {dataList ? (
+      {dataList.length ? (
         <div flex='1' w='full'>
           <div
             flex='~'

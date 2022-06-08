@@ -1,11 +1,11 @@
 # wjj-player
-一个react+vite+ts环境下的小音乐
+一个用react+vite+ts+windicss开发的音乐播放器插件
 
 ## 总览
 
 刚进入页面时是一个小的音乐唱片在左下角，如下所示
 
-![image-20220608215051618](https://img.jzsp66.xyz/github/1.png)
+![](https://img.jzsp66.xyz/github/1.png)
 
 点击唱片之后可以显示音乐卡片，音乐卡片是有切换音乐、控制音量，拖拽进度条以及暂停等基本功能的。
 

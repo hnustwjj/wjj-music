@@ -37,6 +37,13 @@ export function search(keywords: string, limit = 30, offset = 0) {
     },
   })
 }
+//根据用户uid获取用户歌单
+export function getPlayList(uid: string) {
+  return request_util.get({
+    url: '/user/playlist',
+    params: { uid },
+  })
+}
 
 // 根据id获取音乐url
 export function getMusicUrl(id: number) {
@@ -53,4 +60,3 @@ export function getMusicUrl(id: number) {
 // 说明 : 调用此接口,可获取热门搜索列表
 // 接口地址 : /search/hot
 // 调用例子 : /search/hot
-

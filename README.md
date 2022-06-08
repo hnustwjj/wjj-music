@@ -1,6 +1,22 @@
 # wjj-player
-一个react+vite+ts环境下的小音乐，使用方式如下
+一个react+vite+ts环境下的小音乐
 
+## 总览
+
+刚进入页面时是一个小的音乐唱片在左下角，如下所示
+
+![image-20220608215051618](https://img.jzsp66.xyz/github/1.png)
+
+点击唱片之后可以显示音乐卡片，音乐卡片是有切换音乐、控制音量，拖拽进度条以及暂停等基本功能的。
+
+![](https://img.jzsp66.xyz/github/2.png)
+
+点击卡片右上角的更多按钮之后，可以进入主页面，有搜索歌曲功能和每日推荐的板块。更多内容正在加紧开发中...
+
+![](https://img.jzsp66.xyz/github/3.png)
+
+
+# 使用方法
 - 安装
 ```js
 npm i wjj-player
@@ -47,7 +63,6 @@ export default App
 5、使用`vite打包`成库，即插即用
 
 6、使用canvas获取背景图的平均RGB值，动态修改颜色
-
 
 
 # 待完成

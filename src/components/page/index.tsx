@@ -4,7 +4,6 @@ import { imgUrl } from '@/utils'
 import Mine from './child-views/Mine'
 import Search from './child-views/Search'
 import Recommend from './child-views/Recommend'
-// import Listened from './child-views/Listened'
 import DivWrapper, { NavButton } from './style'
 import LyricBox from '@/common/lyricBox'
 import Playing from './child-views/Playing'
@@ -26,7 +25,6 @@ const navList = [
   { title: '每日推荐', element: <Recommend /> },
   { title: '搜索', element: <Search /> },
   { title: '我的歌单', element: <Mine /> },
-  // { title: '我听过的', element: <Listened /> },
 ]
 const Page = memo(
   (props: {

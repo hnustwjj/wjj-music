@@ -38,6 +38,8 @@ const App = memo(() => {
   const lyricInfo = useLyric()
   // 为了控制page页面的LyricBox，需要两个LyricBoxRef，所以再调用一次
   const lyricInfo2 = useLyric()
+  // 获取图片RGB平均值
+  const { CanvasRef, ImgRef, RGB } = useCanvas()
   // 获取音频信息的Hook
   const audioInfo = useAudio()
   const { audioRef, canplay, audioTimeUpdate, onEnd, onError } =
@@ -46,8 +48,6 @@ const App = memo(() => {
   const TimeSlider = getImpTimeSlider(audioInfo, lyricInfo)
   // 获取音乐进度条
   const VolumeSlider = getImpVolumeSlider(audioInfo)
-  // 获取图片RGB平均值
-  const { CanvasRef, ImgRef, RGB } = useCanvas()
 
   return (
     <RGBContext.Provider value={RGB}>

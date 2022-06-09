@@ -38,7 +38,7 @@ export function search(keywords: string, limit = 30, offset = 0) {
   })
 }
 //根据用户uid获取用户歌单
-export function getPlayList(uid: string) {
+export function getPlayList(uid: number) {
   return request_util.get({
     url: '/user/playlist',
     params: { uid },

@@ -37,6 +37,9 @@ const music = createSlice({
   name: 'music',
   initialState,
   reducers: {
+    changeUid(state: musicState, actions: PayloadAction<number>) {
+      state.uid = actions.payload
+    },
     changeDailyMusicList(
       state: musicState,
       actions: PayloadAction<any[]>
@@ -100,6 +103,7 @@ export default music.reducer
 
 //导出所有的普通action
 export const {
+  changeUid,
   changeDailyMusicList,
   pushPlayingMusicList,
   changeCurrentMusic,

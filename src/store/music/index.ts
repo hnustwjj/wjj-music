@@ -16,17 +16,21 @@ export interface musicState {
   currentTime: number
   // 当前音乐的歌词下标
   currentLyricIndex: number
+  // 用于uid
+  uid: number
 }
 // 初始化状态（initFlag为了判断是否是第一次）
 export const initialCurrentMusic = { initFlag: true }
+const storage = useStorage()
 const initialState: musicState = {
   dailyMusicList: [],
-  playingMusicList: useStorage().getItem('playingMusicList', '[]'),
+  playingMusicList: storage.getItem('playingMusicList', '[]'),
   currentMusic: initialCurrentMusic,
   currentLyric: '',
   duration: 0,
   currentTime: 0,
   currentLyricIndex: 0,
+  uid: storage.getItem('uid', '0'),
 }
 
 const music = createSlice({
@@ -48,6 +52,7 @@ const music = createSlice({
       !playingMusicList.find(item => item.id === actions.payload.id)
         ? playingMusicList.push(actions.payload)
         : null
+      storage.setItem('playingMusicList', playingMusicList)
     },
     removeFromPlayingMusicList(
       state: musicState,
@@ -57,6 +62,7 @@ const music = createSlice({
         item => item.id === actions.payload.id
       )
       state.playingMusicList.splice(index, 1)
+      storage.setItem('playingMusicList', state.playingMusicList)
     },
     changeCurrentMusic(
       state: musicState,

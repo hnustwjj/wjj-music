@@ -12,10 +12,9 @@ import useMusicInfo from '../hooks/useMusic'
 import useLyric from '../hooks/useLyric'
 import useAudio from '../hooks/useAudio'
 import { fetchHotRecommend } from '@/store/music'
-import store, { useAppDispatch, useAppSelector } from '@/store'
+import store, { useAppDispatch } from '@/store'
 import getImpTimeSlider from '../common/slider/implement/TimeSlider'
 import getImpVolumeSlider from '../common/slider/implement/VolumeSlider'
-import useStorage from '@/hooks/useStorage'
 import useCanvas from '@/hooks/useCanvas'
 
 export const RGBContext = createContext({
@@ -30,13 +29,6 @@ const App = memo(() => {
   useEffect(() => {
     dispatch(fetchHotRecommend())
   }, [dispatch])
-
-  // 如果正在播放数组改变，就重新缓存
-  const storage = useStorage()
-  const { playingMusicList } = useAppSelector(state => state.music)
-  useEffect(() => {
-    storage.setItem('playingMusicList', playingMusicList)
-  }, [playingMusicList])
 
   // page是否显示
   const [pageActive, setPageActive] = useState(false)
@@ -56,7 +48,7 @@ const App = memo(() => {
   const VolumeSlider = getImpVolumeSlider(audioInfo)
   // 获取图片RGB平均值
   const { CanvasRef, ImgRef, RGB } = useCanvas()
-  
+
   return (
     <RGBContext.Provider value={RGB}>
       <div fixed='~' top='0' left='0'>

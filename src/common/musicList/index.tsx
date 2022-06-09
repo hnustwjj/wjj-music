@@ -74,7 +74,7 @@ const MusicList = memo((props: MusicList) => {
                   items='center'
                   justify='center'
                 >
-                  {currentMusic === item ? (
+                  {currentMusic.id === item.id ? (
                     <img src={img} />
                   ) : (
                     index + 1

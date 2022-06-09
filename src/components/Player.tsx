@@ -56,7 +56,7 @@ const App = memo(() => {
   const VolumeSlider = getImpVolumeSlider(audioInfo)
   // 获取图片RGB平均值
   const { CanvasRef, ImgRef, RGB } = useCanvas()
-
+  
   return (
     <RGBContext.Provider value={RGB}>
       <div fixed='~' top='0' left='0'>

@@ -13,7 +13,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-single-cycle:before {
+.icon-single:before {
   content: "\e607";
 }
 
@@ -21,7 +21,7 @@
   content: "\e6a0";
 }
 
-.icon-order:before {
+.icon-cycle:before {
   content: "\e70b";
 }
 

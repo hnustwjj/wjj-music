@@ -42,6 +42,7 @@ const Card = memo(
       switchMusic,
       volume,
       changeJingyin,
+      currentOrder,
     } = audioInfo
     const BG_STYLE = {
       backgroundImage: `url(${imgUrl(300, al?.picUrl)})`,
@@ -148,11 +149,11 @@ const Card = memo(
         {/* 切换歌曲的箭头 */}
         <i
           className='iconfont icon-left arrow left-5px text-$icon'
-          onClick={() => switchMusic('pre')}
+          onClick={() => switchMusic('pre', currentOrder)}
         />
         <i
           className='iconfont icon-right arrow right-5px text-$icon'
-          onClick={() => switchMusic('next')}
+          onClick={() => switchMusic('next', currentOrder)}
         />
       </>
     )

@@ -1,24 +1,34 @@
+import { ORDER } from '@/constant'
+import { MusicListItem } from './../../dist/src/store/music/types.d'
 import { useAppDispatch, useAppSelector } from '../store/index'
 import { switchCurrentMusic } from '@/store/music'
 import { useState, useRef, SyntheticEvent, useEffect } from 'react'
-import { Dispatch, SetStateAction, RefObject } from 'react'
+import {
+  Dispatch,
+  SetStateAction,
+  RefObject,
+  useCallback,
+} from 'react'
 export const INITIAL_VOLUME = 0.66
 
+type Order = 'cycle' | 'single' | 'random'
 export interface IAudio {
+  canplay: (e: SyntheticEvent<HTMLAudioElement, Event>) => void
+  audioTimeUpdate: (e: any, fn?: (e) => void) => void
+  switchMusic: (type: 'pre' | 'next', order?: Order) => void
+  setVolume: Dispatch<SetStateAction<number>>
   switchMusicStaus: () => void
+  changeJingyin: () => void
+  onError: () => void
+  onEnd: () => void
+  switchOrder: () => void
+  currentOrder: Order
   isPlaying: boolean
   duration: number
   audioRef: RefObject<HTMLAudioElement>
-  switchMusic: (type: 'pre' | 'next') => Promise<void>
-  canplay: (e: SyntheticEvent<HTMLAudioElement, Event>) => void
-  setVolume: Dispatch<SetStateAction<number>>
   volume: number
   bufferPercent: number
-  changeJingyin: () => void
-  audioTimeUpdate: (e: any, fn?: (e) => void) => void
   currentTime: number
-  onError: () => void
-  onEnd: () => void
 }
 //TODO:考虑静音是否用muted属性实现
 //需要放在最外面，否则每次执行函数都会重新创建变量
@@ -50,36 +60,6 @@ export default function useAudio(): IAudio {
       setIsPlaying(!isPlaying)
     }
   }
-
-  //TODO: 播放顺序控制
-  /**
-   *  切换歌曲
-   * @param type 切换到前一首还是后一首
-   */
-  const switchMusic = async (
-    type: 'pre' | 'next',
-    order: 'cycle' | 'single' | 'random' = 'cycle'
-  ) => {
-    // 如果有歌曲就执行
-    if (playingMusicList.length) {
-      let currentIndex = playingMusicList.findIndex(
-        item => item === currentMusic
-      )
-      currentIndex += type === 'pre' ? -1 : 1
-      //循环播放
-      if (currentIndex < 0) {
-        currentIndex = playingMusicList.length - 1
-      } else if (currentIndex === playingMusicList.length) {
-        currentIndex = 0
-      }
-      const Music = playingMusicList[currentIndex]
-      // 改变当前音乐
-      dispatch(switchCurrentMusic(Music))
-      // 根据当前状态判断是否要播放
-      isPlaying ? audioRef.current?.play() : audioRef.current?.pause()
-    }
-  }
-
   /**
    * 音乐可播放的回调函数
    * @param e
@@ -99,6 +79,7 @@ export default function useAudio(): IAudio {
     isJingyin = !isJingyin
   }
   const [bufferPercent, setBufferPercent] = useState(0)
+
   /**
    * 音频时间改变时触发的函数
    * @param e 音频事件
@@ -112,36 +93,92 @@ export default function useAudio(): IAudio {
       const last = timeRanges.length - 1
       // 当最后一个timeRange对象存在时，可以获取到当前缓冲区的长度（单位是s）
       if (last >= 0) {
-        setBufferPercent((timeRanges.end(last) / duration) * 1000)
+        const bufferPercent = (timeRanges.end(last) / duration) * 1000
+        setBufferPercent(bufferPercent > 1 ? 1 : bufferPercent)
       }
     }
     // 会修改全局的currentTime和currentLyricIndex
     fn && fn(e)
   }
 
+  const [currentOrder, setCurrentOrder] = useState<Order>('cycle')
+  //TODO: 播放顺序控制
+  /**
+   *  切换歌曲
+   * @param type 切换到前一首还是后一首
+   */
+  const switchMusic = (
+    type: 'pre' | 'next',
+    order: Order = 'cycle'
+  ) => {
+    // 如果有歌曲就执行
+    if (playingMusicList.length) {
+      let currentIndex = playingMusicList.findIndex(
+        item => item === currentMusic
+      )
+      let Music: MusicListItem | null = null
+
+      switch (order) {
+        case 'cycle': {
+          currentIndex += type === 'pre' ? -1 : 1
+          //循环播放
+          currentIndex =
+            currentIndex < 0
+              ? playingMusicList.length - 1
+              : currentIndex % playingMusicList.length
+          break
+        }
+        case 'single': {
+          break
+        }
+        case 'random': {
+          currentIndex = Math.floor(
+            Math.random() * (playingMusicList.length + 1)
+          )
+        }
+      }
+      Music = playingMusicList[currentIndex]
+      // 改变当前音乐
+      dispatch(switchCurrentMusic(Music))
+      // 根据当前状态判断是否要播放
+      isPlaying ? audioRef.current?.play() : audioRef.current?.pause()
+    }
+  }
+  const switchOrder = () => {
+    const index = ORDER.findIndex(item => item === currentOrder)
+    setCurrentOrder(ORDER[(index + 1) % ORDER.length] as Order)
+  }
+  //TODO:探究useCallback的究竟
   const onError = () => {
     if (!currentMusic.initFlag) {
-      switchMusic('next')
+      //防止因为单曲循环报错而不切换音乐
+      switchMusic(
+        'next',
+        currentOrder === 'single' ? 'cycle' : currentOrder
+      )
       //TODO:Error时发出提示，并且不在切换音乐
     }
   }
+
   const onEnd = () => {
-    switchMusic('next')
+    switchMusic('next', currentOrder)
   }
   return {
-    audioTimeUpdate,
-    bufferPercent,
-    changeJingyin,
     switchMusicStaus,
+    audioTimeUpdate,
+    changeJingyin,
+    switchMusic,
+    setVolume,
+    canplay,
+    onError,
+    onEnd,
+    switchOrder,
+    currentOrder,
+    bufferPercent,
+    currentTime,
     isPlaying,
     duration,
     audioRef,
-    switchMusic,
-    canplay,
-    setVolume,
     volume,
-    currentTime,
-    onError,
-    onEnd,
   }
 }

@@ -64,6 +64,8 @@ export default App
 
 6、使用canvas获取背景图的平均RGB值，动态修改颜色
 
+7、数据持久化处理
+
 
 # 待完成
 

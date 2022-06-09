@@ -8,6 +8,7 @@ import Recommend from './child-views/Recommend'
 import DivWrapper, { NavButton } from './style'
 import LyricBox from '@/common/lyricBox'
 import Playing from './child-views/Playing'
+import { ORDER } from '@/constant'
 
 import type { IMusicInfo } from '@/hooks/useMusic'
 import type { ILyric } from '@/hooks/useLyric'
@@ -38,10 +39,10 @@ const Page = memo(
     const [currentIndex, setCurrentIndex] = useState(0)
     const {
       TimeSlider,
+      VolumeSlider,
       musicInfo,
       lyricInfo,
       audioInfo,
-      VolumeSlider,
     } = props
     // 获取音乐信息相关
     const { al, singers, name: songName } = musicInfo
@@ -51,10 +52,13 @@ const Page = memo(
     const {
       switchMusic,
       switchMusicStaus,
+      changeJingyin,
+      switchOrder,
       isPlaying,
       volume,
-      changeJingyin,
+      currentOrder,
     } = audioInfo
+
     return (
       <DivWrapper>
         {/* 两张背景蒙版 */}
@@ -158,9 +162,9 @@ const Page = memo(
         >
           <div flex='~' justify='center' m='b-10px'>
             <p
-              className='iconfont icon-random icon text-18px'
+              className={`iconfont icon-${currentOrder} icon text-18px`}
               //TODO: 播放顺序控制
-              onClick={() => alert('todo')}
+              onClick={() => switchOrder()}
             />
             <p
               className='iconfont icon-pre icon text-18px'

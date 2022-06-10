@@ -175,7 +175,10 @@ const Card = memo(
             />
           </div>
         </PanWrapper>
-        <CardWrapper className={active ? 'active' : ''} select='none'>
+        <CardWrapper
+          className={`${active ? 'active' : ''} transition`}
+          select='none'
+        >
           {/* 三张背景蒙版 */}
           {[5, 2].map(item => (
             <div

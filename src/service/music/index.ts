@@ -44,7 +44,13 @@ export function getPlayList(uid: number) {
     params: { uid },
   })
 }
-
+//根据歌单id获取歌单详情
+export function getPlayListDetail(id: number) {
+  return request_util.get({
+    url: '/playlist/detail',
+    params: { id },
+  })
+}
 // 根据id获取音乐url
 export function getMusicUrl(id: number) {
   return `https://music.163.com/song/media/outer/url?id=${id}.mp3`

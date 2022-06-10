@@ -28,7 +28,6 @@
 }
 
 *{
-  transition:all .3s;
   @apply select-none;
 }
 

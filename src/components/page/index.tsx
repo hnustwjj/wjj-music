@@ -96,7 +96,13 @@ const Page = memo(
           </button>
         </header>
         {/* 内容 */}
-        <div flex='~ 1' w='1700px' p='20px' mx='auto' overflow='auto'>
+        <div
+          flex='~ 1'
+          className='w-[80%] <lg:(w-[95%])'
+          p='20px'
+          mx='auto'
+          overflow='auto'
+        >
           <div flex='~ 1 col'>
             <nav h='60px'>
               {navList.map((item, index) => (
@@ -114,7 +120,12 @@ const Page = memo(
               {navList[currentIndex].element}
             </div>
           </div>
-          <aside w='300px' flex='~ col' items='center'>
+          <aside
+            w='300px'
+            flex='~ col'
+            items='center'
+            className='<lg:(hidden)'
+          >
             <div w='250px' flex='~ col' items='center' h='full'>
               {/* 歌名 */}
               <div
@@ -205,7 +216,7 @@ const Page = memo(
               </div>
             </div>
           </div>
-          <div w='full' flex='~' justify='center' px='200px'>
+          <div className='w-[85%]' flex='~' justify='center'>
             {TimeSlider}
           </div>
         </footer>

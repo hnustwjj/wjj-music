@@ -12,7 +12,8 @@ import useMusicInfo from '../hooks/useMusic'
 import useLyric from '../hooks/useLyric'
 import useAudio from '../hooks/useAudio'
 import { fetchHotRecommend } from '@/store/music'
-import store, { useAppDispatch } from '@/store'
+import { fetPlayingList } from '@/store/user'
+import store, { useAppDispatch, useAppSelector } from '@/store'
 import getImpTimeSlider from '../common/slider/implement/TimeSlider'
 import getImpVolumeSlider from '../common/slider/implement/VolumeSlider'
 import useCanvas from '@/hooks/useCanvas'
@@ -25,9 +26,11 @@ export const RGBContext = createContext({
 })
 const App = memo(() => {
   const dispatch = useAppDispatch()
+  const { uid } = useAppSelector(state => state.user)
   // 请求热榜推荐歌曲的数据
   useEffect(() => {
     dispatch(fetchHotRecommend())
+    dispatch(fetPlayingList(uid))
   }, [dispatch])
 
   // page是否显示

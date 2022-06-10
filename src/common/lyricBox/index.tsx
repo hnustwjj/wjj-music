@@ -22,7 +22,7 @@ const LyricBox = memo((props: lyricBox) => {
   //样式对象
   const style = { padding: `${leading ?? 5}px 0` }
   return (
-    <Wrapper ref={lyricBoxRef}>
+    <Wrapper ref={lyricBoxRef} className='transition'>
       {lyricList.length ? (
         lyricList.map((item, index) => (
           <p

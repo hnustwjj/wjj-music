@@ -1,16 +1,13 @@
-export interface MusicListItem {
-  name?: string
+export interface PlayingListItem {
+  name?: string //歌单名
   id?: number
-  ar?: {
-    id?: number
-    name?: string
-  }[]
-  al?: {
-    id: number
-    name: string
-    picUrl: string
+  coverImgUrl?: string //封面
+  description?: string //介绍
+  trackCount?: number //歌曲数目
+  createTime?: number //创建时间
+  playCount?: number //播放次数
+  creator?: {
+    avatarUrl?: string //头像
+    nickname?: string //昵称
   }
-  dt?: number
-  lyric?: string
-  initFlag?: boolean
 }

@@ -18,7 +18,8 @@ const LyricBox = memo((props: lyricBox) => {
   const { currentLyricIndex, lyricList, lyricBoxRef, leading } = props
   //样式类名
   const pClass = (index: number) =>
-    currentLyricIndex === index ? 'active-lyric' : undefined
+    (currentLyricIndex === index ? 'active-lyric' : undefined) +
+    ' transition'
   //样式对象
   const style = { padding: `${leading ?? 5}px 0` }
   return (

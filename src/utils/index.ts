@@ -73,3 +73,11 @@ export const formatTime = (time: number) => {
   }
   return res
 }
+
+export const formatCount = (num: number, save: number) => {
+  if (num < 10000) return num
+  const wan = num / 10000
+  if (wan < 10000) return wan.toFixed(save) + '万'
+  const yi = wan / 10000
+  return yi.toFixed(save) + '亿'
+}

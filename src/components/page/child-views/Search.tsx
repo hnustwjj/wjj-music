@@ -26,7 +26,7 @@ const Search = memo(() => {
     dispatch(pushPlayingMusicList(res.songs[0]))
   }
   return (
-    <div w='full' h='full' flex='~ col'>
+    <div w='full' h='full' flex='~ col' pl='10px'>
       <div
         className={
           !isFocus ? 'border-$deactive-color' : 'border-$active-color'

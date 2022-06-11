@@ -104,7 +104,7 @@ const Page = memo(
           overflow='auto'
         >
           <div flex='~ 1 col'>
-            <nav h='60px'>
+            <nav h='60px' pl='10px'>
               {navList.map((item, index) => (
                 <NavButton
                   className={index === currentIndex ? 'active' : ''}
@@ -169,10 +169,9 @@ const Page = memo(
           justify='center'
           items='center'
         >
-          <div flex='~' justify='center' m='b-10px'>
+          <div flex='~' justify='center' m='b-20px'>
             <p
               className={`iconfont icon-${currentOrder} icon text-18px`}
-              //TODO: 播放顺序控制
               onClick={() => switchOrder()}
             />
             <p

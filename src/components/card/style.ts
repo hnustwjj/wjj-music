@@ -4,7 +4,7 @@ export const PanWrapper = styled.div`
   transition: all 0.5s;
   position: fixed;
   left: 3px;
-  bottom: 20px;
+  bottom: 50px;
   cursor: pointer;
   transform: translateX(-50%);
   &.active {

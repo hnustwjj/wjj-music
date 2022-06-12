@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 export const SingerSpan = styled.span`
-  flex: 4;
+  flex: 5;
   position: relative;
   .delete {
     width: 20px;

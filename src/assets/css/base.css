@@ -66,4 +66,5 @@
   -webkit-line-clamp:2;        
   overflow:hidden;             
   text-overflow:ellipsis;  
+  margin:5px;
 }

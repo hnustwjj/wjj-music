@@ -50,8 +50,8 @@ const MusicList = memo((props: MusicList) => {
             leading='50px'
           >
             <span w='80px' />
-            <span className='flex-[4]'>歌曲</span>
-            <span className='flex-1'>歌手</span>
+            <span className='flex-[5]'>歌曲</span>
+            <span className='flex-[2]'>歌手</span>
             <span w='80px'>时长</span>
           </div>
           <div flex='1' overflow='auto'>
@@ -91,7 +91,7 @@ const MusicList = memo((props: MusicList) => {
                   ) : null}
                 </SingerSpan>
                 {/* 歌手 */}
-                <span className='flex-1'>
+                <span className='flex-[2]'>
                   {item.ar && item.ar[0].name}
                 </span>
                 {/* 时常 */}

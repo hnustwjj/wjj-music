@@ -51,7 +51,6 @@ const App = memo(() => {
   const TimeSlider = getImpTimeSlider(audioInfo, lyricInfo)
   // 获取音乐进度条
   const VolumeSlider = getImpVolumeSlider(audioInfo)
-
   return (
     <RGBContext.Provider value={RGB}>
       <div fixed='~' top='0' left='0'>
@@ -79,7 +78,6 @@ const App = memo(() => {
           VolumeSlider={VolumeSlider}
           changePageActive={() => setPageActive(!pageActive)}
         />
-
         <div
           h='100vh'
           w='100vw'

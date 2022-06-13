@@ -3,7 +3,6 @@ import { formatCount } from '@/utils'
 import React, { memo } from 'react'
 const Mine = memo(() => {
   const { playList } = useAppSelector(state => state.user)
-
   return (
     <div flex='~ wrap' items='start'>
       {playList.map(item => (

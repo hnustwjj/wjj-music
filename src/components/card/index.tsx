@@ -12,12 +12,12 @@ import type { IAudio } from '../../hooks/useAudio'
 const Card = memo(
   (props: {
     changePageActive: () => void
-    musicInfo: IMusicInfo
-    lyricInfo: ILyric
-    ImgRef: React.RefObject<HTMLImageElement>
-    audioInfo: IAudio
     TimeSlider: () => JSX.Element
     VolumeSlider: () => JSX.Element
+    musicInfo: IMusicInfo
+    lyricInfo: ILyric
+    audioInfo: IAudio
+    ImgRef: React.RefObject<HTMLImageElement>
   }) => {
     const {
       TimeSlider,

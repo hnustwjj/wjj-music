@@ -12,7 +12,7 @@ import useMusicInfo from '../hooks/useMusic'
 import useLyric from '../hooks/useLyric'
 import useAudio from '../hooks/useAudio'
 import { fetchHotRecommend } from '@/store/music'
-import { fetPlayingList } from '@/store/user'
+import { getPlayingList } from '@/store/user'
 import store, { useAppDispatch, useAppSelector } from '@/store'
 import getImpTimeSlider from '../common/slider/implement/TimeSlider'
 import getImpVolumeSlider from '../common/slider/implement/VolumeSlider'
@@ -30,7 +30,7 @@ const App = memo(() => {
   // 请求热榜推荐歌曲的数据
   useEffect(() => {
     dispatch(fetchHotRecommend())
-    dispatch(fetPlayingList(uid))
+    dispatch(getPlayingList(uid))
   }, [dispatch])
 
   // page是否显示

@@ -1,14 +1,9 @@
 import { ORDER } from '@/constant'
-import { MusicListItem } from './../../dist/src/store/music/types.d'
+import { MusicListItem } from '@/store/music/types'
 import { useAppDispatch, useAppSelector } from '../store/index'
 import { switchCurrentMusic } from '@/store/music'
 import { useState, useRef, SyntheticEvent, useEffect } from 'react'
-import {
-  Dispatch,
-  SetStateAction,
-  RefObject,
-  useCallback,
-} from 'react'
+import { Dispatch, SetStateAction, RefObject } from 'react'
 export const INITIAL_VOLUME = 0.66
 
 type Order = 'cycle' | 'single' | 'random'

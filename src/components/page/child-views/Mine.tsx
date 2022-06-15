@@ -1,14 +1,26 @@
 import { useAppSelector } from '@/store'
+import { PlayingListItem } from '@/store/user/types'
 import { formatCount } from '@/utils'
-import React, { memo } from 'react'
+import React, { memo, useState } from 'react'
 const Mine = memo(() => {
   const { playList } = useAppSelector(state => state.user)
+  //TODO:做选中歌单之后做FLIP动画
+  // 当前点击的歌单
+  const [activeItem, setActiveItem] =
+    useState<PlayingListItem | null>(null)
   return (
     <div flex='~ wrap' items='start'>
       {playList.map(item => (
         <div
+          style={{
+            display:
+              !activeItem || item === activeItem ? 'flex' : 'none',
+          }}
           key={item.id}
-          className='2xl:(w-[16.6%]) xl:(w-[20%]) md:(w-[25%]) <md:(w-[33.3%])'
+          className='transition 2xl:(w-[16.6%]) xl:(w-[20%]) md:(w-[25%]) <md:(w-[33.3%])'
+          onClick={() => {
+            setActiveItem(item)
+          }}
           p='10px'
           flex='~ col'
           justify='center'
@@ -41,6 +53,7 @@ const Mine = memo(() => {
           </div>
         </div>
       ))}
+      <button onClick={() => setActiveItem(null)}>clear test</button>
     </div>
   )
 })

@@ -1,3 +1,4 @@
+import Dialog from '@/common/dialog'
 import { IAudio } from '@/hooks/useAudio'
 import React, { memo } from 'react'
 
@@ -70,6 +71,13 @@ const Footer = memo(
               {props.VolumeSlider}
             </div>
           </div>
+          <Dialog>
+            <h1>jzsp</h1>
+            <div>
+              <h1>jzsp2</h1>
+              
+            </div>
+          </Dialog>
         </div>
         <div className='w-[85%]' flex='~' justify='center'>
           {props.TimeSlider}

@@ -12,7 +12,7 @@ import { useAppDispatch, useAppSelector } from '@/store'
 import { MusicListItem } from '@/store/music/types'
 import { PlayingListItem } from '@/store/user/types'
 import { formatCount, parseTime } from '@/utils'
-import React, { memo, useEffect, useState } from 'react'
+import React, { memo, useEffect, useState, useMemo } from 'react'
 const Mine = memo(() => {
   const dispatch = useAppDispatch()
   const { playList } = useAppSelector(state => state.user)
@@ -28,6 +28,8 @@ const Mine = memo(() => {
     //TODO:push成功的dialog
   }
 
+  //TODO:滚动到最后请求下一页
+  //TODO:虚拟滚动列表
   useEffect(() => {
     // 因为只有这里用到了歌单detail，所以就不放在store里了
     activeItem?.id &&
@@ -90,9 +92,13 @@ const Mine = memo(() => {
         </div>
         <div className='flex-1 px-20px'>
           <div className='flex justify-between text-20px leading-[40px]'>
-            <p text='white'>{activeItem.name}</p>
-            <button onClick={() => setActiveItem(null)}>
-              clear test
+            <p text='gray'>{activeItem.name}</p>
+            <button
+              onClick={() => setActiveItem(null)}
+              text='15px'
+              className='hover:(text-white) '
+            >
+              返回
             </button>
           </div>
           <p>
@@ -111,12 +117,16 @@ const Mine = memo(() => {
                 ))
               : PAGE_MINE_TAGS_NULL_TEXT}
           </div>
-          <div>
-            介绍：
-            {activeItem.description
-              ?.split('\n')
-              .map((item, index) => <p key={index}>{item}</p>) ??
-              PAGE_MINE_DESC_NULL_TEXT}
+          <div className='line-clamp-3'>
+            <div flex='~' justify='between'>
+              介绍:
+            </div>
+            <p>
+              {activeItem.description
+                ?.split('\n')
+                .map((item, index) => <p key={index}>{item}</p>) ??
+                PAGE_MINE_DESC_NULL_TEXT}
+            </p>
           </div>
         </div>
       </div>

@@ -1,21 +1,44 @@
-import { useAppSelector } from '@/store'
+import MusicList from '@/common/musicList'
+import {
+  PAGE_MINE_DESC_NULL_TEXT,
+  PAGE_MINE_TAGS_NULL_TEXT,
+} from '@/constant'
+import {
+  pushPlayingMusicList,
+  switchCurrentMusic,
+} from '@/store/music'
+import { getPlayListDetail } from '@/service/music'
+import { useAppDispatch, useAppSelector } from '@/store'
+import { MusicListItem } from '@/store/music/types'
 import { PlayingListItem } from '@/store/user/types'
-import { formatCount } from '@/utils'
-import React, { memo, useState } from 'react'
+import { formatCount, parseTime } from '@/utils'
+import React, { memo, useEffect, useState } from 'react'
 const Mine = memo(() => {
+  const dispatch = useAppDispatch()
   const { playList } = useAppSelector(state => state.user)
-  //TODO:做选中歌单之后做FLIP动画
   // 当前点击的歌单
   const [activeItem, setActiveItem] =
     useState<PlayingListItem | null>(null)
-  return (
+  const [detail, setDetail] = useState<MusicListItem[]>(
+    [] as MusicListItem[]
+  )
+  const pushIntoPlayingMusicList = (item: MusicListItem) => {
+    dispatch(switchCurrentMusic(item))
+    dispatch(pushPlayingMusicList(item))
+    //TODO:push成功的dialog
+  }
+
+  useEffect(() => {
+    // 因为只有这里用到了歌单detail，所以就不放在store里了
+    activeItem?.id &&
+      getPlayListDetail(activeItem.id).then(res => {
+        setDetail(res.playlist.tracks)
+      })
+  }, [activeItem])
+  return !activeItem ? (
     <div flex='~ wrap' items='start'>
       {playList.map(item => (
         <div
-          style={{
-            display:
-              !activeItem || item === activeItem ? 'flex' : 'none',
-          }}
           key={item.id}
           className='transition 2xl:(w-[16.6%]) xl:(w-[20%]) md:(w-[25%]) <md:(w-[33.3%])'
           onClick={() => {
@@ -53,7 +76,56 @@ const Mine = memo(() => {
           </div>
         </div>
       ))}
-      <button onClick={() => setActiveItem(null)}>clear test</button>
+    </div>
+  ) : (
+    <div flex='~ col' h='full'>
+      <div className='flex' w='full'>
+        <div className='2xl:(w-[16.6%]) xl:(w-[20%]) md:(w-[25%]) <md:(w-[33.3%])'>
+          <img
+            w='full'
+            rounded='lg'
+            shadow='md dark-100'
+            src={activeItem.coverImgUrl + '?param=200y200'}
+          />
+        </div>
+        <div className='flex-1 px-20px'>
+          <div className='flex justify-between text-20px leading-[40px]'>
+            <p text='white'>{activeItem.name}</p>
+            <button onClick={() => setActiveItem(null)}>
+              clear test
+            </button>
+          </div>
+          <p>
+            创建时间：
+            {parseTime(activeItem.createTime ?? 0)}
+          </p>
+          <p>歌单作者：{activeItem.creator?.nickname}</p>
+          <p>播放量：{formatCount(activeItem.playCount ?? 0, 2)}</p>
+          <div className='flex items-center'>
+            标签：
+            {activeItem?.tags?.length
+              ? activeItem?.tags?.map((item, index) => (
+                  <p key={index} className='px-5px'>
+                    {item}
+                  </p>
+                ))
+              : PAGE_MINE_TAGS_NULL_TEXT}
+          </div>
+          <div>
+            介绍：
+            {activeItem.description
+              ?.split('\n')
+              .map((item, index) => <p key={index}>{item}</p>) ??
+              PAGE_MINE_DESC_NULL_TEXT}
+          </div>
+        </div>
+      </div>
+      <div flex='1' overflow='hidden'>
+        <MusicList
+          source={detail}
+          rowClick={pushIntoPlayingMusicList}
+        />
+      </div>
     </div>
   )
 })

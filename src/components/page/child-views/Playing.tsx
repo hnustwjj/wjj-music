@@ -30,7 +30,7 @@ const Playing = memo(() => {
   }
   return (
     <MusicList
-      source='playingMusicList'
+      source={playingMusicList}
       deleteClick={remove}
       rowClick={rowClick}
     />

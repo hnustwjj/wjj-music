@@ -4,6 +4,7 @@ import { BASE_URL, timeout } from './config'
 import { wjjRequest } from '@/service/request'
 
 //创建axios实例
+//TODO:错误处理
 const request_util = new wjjRequest({
   baseURL: BASE_URL,
   interceptor: {
@@ -12,9 +13,9 @@ const request_util = new wjjRequest({
     },
     responseOnFulfilled(res) {
       return res.data
-    }
+    },
   },
-  timeout
+  timeout,
 })
 
 export { request_util }

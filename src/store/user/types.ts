@@ -10,11 +10,11 @@ export interface PlayingListItem {
     avatarUrl?: string //头像
     nickname?: string //昵称
   }
+  tags?: string[]
 }
 
-export interface UserInfo{
+export interface UserInfo {
   nickname?: string //昵称
   avatarUrl?: string //头像
   signature?: string //签名
-  
 }

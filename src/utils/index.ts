@@ -74,6 +74,17 @@ export const formatTime = (time: number) => {
   return res
 }
 
+export function parseTime(time: number, symbol: string = '.') {
+  const date = new Date(time)
+  return (
+    date.getFullYear() +
+    symbol +
+    (date.getMonth() + 1) +
+    symbol +
+    (date.getDay() + 1)
+  )
+}
+
 export const formatCount = (num: number, save: number) => {
   if (num < 10000) return num
   const wan = num / 10000

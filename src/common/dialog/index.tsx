@@ -7,6 +7,7 @@ import React, {
 } from 'react'
 import { createPortal } from 'react-dom'
 
+//TODO:解决使用多个Dialog时只渲染一个dialog
 //TODO:美化样式
 const Dialog = memo(
   forwardRef((props: PropsWithChildren<{ title?: string }>, ref) => {

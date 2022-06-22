@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import { useAppDispatch } from '@/store'
+import { useAppDispatch, useAppSelector } from '@/store'
 import {
   pushPlayingMusicList,
   switchCurrentMusic,
@@ -9,6 +9,7 @@ import type { MusicListItem } from '@/store/music/types'
 const Recommend = memo(() => {
   // 修改音乐
   const dispatch = useAppDispatch()
+  const { dailyMusicList } = useAppSelector(state => state.music)
   const pushIntoPlayingMusicList = (item: MusicListItem) => {
     dispatch(switchCurrentMusic(item))
     dispatch(pushPlayingMusicList(item))
@@ -18,7 +19,7 @@ const Recommend = memo(() => {
   }
   return (
     <MusicList
-      source='dailyMusicList'
+      source={dailyMusicList}
       rowClick={pushIntoPlayingMusicList}
     />
   )

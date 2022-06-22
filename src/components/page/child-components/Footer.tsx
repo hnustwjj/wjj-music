@@ -75,7 +75,7 @@ const Footer = memo(
             <h1>jzsp</h1>
             <div>
               <h1>jzsp2</h1>
-              
+            
             </div>
           </Dialog>
         </div>

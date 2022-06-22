@@ -7,7 +7,7 @@ import { formatTime } from '@/utils'
 import { MusicListItem } from '@/store/music/types'
 import { LIST_NULL_TEXT } from '@/constant'
 interface MusicList {
-  source: 'dailyMusicList' | 'playingMusicList'
+  source: MusicListItem[]
   rowClick?: (item: MusicListItem) => void
   rowDoubleClick?: (item: MusicListItem) => void
   deleteClick?: (item: MusicListItem) => void
@@ -17,8 +17,6 @@ const MusicList = memo((props: MusicList) => {
   const music = useAppSelector(state => state.music)
   const { rowClick, source, rowDoubleClick, deleteClick } = props
   const { currentMusic } = music
-  const dataList = music[source]
-  //TODO: 如果后面需要，会抽离到hook中，如果不需要就将这个TODO删掉
   // 单击row触发事件
   const single = (item: MusicListItem) => {
     clearTimeout(timer) // 清除第二次单击事件
@@ -40,8 +38,8 @@ const MusicList = memo((props: MusicList) => {
   }
   return (
     <>
-      {dataList.length ? (
-        <div h='full' w='full'>
+      {source.length ? (
+        <div flex='~ col' h='full' w='full'>
           <div
             flex='~'
             text='14px thin'
@@ -55,7 +53,7 @@ const MusicList = memo((props: MusicList) => {
             <span w='80px'>时长</span>
           </div>
           <div flex='1' overflow='auto'>
-            {dataList.map((item, index) => (
+            {source.map((item, index) => (
               <div
                 flex='~'
                 text='14px thin'

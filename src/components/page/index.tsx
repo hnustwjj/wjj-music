@@ -83,7 +83,7 @@ const Page = memo(
                 </NavButton>
               ))}
             </nav>
-            <div flex='1 ~ col' text='gray-300' overflow='auto'>
+            <div flex='1 ~ col' text='gray-300' overflow='hidden'>
               {/* 达到类似路由的效果 */}
               {navList[currentIndex].element}
             </div>

@@ -24,7 +24,7 @@ const Header = memo(() => {
         <img
           absolute='~'
           right='20px'
-          w='50px'
+          w='35px'
           rounded='full'
           cursor='pointer'
           src={userInfo.avatarUrl}

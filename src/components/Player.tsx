@@ -17,6 +17,7 @@ import store, { useAppDispatch, useAppSelector } from '@/store'
 import getImpTimeSlider from '../common/slider/implement/TimeSlider'
 import getImpVolumeSlider from '../common/slider/implement/VolumeSlider'
 import useCanvas from '@/hooks/useCanvas'
+import { createPortal } from 'react-dom'
 
 export const RGBContext = createContext({
   R: 0,
@@ -51,7 +52,7 @@ const App = memo(() => {
   const TimeSlider = getImpTimeSlider(audioInfo, lyricInfo)
   // 获取音乐进度条
   const VolumeSlider = getImpVolumeSlider(audioInfo)
-  return (
+  return createPortal(
     <RGBContext.Provider value={RGB}>
       <div fixed='~' top='0' left='0'>
         <canvas
@@ -96,7 +97,8 @@ const App = memo(() => {
           />
         </div>
       </div>
-    </RGBContext.Provider>
+    </RGBContext.Provider>,
+    document.getElementById('root') as Element
   )
 })
 export default () => (

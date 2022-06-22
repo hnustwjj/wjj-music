@@ -16,6 +16,7 @@ type SliderProps = {
   onMouseUp?: () => void
   onMouseMove?: () => void
 }
+//TODO:解决拖动时Maximun update的问题
 const Slider = memo((props: SliderProps) => {
   // value是传入的进度条百分比
   const { value, direction, setValue, bufferValue, slot } = props
@@ -84,8 +85,7 @@ const Slider = memo((props: SliderProps) => {
         className={
           (direction === 'row'
             ? 'h-5px rounded-l-full'
-            : 'w-5px rounded-t-full') +
-          ' bg-$slider-current transition  z-2'
+            : 'w-5px rounded-t-full') + ' bg-$slider-current z-2'
         }
       />
       {/* 加载进度条 */}

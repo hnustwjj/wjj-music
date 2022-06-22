@@ -72,7 +72,7 @@ const Page = memo(
         >
           <div flex='~ 1 col'>
             {/* 导航栏 */}
-            <nav h='60px' pl='10px'>
+            <nav h='60px'>
               {navList.map((item, index) => (
                 <NavButton
                   className={index === currentIndex ? 'active' : ''}

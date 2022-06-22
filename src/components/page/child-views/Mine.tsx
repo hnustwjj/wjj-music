@@ -1,5 +1,6 @@
 import MusicList from '@/common/musicList'
 import {
+  LIST_NULL_TEXT,
   PAGE_MINE_DESC_NULL_TEXT,
   PAGE_MINE_TAGS_NULL_TEXT,
 } from '@/constant'
@@ -15,19 +16,21 @@ import { formatCount, parseTime } from '@/utils'
 import React, { memo, useEffect, useState, useMemo } from 'react'
 const Mine = memo(() => {
   const dispatch = useAppDispatch()
+  // 歌单数据
   const { playList } = useAppSelector(state => state.user)
   // 当前点击的歌单
   const [activeItem, setActiveItem] =
     useState<PlayingListItem | null>(null)
+  // 歌单详情
   const [detail, setDetail] = useState<MusicListItem[]>(
     [] as MusicListItem[]
   )
+  // 点击歌单详情列表的歌曲添加到playing中
   const pushIntoPlayingMusicList = (item: MusicListItem) => {
     dispatch(switchCurrentMusic(item))
     dispatch(pushPlayingMusicList(item))
     //TODO:push成功的dialog
   }
-
   //TODO:滚动到最后请求下一页
   //TODO:虚拟滚动列表
   useEffect(() => {
@@ -37,7 +40,11 @@ const Mine = memo(() => {
         setDetail(res.playlist.tracks)
       })
   }, [activeItem])
-  return !activeItem ? (
+  return !playList.length ? (
+    <div h='full' w='full' flex='~' justify='center' items='center'>
+      {LIST_NULL_TEXT}
+    </div>
+  ) : !activeItem ? (
     <div flex='~ wrap' items='start'>
       {playList.map(item => (
         <div
@@ -121,12 +128,12 @@ const Mine = memo(() => {
             <div flex='~' justify='between'>
               介绍:
             </div>
-            <p>
+            <div>
               {activeItem.description
                 ?.split('\n')
                 .map((item, index) => <p key={index}>{item}</p>) ??
                 PAGE_MINE_DESC_NULL_TEXT}
-            </p>
+            </div>
           </div>
         </div>
       </div>

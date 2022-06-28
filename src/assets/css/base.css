@@ -78,3 +78,34 @@
 .shadow-light{
   box-shadow: 0 0 10px rgba(255, 255, 255, .15);
 }
+.close{
+  position:relative;
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+  transition:all .5s;
+}
+.close:hover{
+  transform: rotate(180deg) scale(1.1);
+  
+}
+.close::before{
+  display: block;
+  content:'';
+  width: 100%;
+  height: 2px;
+  background: #fff;
+  position:absolute;
+  top:50%;
+  transform: rotate(45deg);
+}
+.close::after{
+  display: block;
+  content:'';
+  width: 100%;
+  height: 2px;
+  background: #fff;
+  position:absolute;
+  top:50%;
+  transform: rotate(-45deg);
+}

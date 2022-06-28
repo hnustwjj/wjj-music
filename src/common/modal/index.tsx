@@ -54,25 +54,25 @@ const Modal = memo((props: PropsWithChildren<ModalProps>) => {
 
   return createPortal(
     <div className='absolute top-[30%] left-[50%] transform translate-x-[-50%] translate-y-[-50%] bg-[#000] text-[#fff] w-400px shadow-light rounded-5px'>
-      <div className='px-24px py-16px border-b text-16px leading-22px'>
-        <div>{title ?? 'header'}</div>
-        <div></div>
+      <div className='px-24px py-16px border-b text-16px leading-22px flex justify-between items-center'>
+        <div>{(title ?? '标题') + ' : -） '}</div>
+        <div className='close' onClick={() => onCallback('cancel')} />
       </div>
       <div className='border-b p-24px text-14px'>
         {Array.isArray(children) ? children?.map(item => item) : children}
       </div>
-      <div className='px-16px py-10px flex items-center justify-end'>
+      <div className='px-16px py-10px flex items-center justify-end text-13px'>
         <button
           className='bg-white text-black py-4px px-15px h-32px rounded-md hover:bg-gray-200'
           onClick={() => onCallback('cancel')}
         >
-          close
+          取消
         </button>
         <button
           className='bg-white text-black py-4px px-15px h-32px rounded-md hover:bg-gray-200 ml-10px'
           onClick={() => onCallback('ok')}
         >
-          confirm
+          确认
         </button>
       </div>
     </div>,
@@ -80,7 +80,7 @@ const Modal = memo((props: PropsWithChildren<ModalProps>) => {
   )
 })
 
-export function confirm() {
+export function confirm(props?: PropsWithChildren<ModalProps>) {
   const innerContainer = document.createElement('div')
   const root = createRoot(innerContainer)
   root.render(
@@ -89,9 +89,8 @@ export function confirm() {
       callback={() => {
         container.removeChild(innerContainer)
       }}
-    >
-      jzspjzsp
-    </Modal>
+      {...props}
+    />
   )
   container.appendChild(innerContainer)
 }

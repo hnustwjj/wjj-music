@@ -85,17 +85,14 @@ const Slider = memo((props: SliderProps) => {
         className={
           (direction === 'row'
             ? 'h-5px rounded-l-full'
-            : 'w-5px rounded-t-full') +
-          ' transition bg-$slider-current z-2'
+            : 'w-5px rounded-t-full') + ' transition bg-$slider-current z-2'
         }
       />
       {/* 加载进度条 */}
       <div
         style={widthOrHeight(bufferValue ?? 0, true)}
         className={
-          (direction === 'row'
-            ? 'h-5px rounded-full'
-            : 'w-5px rounded-full') +
+          (direction === 'row' ? 'h-5px rounded-full' : 'w-5px rounded-full') +
           ' bg-$slider-buffer transition absolute z-1'
         }
       >
@@ -123,9 +120,7 @@ const Slider = memo((props: SliderProps) => {
         justify='center'
         cursor='pointer'
         className='bg-[#454545] button'
-        style={
-          direction === 'row' ? { marginLeft: -8 } : { marginTop: -8 }
-        }
+        style={direction === 'row' ? { marginLeft: -8 } : { marginTop: -8 }}
         onMouseDown={() => mouseDown()}
         onClick={e => e.stopPropagation()}
       >

@@ -75,13 +75,7 @@ const Card = memo(
             歌手：{singers}
           </p>
           {/* 歌词 */}
-          <div
-            flex='1'
-            overflow='hidden'
-            m='b-25px'
-            relative='~'
-            p='x-15px'
-          >
+          <div flex='1' overflow='hidden' m='b-25px' relative='~' p='x-15px'>
             <LyricBox
               currentLyricIndex={currentLyricIndex}
               lyricList={lyricList}
@@ -194,9 +188,7 @@ const Card = memo(
           ))}
           <div
             className={
-              RGB.average > 160
-                ? 'bg-[rgba(0,0,0,.35)]'
-                : 'bg-[rgba(0,0,0,.1)]'
+              RGB.average > 160 ? 'bg-[rgba(0,0,0,.35)]' : 'bg-[rgba(0,0,0,.1)]'
             }
             absolute='~'
             rounded='md'

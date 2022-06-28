@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from '@/store'
 import { getUserInfoAction } from '@/store/user'
-import React, { Children, memo, useEffect } from 'react'
+import React, { memo, useEffect } from 'react'
 import { confirm } from '@/common/modal'
 const Header = memo(() => {
   const dispatch = useAppDispatch()

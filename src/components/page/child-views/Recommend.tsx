@@ -1,9 +1,6 @@
 import React, { memo } from 'react'
 import { useAppDispatch, useAppSelector } from '@/store'
-import {
-  pushPlayingMusicList,
-  switchCurrentMusic,
-} from '@/store/music'
+import { pushPlayingMusicList, switchCurrentMusic } from '@/store/music'
 import MusicList from '@/common/musicList'
 import type { MusicListItem } from '@/store/music/types'
 const Recommend = memo(() => {
@@ -18,10 +15,7 @@ const Recommend = memo(() => {
     // alert('push成功')
   }
   return (
-    <MusicList
-      source={dailyMusicList}
-      rowClick={pushIntoPlayingMusicList}
-    />
+    <MusicList source={dailyMusicList} rowClick={pushIntoPlayingMusicList} />
   )
 })
 

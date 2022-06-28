@@ -40,10 +40,7 @@ const music = createSlice({
     changeUid(state: musicState, actions: PayloadAction<number>) {
       state.uid = actions.payload
     },
-    changeDailyMusicList(
-      state: musicState,
-      actions: PayloadAction<any[]>
-    ) {
+    changeDailyMusicList(state: musicState, actions: PayloadAction<any[]>) {
       state.dailyMusicList = actions.payload
     },
     pushPlayingMusicList(
@@ -67,34 +64,19 @@ const music = createSlice({
       state.playingMusicList.splice(index, 1)
       storage.setItem('playingMusicList', state.playingMusicList)
     },
-    changeCurrentMusic(
-      state: musicState,
-      actions: PayloadAction<any>
-    ) {
+    changeCurrentMusic(state: musicState, actions: PayloadAction<any>) {
       state.currentMusic = actions.payload
     },
-    changeCurrentLyric(
-      state: musicState,
-      actions: PayloadAction<any>
-    ) {
+    changeCurrentLyric(state: musicState, actions: PayloadAction<any>) {
       state.currentLyric = actions.payload
     },
-    changeDuration(
-      state: musicState,
-      actions: PayloadAction<number>
-    ) {
+    changeDuration(state: musicState, actions: PayloadAction<number>) {
       state.duration = actions.payload
     },
-    changeCurrentTime(
-      state: musicState,
-      actions: PayloadAction<number>
-    ) {
+    changeCurrentTime(state: musicState, actions: PayloadAction<number>) {
       state.currentTime = actions.payload
     },
-    changeCurrentLyricIndex(
-      state: musicState,
-      actions: PayloadAction<number>
-    ) {
+    changeCurrentLyricIndex(state: musicState, actions: PayloadAction<number>) {
       state.currentLyricIndex = actions.payload
     },
   },

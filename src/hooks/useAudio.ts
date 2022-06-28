@@ -102,10 +102,7 @@ export default function useAudio(): IAudio {
    *  切换歌曲
    * @param type 切换到前一首还是后一首
    */
-  const switchMusic = (
-    type: 'pre' | 'next',
-    order: Order = 'cycle'
-  ) => {
+  const switchMusic = (type: 'pre' | 'next', order: Order = 'cycle') => {
     // 如果有歌曲就执行
     if (playingMusicList.length) {
       let currentIndex = playingMusicList.findIndex(
@@ -147,10 +144,7 @@ export default function useAudio(): IAudio {
   const onError = () => {
     if (!currentMusic.initFlag) {
       //防止因为单曲循环报错而不切换音乐
-      switchMusic(
-        'next',
-        currentOrder === 'single' ? 'cycle' : currentOrder
-      )
+      switchMusic('next', currentOrder === 'single' ? 'cycle' : currentOrder)
       //TODO:Error时发出提示，并且不在切换音乐
     }
   }

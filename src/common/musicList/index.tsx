@@ -66,32 +66,18 @@ const MusicList = memo((props: MusicList) => {
                 onDoubleClick={() => double(item)}
               >
                 {/* 序号 */}
-                <span
-                  w='80px'
-                  flex='~'
-                  items='center'
-                  justify='center'
-                >
-                  {currentMusic.id === item.id ? (
-                    <img src={img} />
-                  ) : (
-                    index + 1
-                  )}
+                <span w='80px' flex='~' items='center' justify='center'>
+                  {currentMusic.id === item.id ? <img src={img} /> : index + 1}
                 </span>
                 {/* 歌名 */}
                 <SingerSpan>
                   {item.name}
                   {deleteClick !== undefined ? (
-                    <span
-                      className='delete'
-                      onClick={e => deleteFn(e, item)}
-                    />
+                    <span className='delete' onClick={e => deleteFn(e, item)} />
                   ) : null}
                 </SingerSpan>
                 {/* 歌手 */}
-                <span className='flex-[2]'>
-                  {item.ar && item.ar[0].name}
-                </span>
+                <span className='flex-[2]'>{item.ar && item.ar[0].name}</span>
                 {/* 时常 */}
                 <span w='80px'>{formatTime(item.dt ?? 0)}</span>
               </div>
@@ -99,13 +85,7 @@ const MusicList = memo((props: MusicList) => {
           </div>
         </div>
       ) : (
-        <div
-          h='full'
-          w='full'
-          flex='~'
-          justify='center'
-          items='center'
-        >
+        <div h='full' w='full' flex='~' justify='center' items='center'>
           {LIST_NULL_TEXT}
         </div>
       )}

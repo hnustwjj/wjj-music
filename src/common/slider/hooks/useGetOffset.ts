@@ -1,17 +1,12 @@
 import { getElementLeft, getElementTop } from '@/utils/getOffset'
 //返回获取偏移量的函数
-export default function useGetOffset(
-  lineRef: React.RefObject<HTMLDivElement>
-) {
+export default function useGetOffset(lineRef: React.RefObject<HTMLDivElement>) {
   /**
    * 返回鼠标在进度条上的左侧或垂直方向的偏移量百分比
    * @param e
    * @returns 百分比
    */
-  const getOffset = (
-    e: MouseEvent,
-    direction: 'col' | 'row'
-  ): number => {
+  const getOffset = (e: MouseEvent, direction: 'col' | 'row'): number => {
     // 鼠标点击时距离屏幕左侧的偏移量
     const clickOffset = direction === 'row' ? e.clientX : e.clientY
     // 进度条长度

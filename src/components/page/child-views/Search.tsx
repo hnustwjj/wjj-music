@@ -28,9 +28,7 @@ const Search = memo(() => {
   return (
     <div w='full' h='full' flex='~ col'>
       <div
-        className={
-          !isFocus ? 'border-$deactive-color' : 'border-$active-color'
-        }
+        className={!isFocus ? 'border-$deactive-color' : 'border-$active-color'}
         border='1px solid'
         w='full'
         p='x-15px'
@@ -80,12 +78,7 @@ const Search = memo(() => {
                 onClick={() => add(item)}
               >
                 {/* 序号 */}
-                <span
-                  w='80px'
-                  flex='~'
-                  items='center'
-                  justify='center'
-                >
+                <span w='80px' flex='~' items='center' justify='center'>
                   {index + 1}
                 </span>
                 {/* 歌名 */}

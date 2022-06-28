@@ -4,27 +4,22 @@ import {
   PAGE_MINE_DESC_NULL_TEXT,
   PAGE_MINE_TAGS_NULL_TEXT,
 } from '@/constant'
-import {
-  pushPlayingMusicList,
-  switchCurrentMusic,
-} from '@/store/music'
+import { pushPlayingMusicList, switchCurrentMusic } from '@/store/music'
 import { getPlayListDetail } from '@/service/music'
 import { useAppDispatch, useAppSelector } from '@/store'
 import { MusicListItem } from '@/store/music/types'
 import { PlayingListItem } from '@/store/user/types'
 import { formatCount, parseTime } from '@/utils'
-import React, { memo, useEffect, useState, useMemo } from 'react'
+import React, { memo, useEffect, useState } from 'react'
+//TODO:使用Suspense API来加载图片
 const Mine = memo(() => {
   const dispatch = useAppDispatch()
   // 歌单数据
   const { playList } = useAppSelector(state => state.user)
   // 当前点击的歌单
-  const [activeItem, setActiveItem] =
-    useState<PlayingListItem | null>(null)
+  const [activeItem, setActiveItem] = useState<PlayingListItem | null>(null)
   // 歌单详情
-  const [detail, setDetail] = useState<MusicListItem[]>(
-    [] as MusicListItem[]
-  )
+  const [detail, setDetail] = useState<MusicListItem[]>([] as MusicListItem[])
   // 点击歌单详情列表的歌曲添加到playing中
   const pushIntoPlayingMusicList = (item: MusicListItem) => {
     dispatch(switchCurrentMusic(item))
@@ -138,10 +133,7 @@ const Mine = memo(() => {
         </div>
       </div>
       <div flex='1' overflow='hidden'>
-        <MusicList
-          source={detail}
-          rowClick={pushIntoPlayingMusicList}
-        />
+        <MusicList source={detail} rowClick={pushIntoPlayingMusicList} />
       </div>
     </div>
   )

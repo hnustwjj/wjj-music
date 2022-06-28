@@ -1,7 +1,6 @@
 import React, { memo, PropsWithChildren, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { createRoot } from 'react-dom/client'
-//TODO:美化样式'
 
 //create the portal element
 const container = document.createElement('div')
@@ -53,7 +52,7 @@ const Modal = memo((props: PropsWithChildren<ModalProps>) => {
   }
 
   return createPortal(
-    <div className='absolute top-[30%] left-[50%] transform translate-x-[-50%] translate-y-[-50%] bg-[#000] text-[#fff] w-400px shadow-light rounded-5px'>
+    <div className='absolute top-[30%] left-[50%] transform translate-x-[-50%] translate-y-[-50%] bg-[#252323] text-[#fff] w-400px shadow-light rounded-5px'>
       <div className='px-24px py-16px border-b text-16px leading-22px flex justify-between items-center'>
         <div>{(title ?? '标题') + ' : -） '}</div>
         <div className='close' onClick={() => onCallback('cancel')} />

@@ -1,9 +1,4 @@
-import React, {
-  createContext,
-  memo,
-  useEffect,
-  useState,
-} from 'react'
+import React, { createContext, memo, useEffect, useState } from 'react'
 import { Provider } from 'react-redux'
 import Card from './card'
 import Page from './page'
@@ -46,8 +41,7 @@ const App = memo(() => {
   const { CanvasRef, ImgRef, RGB } = useCanvas()
   // 获取音频信息的Hook
   const audioInfo = useAudio()
-  const { audioRef, canplay, audioTimeUpdate, onEnd, onError } =
-    audioInfo
+  const { audioRef, canplay, audioTimeUpdate, onEnd, onError } = audioInfo
   // 获取时间进度条
   const TimeSlider = getImpTimeSlider(audioInfo, lyricInfo)
   // 获取音乐进度条

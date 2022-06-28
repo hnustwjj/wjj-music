@@ -30,10 +30,7 @@ const music = createSlice({
       state.playList = actions.payload
       // storage.setItem('playList', state.playList)
     },
-    changeUserInfo(
-      state: userState,
-      actions: PayloadAction<UserInfo>
-    ) {
+    changeUserInfo(state: userState, actions: PayloadAction<UserInfo>) {
       state.userInfo = actions.payload
     },
   },
@@ -41,8 +38,7 @@ const music = createSlice({
 export default music.reducer
 
 //导出所有的普通action
-export const { changeUid, changePlayList, changeUserInfo } =
-  music.actions
+export const { changeUid, changePlayList, changeUserInfo } = music.actions
 
 // 导出定义的所有异步action
 export * from './asyncAction'

@@ -11,14 +11,13 @@ import {
 } from '.'
 
 // 获取每日推荐歌曲
-export const fetchHotRecommend =
-  () => async (dispatch: AppDispatch) => {
-    const {
-      data: { dailySongs },
-    } = await getLike()
-    // 保存
-    dispatch(changeDailyMusicList(dailySongs))
-  }
+export const fetchHotRecommend = () => async (dispatch: AppDispatch) => {
+  const {
+    data: { dailySongs },
+  } = await getLike()
+  // 保存
+  dispatch(changeDailyMusicList(dailySongs))
+}
 
 // 根据id获取歌词
 export const changeLyric =

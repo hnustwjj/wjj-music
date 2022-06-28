@@ -32,13 +32,7 @@ const Page = memo(
   }) => {
     // 切换content
     const [currentIndex, setCurrentIndex] = useState(0)
-    const {
-      musicInfo,
-      lyricInfo,
-      audioInfo,
-      TimeSlider,
-      VolumeSlider,
-    } = props
+    const { musicInfo, lyricInfo, audioInfo, TimeSlider, VolumeSlider } = props
     // 获取音乐信息相关
     const { al } = musicInfo
 
@@ -48,9 +42,7 @@ const Page = memo(
         <div
           className='bg-page1 absolute'
           style={{
-            backgroundImage: al
-              ? `url(${imgUrl(140, al.picUrl)})`
-              : ``,
+            backgroundImage: al ? `url(${imgUrl(140, al.picUrl)})` : ``,
           }}
           h='full'
           w='full'

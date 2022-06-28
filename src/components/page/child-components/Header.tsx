@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from '@/store'
 import { getUserInfoAction } from '@/store/user'
 import React, { memo, useEffect } from 'react'
-
+import { confirm } from '@/common/modal'
 const Header = memo(() => {
   const dispatch = useAppDispatch()
   const { uid, userInfo } = useAppSelector(state => state.user)
@@ -20,25 +20,23 @@ const Header = memo(() => {
       >
         勾勾的音乐组件
       </a>
-      {userInfo.avatarUrl ? (
-        <img
-          absolute='~'
-          right='20px'
-          w='35px'
-          rounded='full'
-          cursor='pointer'
-          src={userInfo.avatarUrl}
-          alt={userInfo.nickname}
-        />
-      ) : (
-        <button
-          absolute='~'
-          right='20px'
-          onClick={() => alert('todo')}
-        >
-          登录
-        </button>
-      )}
+      <div onClick={() => confirm()}>
+        {userInfo.avatarUrl ? (
+          <img
+            absolute='~'
+            right='20px'
+            w='35px'
+            rounded='full'
+            cursor='pointer'
+            src={userInfo.avatarUrl}
+            alt={userInfo.nickname}
+          />
+        ) : (
+          <button absolute='~' right='20px'>
+            登录
+          </button>
+        )}
+      </div>
     </header>
   )
 })

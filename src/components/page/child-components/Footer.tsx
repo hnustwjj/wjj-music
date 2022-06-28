@@ -1,6 +1,5 @@
 import { IAudio } from '@/hooks/useAudio'
 import React, { memo } from 'react'
-
 const Footer = memo(
   (props: {
     audioInfo: IAudio
@@ -18,13 +17,7 @@ const Footer = memo(
       currentOrder,
     } = props.audioInfo
     return (
-      <footer
-        w='full'
-        h='100px'
-        flex='~ col'
-        justify='center'
-        items='center'
-      >
+      <footer w='full' h='100px' flex='~ col' justify='center' items='center'>
         <div flex='~' justify='center' m='b-20px'>
           <p
             className={`iconfont icon-${currentOrder} icon text-18px`}
@@ -44,13 +37,7 @@ const Footer = memo(
             className='iconfont icon-next icon text-18px'
             onClick={() => switchMusic('next')}
           />
-          <div
-            m='r-5px'
-            relative='~'
-            flex='~'
-            items='center'
-            justify='center'
-          >
+          <div m='r-5px' relative='~' flex='~' items='center' justify='center'>
             <i
               className={`iconfont volume-slider-hover icon text-18px ${
                 volume === 0 ? 'icon-jingyin' : 'icon-laba'

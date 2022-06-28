@@ -1,4 +1,4 @@
-import React, { memo, useState, PropsWithChildren, useEffect } from 'react'
+import React, { memo, PropsWithChildren, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { createRoot } from 'react-dom/client'
 //TODO:美化样式'
@@ -7,7 +7,7 @@ import { createRoot } from 'react-dom/client'
 const container = document.createElement('div')
 container.id = 'dialog-container'
 container.className =
-  'fixed top-0 left-0 transition bottom-0 right-0 bg-[rgba(0,0,0,.7)]'
+  'fixed top-0 left-0 transition bottom-0 right-0 bg-[rgba(0,0,0,.5)]'
 container.style.zIndex = '-1'
 container.style.opacity = '0'
 document.body.appendChild(container)
@@ -38,6 +38,11 @@ const Modal = memo((props: PropsWithChildren<ModalProps>) => {
       container.innerHTML = ''
     }
   }
+  useEffect(() => {
+    return () => {
+      switchStyle(false)
+    }
+  })
   switchStyle(visible ?? true)
   const onCallback = (type: 'ok' | 'cancel') => {
     type === 'cancel' ? onCancel && onCancel() : onOk && onOk()
@@ -48,14 +53,27 @@ const Modal = memo((props: PropsWithChildren<ModalProps>) => {
   }
 
   return createPortal(
-    <div className='absolute top-[50%] left-[50%] transform  translate-x-[-50%] translate-y-[-50%] bg-[#000] text-[#fff] mx-10px px-10px w-400px '>
-      <div className='h-48px leading-[48px] border-b'>{title ?? 'header'}</div>
-      <div className='border-b py-10px'>
+    <div className='absolute top-[30%] left-[50%] transform translate-x-[-50%] translate-y-[-50%] bg-[#000] text-[#fff] w-400px shadow-light rounded-5px'>
+      <div className='px-24px py-16px border-b text-16px leading-22px'>
+        <div>{title ?? 'header'}</div>
+        <div></div>
+      </div>
+      <div className='border-b p-24px text-14px'>
         {Array.isArray(children) ? children?.map(item => item) : children}
       </div>
-      <div className='h-48px leading-[48px]'>
-        <button onClick={() => onCallback('cancel')}>close</button>
-        <button onClick={() => onCallback('ok')}>confirm</button>
+      <div className='px-16px py-10px flex items-center justify-end'>
+        <button
+          className='bg-white text-black py-4px px-15px h-32px rounded-md hover:bg-gray-200'
+          onClick={() => onCallback('cancel')}
+        >
+          close
+        </button>
+        <button
+          className='bg-white text-black py-4px px-15px h-32px rounded-md hover:bg-gray-200 ml-10px'
+          onClick={() => onCallback('ok')}
+        >
+          confirm
+        </button>
       </div>
     </div>,
     innerContainer

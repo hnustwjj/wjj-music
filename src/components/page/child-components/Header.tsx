@@ -31,6 +31,8 @@ const Header = memo(() => {
           confirm({
             children: <div>确定要退出吗？</div>,
             title: '提示',
+          }).then(() => {
+            confirm({ children: <div>确定要退出吗2？</div>, title: '提示' })
           })
         }
       >

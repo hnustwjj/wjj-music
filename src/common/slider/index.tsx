@@ -79,6 +79,17 @@ const Slider = memo((props: SliderProps) => {
       className={direction}
       onClick={(e: any) => setValue(getOffset(e, direction))}
     >
+      <div
+        absolute='~'
+        top='0'
+        left='0'
+        transform='~ -translate-y-full'
+        text='$font 13px'
+        leading='30px'
+        whitespace='nowrap'
+      >
+        {slot}
+      </div>
       {/* 播放进度条 */}
       <div
         style={widthOrHeight(currentLength)}
@@ -95,19 +106,7 @@ const Slider = memo((props: SliderProps) => {
           (direction === 'row' ? 'h-5px rounded-full' : 'w-5px rounded-full') +
           ' bg-$slider-buffer transition absolute z-1'
         }
-      >
-        <div
-          absolute='~'
-          top='0'
-          left='0'
-          transform='~ -translate-y-full'
-          text='$font 13px'
-          leading='30px'
-          whitespace='nowrap'
-        >
-          {slot}
-        </div>
-      </div>
+      />
       {/* 圆圈按钮 */}
       <div
         w='16px'

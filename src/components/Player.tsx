@@ -1,4 +1,4 @@
-import React, { createContext, memo, useEffect, useState } from 'react'
+import React, { createContext, memo, useState } from 'react'
 import { Provider } from 'react-redux'
 import Card from './card'
 import Page from './page'
@@ -6,9 +6,7 @@ import Page from './page'
 import useMusicInfo from '../hooks/useMusic'
 import useLyric from '../hooks/useLyric'
 import useAudio from '../hooks/useAudio'
-import { fetchHotRecommend } from '@/store/music'
-import { getPlayingList } from '@/store/user'
-import store, { useAppDispatch, useAppSelector } from '@/store'
+import store from '@/store'
 import getImpTimeSlider from '../common/slider/implement/TimeSlider'
 import getImpVolumeSlider from '../common/slider/implement/VolumeSlider'
 import useCanvas from '@/hooks/useCanvas'
@@ -21,14 +19,6 @@ export const RGBContext = createContext({
   average: 0,
 })
 const App = memo(() => {
-  const dispatch = useAppDispatch()
-  const { uid } = useAppSelector(state => state.user)
-  // 请求热榜推荐歌曲的数据
-  useEffect(() => {
-    dispatch(fetchHotRecommend())
-    dispatch(getPlayingList(uid))
-  }, [dispatch])
-
   // page是否显示
   const [pageActive, setPageActive] = useState(false)
   // 获取音乐信息的Hook

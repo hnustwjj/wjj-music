@@ -11,9 +11,16 @@ import { MusicListItem } from '@/store/music/types'
 import { PlayingListItem } from '@/store/user/types'
 import { formatCount, parseTime } from '@/utils'
 import React, { memo, useEffect, useState } from 'react'
+import { getPlayingList } from '@/store/user'
 //TODO:使用Suspense API来加载图片
 const Mine = memo(() => {
   const dispatch = useAppDispatch()
+  const { uid } = useAppSelector(state => state.user)
+  useEffect(() => {
+    // 请求热榜推荐歌曲的数据
+    dispatch(getPlayingList(uid))
+  }, [dispatch])
+
   // 歌单数据
   const { playList } = useAppSelector(state => state.user)
   // 当前点击的歌单
@@ -84,7 +91,7 @@ const Mine = memo(() => {
   ) : (
     <div flex='~ col' h='full'>
       <div className='flex <md:(flex-col items-center)' w='full'>
-        <div className='2xl:(w-[16.6%]) xl:(w-[20%]) md:(w-[25%]) <md:(w-[33.3%])'>
+        <div className='2xl:(w-[16.6%]) xl:(w-[20%]) md:(w-[25%]) <md:(w-[20%])'>
           <img
             w='full'
             rounded='lg'

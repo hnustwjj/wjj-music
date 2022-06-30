@@ -48,7 +48,7 @@ const Modal = memo((props: PropsWithChildren<ModalProps>) => {
   }
 
   return createPortal(
-    <div className='absolute top-[30%] left-[50%] transform translate-x-[-50%] translate-y-[-50%] bg-[rgba(13,17,23)] text-[#fff] w-400px shadow-light rounded-5px'>
+    <div className='absolute top-[30%] left-[50%] transform translate-x-[-50%] translate-y-[-50%] bg-[rgba(13,17,23)] text-[#fff] w-400px <md:(w-250px) shadow-light rounded-5px'>
       <div className='px-24px py-16px border-b text-16px leading-22px flex justify-between items-center'>
         <div>{(title ?? '标题') + ' : -） '}</div>
         <div className='close' onClick={() => onCallback('cancel')} />

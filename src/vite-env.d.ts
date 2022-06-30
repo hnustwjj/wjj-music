@@ -7,4 +7,4 @@ declare module 'react' {
   }
 }
 
-type FIXME = any
+export type FIXME = any

@@ -1,24 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import useStorage from '@/hooks/useStorage'
-import type { MusicListItem } from './types'
-export interface musicState {
-  // 每日推荐音乐列表
-  dailyMusicList: MusicListItem[]
-  // 正在播放音乐列表
-  playingMusicList: MusicListItem[]
-  // 当前音乐信息
-  currentMusic: MusicListItem
-  // 当前音乐的歌词
-  currentLyric: string
-  // 当前音乐的时长
-  duration: number
-  // 当前音乐的事件
-  currentTime: number
-  // 当前音乐的歌词下标
-  currentLyricIndex: number
-  // 用于uid
-  uid: number
-}
+import type { MusicListItem, musicState } from './types'
+
 // 初始化状态（initFlag为了判断是否是第一次）
 export const initialCurrentMusic = { initFlag: true }
 const storage = useStorage()

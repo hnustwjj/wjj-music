@@ -2,13 +2,16 @@ import { useAppDispatch, useAppSelector } from '@/store'
 import { getUserInfoAction } from '@/store/user'
 import React, { memo, useEffect } from 'react'
 import { alert, confirm } from '@/common/modal'
+// import { getQrIamge } from '@/service/user'
 const Header = memo(() => {
   const dispatch = useAppDispatch()
   const { uid, userInfo } = useAppSelector(state => state.user)
   useEffect(() => {
     dispatch(getUserInfoAction(uid))
   }, [dispatch])
-
+  // setInterval(() => {
+  //   getQrIamge()
+  // }, 20000)
   return (
     <header
       className='leading-[60px] flex justify-center items-center relative'

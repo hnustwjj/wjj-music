@@ -18,3 +18,11 @@ export interface UserInfo {
   avatarUrl?: string //头像
   signature?: string //签名
 }
+
+export interface userState {
+  // 用户uid
+  uid: number
+  playList: PlayingListItem[]
+  userInfo: UserInfo
+  cookie: string
+}

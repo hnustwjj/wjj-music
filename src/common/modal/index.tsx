@@ -1,6 +1,6 @@
 import React, { memo, PropsWithChildren } from 'react'
 import { createPortal } from 'react-dom'
-import { createRoot } from 'react-dom/client'
+import ReactDomClient from 'react-dom/client'
 
 //创建modal要存放的container
 const container = document.createElement('div')
@@ -79,7 +79,7 @@ const Modal = memo((props: PropsWithChildren<ModalProps>) => {
 export function confirm(props?: PropsWithChildren<ModalProps>) {
   return new Promise((resolve, reject) => {
     const innerContainer = document.createElement('div')
-    const root = createRoot(innerContainer)
+    const root = ReactDomClient.createRoot(innerContainer)
     root.render(
       <Modal
         title='confirm'

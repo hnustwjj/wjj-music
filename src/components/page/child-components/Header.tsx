@@ -1,13 +1,16 @@
 import { useAppDispatch, useAppSelector } from '@/store'
 import { getUserInfoAction } from '@/store/user'
-import React, { memo, useEffect } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import { confirm } from '@/common/modal'
+//FIXME: 将Input传入到slot中的时候，Input的value并未重新设置
 const Header = memo(() => {
   const dispatch = useAppDispatch()
+  const [inputUid, setInputUid] = useState('')
   const { uid, userInfo } = useAppSelector(state => state.user)
   useEffect(() => {
     dispatch(getUserInfoAction(uid))
   }, [dispatch])
+
   return (
     <header
       className='leading-[60px] flex justify-center items-center relative'
@@ -27,14 +30,6 @@ const Header = memo(() => {
         top='1/2'
         transform='~'
         className='translate-y-[-50%]'
-        onClick={() =>
-          confirm({
-            children: <div>确定要退出吗？</div>,
-            title: '提示',
-          }).then(() => {
-            confirm({ children: <div>确定要退出吗2？</div>, title: '提示' })
-          })
-        }
       >
         {userInfo.avatarUrl ? (
           <img
@@ -43,9 +38,30 @@ const Header = memo(() => {
             cursor='pointer'
             src={userInfo.avatarUrl}
             alt={userInfo.nickname}
+            onClick={() =>
+              confirm({
+                children: <div>您确定要推出嘛</div>,
+                title: '提示',
+              })
+            }
           />
         ) : (
-          <button>登录</button>
+          <button
+            onClick={() =>
+              confirm({
+                children: (
+                  <input
+                    text='black'
+                    type='text'
+                    onChange={e => setInputUid(e.target.value)}
+                  />
+                ),
+                title: '提示',
+              })
+            }
+          >
+            登录
+          </button>
         )}
       </div>
     </header>

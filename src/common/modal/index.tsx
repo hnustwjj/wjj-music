@@ -92,4 +92,5 @@ export function confirm(props?: PropsWithChildren<ModalProps>) {
     container.appendChild(innerContainer)
   })
 }
+
 export default Modal

@@ -83,16 +83,17 @@ const Mine = memo(() => {
     </div>
   ) : (
     <div flex='~ col' h='full'>
-      <div className='flex' w='full'>
+      <div className='flex <md:(flex-col items-center)' w='full'>
         <div className='2xl:(w-[16.6%]) xl:(w-[20%]) md:(w-[25%]) <md:(w-[33.3%])'>
           <img
             w='full'
             rounded='lg'
             shadow='md dark-100'
+            className='<md:(rounded-full)'
             src={activeItem.coverImgUrl + '?param=200y200'}
           />
         </div>
-        <div className='flex-1 px-20px'>
+        <div className='flex-1 px-20px <md:(w-full)'>
           <div className='flex justify-between text-20px leading-[40px]'>
             <p text='gray'>{activeItem.name}</p>
             <button

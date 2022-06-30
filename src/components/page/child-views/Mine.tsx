@@ -18,9 +18,8 @@ const Mine = memo(() => {
   const { uid } = useAppSelector(state => state.user)
   useEffect(() => {
     // 请求热榜推荐歌曲的数据
-    dispatch(getPlayingList(uid))
+    if (!playList.length) dispatch(getPlayingList(uid))
   }, [dispatch])
-
   // 歌单数据
   const { playList } = useAppSelector(state => state.user)
   // 当前点击的歌单

@@ -1,11 +1,9 @@
 import { useAppDispatch, useAppSelector } from '@/store'
 import { getUserInfoAction } from '@/store/user'
-import React, { memo, useEffect, useState } from 'react'
-import { confirm } from '@/common/modal'
-//FIXME: 将Input传入到slot中的时候，Input的value并未重新设置
+import React, { memo, useEffect } from 'react'
+import { alert, confirm } from '@/common/modal'
 const Header = memo(() => {
   const dispatch = useAppDispatch()
-  const [inputUid, setInputUid] = useState('')
   const { uid, userInfo } = useAppSelector(state => state.user)
   useEffect(() => {
     dispatch(getUserInfoAction(uid))
@@ -40,7 +38,7 @@ const Header = memo(() => {
             alt={userInfo.nickname}
             onClick={() =>
               confirm({
-                children: <div>您确定要推出嘛</div>,
+                children: <div>您确定要退出嘛~</div>,
                 title: '提示',
               })
             }
@@ -48,14 +46,7 @@ const Header = memo(() => {
         ) : (
           <button
             onClick={() =>
-              confirm({
-                children: (
-                  <input
-                    text='black'
-                    type='text'
-                    onChange={e => setInputUid(e.target.value)}
-                  />
-                ),
+              alert(['test', 'test2'], {
                 title: '提示',
               })
             }

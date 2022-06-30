@@ -1,6 +1,7 @@
-import React, { memo, PropsWithChildren } from 'react'
+import React, { createRef, memo, PropsWithChildren } from 'react'
 import { createPortal } from 'react-dom'
 import ReactDomClient from 'react-dom/client'
+import Form from '../Form'
 
 //创建modal要存放的container
 const container = document.createElement('div')
@@ -93,4 +94,22 @@ export function confirm(props?: PropsWithChildren<ModalProps>) {
   })
 }
 
+export function alert(data: string[], props?: PropsWithChildren<ModalProps>) {
+  return new Promise((resolve, reject) => {
+    const innerContainer = document.createElement('div')
+    const root = ReactDomClient.createRoot(innerContainer)
+    const ref = createRef<any>()
+    root.render(
+      <Modal
+        title='alert'
+        callback={() => root.unmount()}
+        onOk={() => setTimeout(() => resolve(ref.current.metadata), 300)}
+        onCancel={() => setTimeout(() => reject(null), 300)}
+        {...props}
+      >
+        <Form data={data} ref={ref} />
+      </Modal>
+    )
+  })
+}
 export default Modal

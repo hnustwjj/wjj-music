@@ -5,14 +5,22 @@ import { changeCookie, changePlayList, changeUserInfo } from '.'
 //TODO:研究一下redux-thunk的第二个参数getState（还是得多看看RTK官网）
 export const getPlayingList =
   (uid: number) => async (dispatch: AppDispatch) => {
-    const res = await getPlayList(uid)
-    dispatch(changePlayList(res.playlist))
+    if (uid) {
+      const res = await getPlayList(uid)
+      dispatch(changePlayList(res.playlist))
+    } else {
+      dispatch(changePlayList([]))
+    }
   }
 
 export const getUserInfoAction =
   (uid: number) => async (dispatch: AppDispatch) => {
-    const res = await getUserInfo(uid)
-    dispatch(changeUserInfo(res.profile))
+    if (uid) {
+      const res = await getUserInfo(uid)
+      dispatch(changeUserInfo(res.profile))
+    } else {
+      dispatch(changeUserInfo({}))
+    }
   }
 
 export const getUserCookie = (key: string) => async (dispatch: AppDispatch) => {

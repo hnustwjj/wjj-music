@@ -54,7 +54,7 @@ const Modal = memo((props: PropsWithChildren<ModalProps>) => {
         <div>{(title ?? '标题') + ' : -） '}</div>
         <div className='close' onClick={() => onCallback('cancel')} />
       </div>
-      <div className='border-b p-24px text-14px'>
+      <div className='border-b p-18px text-14px'>
         {Array.isArray(children) ? children?.map(item => item) : children}
       </div>
       <div className='px-16px py-10px flex items-center justify-end text-13px'>
@@ -107,6 +107,9 @@ export function alert(data: string[], props?: PropsWithChildren<ModalProps>) {
         onCancel={() => setTimeout(() => reject(null), 300)}
         {...props}
       >
+        <div leading='30px' text='center' mb='18px' select='text'>
+          try: 119151330
+        </div>
         <Form data={data} ref={ref} />
       </Modal>
     )

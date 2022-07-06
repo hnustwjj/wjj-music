@@ -12,16 +12,23 @@ const Form = forwardRef(function Form(props: { data: string[] }, ref) {
     [metadata]
   )
   return (
-    <div>
+    <div w='full' h='full'>
       {data.map(item => (
-        <div key={item}>
-          <input
-            text='black'
-            value={metadata[item] ?? ''}
-            onChange={e =>
-              setMetadata(pre => ({ ...pre, [item]: e.target.value }))
-            }
-          />
+        <div key={item} flex='~' justify='center' mb='5px'>
+          <div leading='30px' w='1/4' text='center'>
+            {item}
+          </div>
+          <div flex='1' text='black' p='y-5px x-15px' bg='white' rounded='md'>
+            <input
+              bg='transparent'
+              outline='none'
+              w='full'
+              value={metadata[item] ?? ''}
+              onChange={e =>
+                setMetadata(pre => ({ ...pre, [item]: e.target.value }))
+              }
+            />
+          </div>
         </div>
       ))}
     </div>

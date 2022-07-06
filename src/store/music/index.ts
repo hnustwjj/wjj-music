@@ -13,16 +13,12 @@ const initialState: musicState = {
   duration: 0,
   currentTime: 0,
   currentLyricIndex: 0,
-  uid: storage.getItem('uid', '0'),
 }
 
 const music = createSlice({
   name: 'music',
   initialState,
   reducers: {
-    changeUid(state: musicState, actions: PayloadAction<number>) {
-      state.uid = actions.payload
-    },
     changeDailyMusicList(state: musicState, actions: PayloadAction<any[]>) {
       state.dailyMusicList = actions.payload
     },
@@ -68,7 +64,6 @@ export default music.reducer
 
 //导出所有的普通action
 export const {
-  changeUid,
   changeDailyMusicList,
   pushPlayingMusicList,
   changeCurrentMusic,

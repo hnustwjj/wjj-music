@@ -29,6 +29,4 @@ export interface musicState {
   currentTime: number
   // 当前音乐的歌词下标
   currentLyricIndex: number
-  // 用于uid
-  uid: number
 }

@@ -15,13 +15,13 @@ import { getPlayingList } from '@/store/user'
 //TODO:使用Suspense API来加载图片
 const Mine = memo(() => {
   const dispatch = useAppDispatch()
-  const { uid } = useAppSelector(state => state.user)
+  // 歌单数据
+  const { uid, playList } = useAppSelector(state => state.user)
   useEffect(() => {
     // 请求热榜推荐歌曲的数据
-    if (!playList.length) dispatch(getPlayingList(uid))
-  }, [dispatch])
-  // 歌单数据
-  const { playList } = useAppSelector(state => state.user)
+    dispatch(getPlayingList(uid))
+  }, [dispatch, uid])
+
   // 当前点击的歌单
   const [activeItem, setActiveItem] = useState<PlayingListItem | null>(null)
   // 歌单详情

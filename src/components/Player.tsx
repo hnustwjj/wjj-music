@@ -18,7 +18,7 @@ export const RGBContext = createContext({
   B: 0,
   average: 0,
 })
-const App = memo(() => {
+const Player = memo(() => {
   // page是否显示
   const [pageActive, setPageActive] = useState(false)
   // 获取音乐信息的Hook
@@ -85,8 +85,4 @@ const App = memo(() => {
     document.getElementById('root') as Element
   )
 })
-export default () => (
-  <Provider store={store}>
-    <App />
-  </Provider>
-)
+export default () => <Provider store={store} children={<Player />}></Provider>

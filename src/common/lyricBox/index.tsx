@@ -1,8 +1,7 @@
-import React, { memo, useContext } from 'react'
+import React, { memo } from 'react'
 
 import { Wrapper } from './style'
 import { LYRICLIST_NULL_TEXT } from '@/constant'
-import { RGBContext } from '@/components/Player'
 interface lyricBox {
   currentLyricIndex: number
   lyricList: any[]
@@ -12,7 +11,7 @@ interface lyricBox {
 //TODO:考虑添加一个drag拖拽歌词功能
 const LyricBox = memo((props: lyricBox) => {
   //TODO:在未来可能会考虑修改配色，而不是单纯的修改card的遮罩层透明度（主要是我个人CSS变量管理的不好）
-  const RGB = useContext(RGBContext)
+  // const RGB = useContext(RGBContext)
 
   // 获取歌词相关信息的hook
   const { currentLyricIndex, lyricList, lyricBoxRef, leading } = props

@@ -22,7 +22,7 @@
     "type": "tsc -d"
   },
   "files":["dist"],
-  "dependencies": {
+  "peerDependencies": {
     "@reduxjs/toolkit": "^1.8.2",
     "axios": "^0.27.2",
     "react": "^18.0.0",

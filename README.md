@@ -1,5 +1,5 @@
 # wjj-player
-一个用react+vite+ts+windicss开发的音乐播放器插件，意在让每一个react项目都快速具备音乐播放功能，快来试试吧~
+一个用react+vite+ts+windicss开发的音乐播放器组件，意在让每一个react项目都快速具备音乐播放功能，快来试试吧~
 
 ## 总览
 
@@ -81,4 +81,8 @@ export default App
 
 2、手机端适配
 
-3、样式优化以及动画优化（FLIP）
+3、样式优化
+
+4、suspense
+
+5、登录功能

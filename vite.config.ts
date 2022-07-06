@@ -16,15 +16,15 @@ export default defineConfig({
       BASE_URL: 'http://42.192.65.59:9000/',
     },
   },
-  build: {
-    lib: {
-      entry: './src/main.tsx',
-      formats: ['es', 'umd'],
-      name: pkg.name,
-      fileName: format => `index.${format}.js`,
-    },
-    rollupOptions: {
-      external: ['react', 'react-dom'],
-    },
-  },
+  // build: {
+  //   lib: {
+  //     entry: './src/main.tsx',
+  //     formats: ['es', 'umd'],
+  //     name: pkg.name,
+  //     fileName: format => `index.${format}.js`,
+  //   },
+  //   rollupOptions: {
+  //     external: ['react', 'react-dom'],
+  //   },
+  // },
 })

@@ -8,8 +8,10 @@ export const getPlayingList =
     if (uid) {
       const res = await getPlayList(uid)
       dispatch(changePlayList(res.playlist))
+      return res.playlist
     } else {
       dispatch(changePlayList([]))
+      return null
     }
   }
 
@@ -18,12 +20,15 @@ export const getUserInfoAction =
     if (uid) {
       const res = await getUserInfo(uid)
       dispatch(changeUserInfo(res.profile))
+      return res.profile
     } else {
       dispatch(changeUserInfo({}))
+      return null
     }
   }
 
 export const getUserCookie = (key: string) => async (dispatch: AppDispatch) => {
   const { cookie } = await getCookie(key)
   dispatch(changeCookie(cookie))
+  return cookie
 }

@@ -17,6 +17,7 @@ export const fetchHotRecommend = () => async (dispatch: AppDispatch) => {
   } = await getLike()
   // 保存
   dispatch(changeDailyMusicList(dailySongs))
+  return dailySongs
 }
 
 // 根据id获取歌词
@@ -30,8 +31,10 @@ export const changeLyric =
         lyric = '[99:00.00]纯音乐，请欣赏\n'
       }
       dispatch(changeCurrentLyric(lyric))
+      return lyric
     } else {
       dispatch(changeCurrentLyric(' '))
+      return ' '
     }
   }
 

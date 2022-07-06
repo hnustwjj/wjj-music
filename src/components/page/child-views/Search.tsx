@@ -52,7 +52,7 @@ const Search = memo(() => {
         />
       </div>
       {dataList.length ? (
-        <div flex='1' w='full'>
+        <div flex='1 ~ col' w='full' overflow='hidden'>
           <div
             flex='~'
             text='14px thin'

@@ -11,7 +11,7 @@ export const getPlayingList =
       return res.playlist
     } else {
       dispatch(changePlayList([]))
-      return null
+      return []
     }
   }
 
@@ -23,7 +23,7 @@ export const getUserInfoAction =
       return res.profile
     } else {
       dispatch(changeUserInfo({}))
-      return null
+      return {}
     }
   }
 

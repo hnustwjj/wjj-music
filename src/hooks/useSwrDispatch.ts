@@ -1,4 +1,4 @@
-import { AppDispatch } from './../store/index'
+import type { AppDispatch } from './../store/index'
 import { useEffect, useState } from 'react'
 import { useAppDispatch } from '@/store'
 const useSwrDispatch = (
@@ -13,11 +13,11 @@ const useSwrDispatch = (
     setLoading(true)
     dispatch(actions)
       .then(res => setData(res))
-      .finally(() => setLoading(false))
+      .finally(() => setTimeout(() => setLoading(false), 500))
   }, [...deps, dispatch])
   //返回状态
-  if (loading) {
-    return { data }
+  if (!loading) {
+    return data
   } else {
     throw Promise.resolve(null)
   }

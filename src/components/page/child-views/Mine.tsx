@@ -12,22 +12,24 @@ import { PlayingListItem } from '@/store/user/types'
 import { formatCount, parseTime } from '@/utils'
 import React, { memo, useEffect, useState } from 'react'
 import { getPlayingList } from '@/store/user'
-import useSwrDispatch from '@/hooks/useSwrDispatch'
-//TODO:使用Suspense API来加载图片
+// import useSwrDispatch from '@/hooks/useSwrDispatch'
+
+//TODO:使用Suspense API来加载图片(暂时没研究明白)
 const Mine = memo(() => {
   const dispatch = useAppDispatch()
   // 歌单数据
   const { uid, playList } = useAppSelector(state => state.user)
   // 请求热榜推荐歌曲的数据
-  useSwrDispatch(getPlayingList(uid), [uid])
-
+  useEffect(() => {
+    dispatch(getPlayingList(uid))
+  }, [uid, dispatch])
   // 当前点击的歌单
   const [activeItem, setActiveItem] = useState<PlayingListItem | null>(null)
   // 歌单详情
   const [detail, setDetail] = useState<MusicListItem[]>([] as MusicListItem[])
   // 点击歌单详情列表的歌曲添加到playing中
   const pushIntoPlayingMusicList = (item: MusicListItem) => {
-    useSwrDispatch(switchCurrentMusic(item))
+    dispatch(switchCurrentMusic(item))
     dispatch(pushPlayingMusicList(item))
     //TODO:push成功的dialog
   }
@@ -40,7 +42,7 @@ const Mine = memo(() => {
         setDetail(res.playlist.tracks)
       })
   }, [activeItem])
-  return !playList.length ? (
+  return !playList?.length ? (
     <div h='full' w='full' flex='~' justify='center' items='center'>
       {LIST_NULL_TEXT}
     </div>

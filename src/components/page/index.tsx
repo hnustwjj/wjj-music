@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react'
+import React, { memo, useState, Suspense } from 'react'
 
 import { imgUrl } from '@/utils'
 import Mine from './child-views/Mine'
@@ -76,8 +76,22 @@ const Page = memo(
               ))}
             </nav>
             <div flex='1 ~ col' text='gray-300' overflow='hidden'>
-              {/* 达到类似路由的效果 */}
-              {navList[currentIndex].element}
+              <Suspense
+                fallback={
+                  <div
+                    w='full'
+                    h='full'
+                    flex='~'
+                    items='center'
+                    justify='center'
+                  >
+                    loading...
+                  </div>
+                }
+              >
+                {/* 达到类似路由的效果 */}
+                {navList[currentIndex].element}
+              </Suspense>
             </div>
           </div>
           <Music musicInfo={musicInfo} lyricInfo={lyricInfo} />

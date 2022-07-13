@@ -68,13 +68,17 @@ const Mine = memo(() => {
           justify='center'
           relative='~'
         >
-          <img
-            w='full'
-            rounded='lg'
-            shadow='md dark-100'
-            cursor='pointer'
-            src={item.coverImgUrl + '?param=200y200'}
-          />
+          <div className='w-full pt-[100%] relative rounded-lg overflow-hidden bg-[rgba(0,0,0,.3)]'>
+            <img
+              w='full'
+              absolute='~'
+              top='0'
+              left='0'
+              shadow='md dark-100'
+              cursor='pointer'
+              src={item.coverImgUrl + '?param=200y200'}
+            />
+          </div>
           <div
             className='bg-[rgba(0,0,0,.3)]'
             absolute='~'

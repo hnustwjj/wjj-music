@@ -11,17 +11,27 @@ import { MusicListItem } from '@/store/music/types'
 import { PlayingListItem } from '@/store/user/types'
 import { formatCount, parseTime } from '@/utils'
 import React, { memo, useEffect, useState } from 'react'
-import { getPlayingList } from '@/store/user'
-// import useSwrDispatch from '@/hooks/useSwrDispatch'
-
+import useSWR from 'swr'
+import { getPlayList } from '@/service/user'
+//TODO:使用Suspense API来加载图片(暂时没研究明白)
 const Mine = memo(() => {
   const dispatch = useAppDispatch()
   // 歌单数据
-  const { uid, playList } = useAppSelector(state => state.user)
-  // 请求热榜推荐歌曲的数据
-  useEffect(() => {
-    dispatch(getPlayingList(uid))
-  }, [uid, dispatch])
+  const { uid } = useAppSelector(state => state.user)
+  // Suspense优化？？？
+  // 最终决定不放在store中了
+  const {
+    data: { playlist },
+  } = useSWR<any>(
+    uid + '',
+    uid =>
+      getPlayList(Number(uid)).then(
+        res => new Promise(resolve => setTimeout(() => resolve(res), 500))
+      ),
+    {
+      suspense: true,
+    }
+  )
   // 当前点击的歌单
   const [activeItem, setActiveItem] = useState<PlayingListItem | null>(null)
   // 歌单详情
@@ -40,13 +50,13 @@ const Mine = memo(() => {
         setDetail(res.playlist.tracks)
       })
   }, [activeItem])
-  return !playList?.length ? (
+  return !playlist?.length ? (
     <div h='full' w='full' flex='~' justify='center' items='center'>
       {LIST_NULL_TEXT}
     </div>
   ) : !activeItem ? (
-    <div flex='~ wrap' items='start' h='full' w='full' overflow='auto'>
-      {playList.map(item => (
+    <div flex='~ wrap' items='start' w='full' overflow='auto'>
+      {playlist.map(item => (
         <div
           key={item.id}
           className='transition 2xl:(w-[16.6%]) xl:(w-[20%]) md:(w-[25%]) <md:(w-[33.3%])'

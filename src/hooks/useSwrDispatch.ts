@@ -1,25 +1,19 @@
-import type { AppDispatch } from './../store/index'
-import { useEffect, useState } from 'react'
-import { useAppDispatch } from '@/store'
-const useSwrDispatch = (
-  actions: (dispatch: AppDispatch) => Promise<any>,
-  deps: any[] = []
-) => {
-  const [data, setData] = useState<any>(null)
-  const [loading, setLoading] = useState<any>(false)
-  const dispatch = useAppDispatch()
-  // 分发任务
-  useEffect(() => {
-    setLoading(true)
-    dispatch(actions)
-      .then(res => setData(res))
-      .finally(() => setTimeout(() => setLoading(false), 500))
-  }, [...deps, dispatch])
-  //返回状态
-  if (!loading) {
-    return data
-  } else {
-    throw Promise.resolve(null)
-  }
+const useSwr = (data, fetcher) => {
+  let status = 'pending'
+  let reason = null
+  let value = null
+  const promise = fetcher(data)
+    .then(res => {
+      value = res
+      status = 'success'
+    })
+    .catch(err => {
+      reason = err
+      status = 'fail'
+    })
+  if (status === 'pending') throw promise
+  else if (status === 'fail') throw reason
+  else return value
 }
-export default useSwrDispatch
+
+export default useSwr

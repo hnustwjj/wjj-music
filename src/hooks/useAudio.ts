@@ -25,7 +25,6 @@ export interface IAudio {
   bufferPercent: number
   currentTime: number
 }
-//TODO:考虑静音是否用muted属性实现
 //需要放在最外面，否则每次执行函数都会重新创建变量
 let volumeCache = 0
 let isJingyin = false
@@ -97,7 +96,6 @@ export default function useAudio(): IAudio {
   }
 
   const [currentOrder, setCurrentOrder] = useState<Order>('cycle')
-  //TODO: 播放顺序控制
   /**
    *  切换歌曲
    * @param type 切换到前一首还是后一首

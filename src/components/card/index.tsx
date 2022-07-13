@@ -8,7 +8,6 @@ import { RGBContext } from '../Player'
 import type { ILyric } from '@/hooks/useLyric'
 import type { IMusicInfo } from '../../hooks/useMusic'
 import type { IAudio } from '../../hooks/useAudio'
-//TODO:添加pan的碟片的那根棍子= =
 const Card = memo(
   (props: {
     changePageActive: () => void
@@ -47,8 +46,6 @@ const Card = memo(
     const BG_STYLE = {
       backgroundImage: `url(${imgUrl(300, al?.picUrl)})`,
     }
-
-    //TODO:优化歌名的样式问题
     const content = (
       <>
         <div w='250px' flex='~ col' items='center' z='1' h='full'>

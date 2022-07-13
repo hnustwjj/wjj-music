@@ -14,7 +14,6 @@ import React, { memo, useEffect, useState } from 'react'
 import { getPlayingList } from '@/store/user'
 // import useSwrDispatch from '@/hooks/useSwrDispatch'
 
-//TODO:使用Suspense API来加载图片(暂时没研究明白)
 const Mine = memo(() => {
   const dispatch = useAppDispatch()
   // 歌单数据
@@ -34,7 +33,6 @@ const Mine = memo(() => {
     //TODO:push成功的dialog
   }
   //TODO:滚动到最后请求下一页
-  //TODO:虚拟滚动列表
   useEffect(() => {
     // 因为只有这里用到了歌单detail，所以就不放在store里了
     activeItem?.id &&

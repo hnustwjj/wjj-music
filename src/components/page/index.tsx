@@ -14,7 +14,6 @@ import type { IMusicInfo } from '@/hooks/useMusic'
 import type { ILyric } from '@/hooks/useLyric'
 import type { IAudio } from '@/hooks/useAudio'
 //TODO:手机端兼容
-//TODO:登录(使用uid获取信息)
 //TODO:使背景切换更自然
 const navList = [
   { title: '正在播放', element: <Playing /> },

@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useEffect } from 'react'
 import { useAppSelector } from '@/store'
 
 import img from '@/assets/img/playing.gif'
@@ -6,8 +6,10 @@ import { SingerSpan } from './style'
 import { formatTime } from '@/utils'
 import { MusicListItem } from '@/store/music/types'
 import { LIST_NULL_TEXT } from '@/constant'
+import useScrollToBottom from '@/hooks/useScrollToBottom'
 interface MusicList {
   source: MusicListItem[]
+  callback: () => void
   rowClick?: (item: MusicListItem) => void
   rowDoubleClick?: (item: MusicListItem) => void
   deleteClick?: (item: MusicListItem) => void
@@ -15,7 +17,11 @@ interface MusicList {
 let timer: any = null
 const MusicList = memo((props: MusicList) => {
   const music = useAppSelector(state => state.music)
-  const { rowClick, source, rowDoubleClick, deleteClick } = props
+  const { rowClick, source, rowDoubleClick, deleteClick, callback } = props
+  const { scrollRef, scrollToBottom } = useScrollToBottom()
+  useEffect(() => {
+    callback && callback()
+  }, [scrollToBottom])
   const { currentMusic } = music
   // 单击row触发事件
   const single = (item: MusicListItem) => {
@@ -52,7 +58,7 @@ const MusicList = memo((props: MusicList) => {
             <span className='flex-[2]'>歌手</span>
             <span w='80px'>时长</span>
           </div>
-          <div flex='1' overflow='auto'>
+          <div flex='1' overflow='auto' ref={scrollRef}>
             {source.map((item, index) => (
               <div
                 flex='~'

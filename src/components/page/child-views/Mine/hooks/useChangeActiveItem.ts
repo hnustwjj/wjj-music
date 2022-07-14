@@ -16,24 +16,23 @@ export default function () {
   useEffect(() => {
     activeItem?.id &&
       getPlayListDetail(activeItem.id).then(res => {
+        // 先请求到所有trackIds
         setDetail(res.playlist)
         return getAllMusic(res.playlist.trackIds).then(res => {
+          // 再根据trackIds获取所有的songs
           setTracks(res.songs)
         })
       })
   }, [activeItem])
-  useEffect(() => {
-    if (detail?.trackIds) {
-    }
-  }, [detail])
 
   const [showLength, setShowLength] = useState(10)
-  //TODO:滚动到最后请求下一页
+  // 滚动到底部时触发的回调函数
   const showMore = async () => {
     if (detail && detail.trackCount > showLength) {
       setShowLength(showLength + 10)
     }
   }
+  // 截取tracks
   const computedTracks = useMemo(() => {
     return tracks?.slice(0, showLength) ?? []
   }, [showLength, tracks])

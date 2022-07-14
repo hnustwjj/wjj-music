@@ -2,7 +2,7 @@ import { getAllMusic, getPlayListDetail } from '@/service/music'
 import { PlayingListItem } from '@/store/user/types'
 import { MusicListItem } from '@/store/music/types'
 import { useState, useEffect, useMemo } from 'react'
-
+import { useAppDispatch } from '@/store'
 type Detail = {
   tracks: MusicListItem[]
   trackCount: number
@@ -13,6 +13,7 @@ export default function () {
   const [activeItem, setActiveItem] = useState<PlayingListItem | null>(null)
   const [detail, setDetail] = useState<Detail>()
   const [tracks, setTracks] = useState<MusicListItem[]>()
+  // const dispatch = useAppDispatch()
   useEffect(() => {
     activeItem?.id &&
       getPlayListDetail(activeItem.id).then(res => {

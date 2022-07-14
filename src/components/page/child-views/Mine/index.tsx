@@ -12,7 +12,6 @@ import React, { memo } from 'react'
 import useGetPlayList from './hooks/useGetPlayList'
 import useChangeActiveItem from './hooks/useChangeActiveItem'
 
-/
 const Mine = memo(() => {
   const dispatch = useAppDispatch()
   const playList = useGetPlayList()

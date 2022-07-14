@@ -8,15 +8,15 @@ import { pushPlayingMusicList, switchCurrentMusic } from '@/store/music'
 import { useAppDispatch } from '@/store'
 import { MusicListItem } from '@/store/music/types'
 import { formatCount, parseTime } from '@/utils'
-import React, { memo, useMemo, useState } from 'react'
+import React, { memo } from 'react'
 import useGetPlayList from './hooks/useGetPlayList'
 import useChangeActiveItem from './hooks/useChangeActiveItem'
 
-//TODO:使用Suspense API来加载图片(暂时没研究明白)
+/
 const Mine = memo(() => {
   const dispatch = useAppDispatch()
   const playList = useGetPlayList()
-  const { setActiveItem, detail, activeItem, computedTracks, showMore } =
+  const { setActiveItem, activeItem, computedTracks, showMore } =
     useChangeActiveItem()
   // 点击歌单详情列表的歌曲添加到playing中
   const pushIntoPlayingMusicList = (item: MusicListItem) => {

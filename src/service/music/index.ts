@@ -45,6 +45,14 @@ export function getPlayListDetail(id: number) {
     params: { id },
   })
 }
+
+//根据trackIds获取所有的音乐信息
+export function getAllMusic(trackIds: any[]) {
+  return request_util.get({
+    url: '/song/detail',
+    params: { ids: trackIds.map(item => item.id).join(',') },
+  })
+}
 // 根据id获取音乐url
 export function getMusicUrl(id: number) {
   return `https://music.163.com/song/media/outer/url?id=${id}.mp3`

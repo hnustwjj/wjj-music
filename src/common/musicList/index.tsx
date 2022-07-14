@@ -9,7 +9,7 @@ import { LIST_NULL_TEXT } from '@/constant'
 import useScrollToBottom from '@/hooks/useScrollToBottom'
 interface MusicList {
   source: MusicListItem[]
-  callback: () => void
+  callback?: () => void
   rowClick?: (item: MusicListItem) => void
   rowDoubleClick?: (item: MusicListItem) => void
   deleteClick?: (item: MusicListItem) => void

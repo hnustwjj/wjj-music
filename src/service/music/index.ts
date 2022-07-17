@@ -27,7 +27,7 @@ export function getMusic(ids: number) {
 }
 
 // 搜索音乐
-export function search(keywords: string, limit = 30, offset = 0) {
+export function search(keywords: string, offset = 0, limit = 30) {
   return request_util.get({
     url: '/search',
     params: {

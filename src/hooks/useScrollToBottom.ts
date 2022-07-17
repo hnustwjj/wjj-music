@@ -21,6 +21,6 @@ export default function useScrollToBottom() {
         scrollRef.current.removeEventListener('scroll', handleScroll)
       }
     }
-  }, [scrollRef])
+  }, [scrollRef.current])
   return { scrollToBottom, scrollRef }
 }

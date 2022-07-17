@@ -18,11 +18,15 @@ let timer: any = null
 const MusicList = memo((props: MusicList) => {
   const music = useAppSelector(state => state.music)
   const { rowClick, source, rowDoubleClick, deleteClick, callback } = props
+
   const { scrollRef, scrollToBottom } = useScrollToBottom()
+
   useEffect(() => {
     callback && callback()
   }, [scrollToBottom])
+
   const { currentMusic } = music
+
   // 单击row触发事件
   const single = (item: MusicListItem) => {
     clearTimeout(timer) // 清除第二次单击事件
@@ -30,6 +34,7 @@ const MusicList = memo((props: MusicList) => {
       rowClick && rowClick(item)
     }, 200)
   }
+
   // 双击row触发事件
   const double = (item: MusicListItem) => {
     clearTimeout(timer) // 清除第一次单击事件
@@ -42,6 +47,7 @@ const MusicList = memo((props: MusicList) => {
     //TODO:删除的提示
     deleteClick && deleteClick(item)
   }
+  
   return (
     <>
       {source.length ? (

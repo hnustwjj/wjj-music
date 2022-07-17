@@ -4,17 +4,24 @@ import { formatTime } from '@/utils'
 import { pushPlayingMusicList } from '@/store/music'
 import { useAppDispatch } from '@/store'
 import { LIST_NULL_TEXT } from '@/constant'
+import useScrollToBottom from '@/hooks/useScrollToBottom'
+
+const LIMIT = 30
+
 const Search = memo(() => {
   const dispatch = useAppDispatch()
   const [isFocus, setIsFocus] = useState(false)
   // 保存表单数据
   const [value, setValue] = useState('')
   const [dataList, setDataList] = useState([] as any[])
+  const [songCount, setSongCount] = useState(0)
+
   useEffect(() => {
     // 防抖，获取搜索结果
     const timer = setTimeout(() => {
       search(value).then(res => {
         setDataList(res?.result?.songs ?? ([] as any[]))
+        setSongCount(res?.result?.songCount)
       })
     }, 300)
     return () => clearTimeout(timer)
@@ -25,6 +32,24 @@ const Search = memo(() => {
     const res = await getMusic(item.id)
     dispatch(pushPlayingMusicList(res.songs[0]))
   }
+
+  const showMore = async e => {
+    const { scrollTop, scrollHeight, clientHeight } = e.target
+    if (scrollTop + clientHeight >= scrollHeight) {
+      if (dataList.length < songCount) {
+        let offset = ~~(dataList.length / LIMIT)
+        let limit = LIMIT
+        if ((offset + 1) * LIMIT > songCount) {
+          limit = songCount - offset * LIMIT
+        }
+        const res = await search(value, offset, limit)
+        setDataList([...dataList, ...(res?.result?.songs ?? [])])
+      }
+    } else {
+      console.log('还没滚动到底部')
+    }
+  }
+
   return (
     <div w='full' h='full' flex='~ col'>
       <div
@@ -65,7 +90,7 @@ const Search = memo(() => {
             <span className='flex-1'>歌手</span>
             <span w='80px'>时长</span>
           </div>
-          <div flex='1' overflow='auto'>
+          <div flex='1' overflow='auto' onScroll={e => showMore(e)}>
             {dataList.map((item, index) => (
               <div
                 flex='~'

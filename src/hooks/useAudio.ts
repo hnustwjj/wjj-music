@@ -32,32 +32,26 @@ export default function useAudio(): IAudio {
   const dispatch = useAppDispatch()
   const { duration, playingMusicList, currentMusic, currentTime } =
     useAppSelector(state => state.music)
-
   //是否正在播放歌曲
   const [isPlaying, setIsPlaying] = useState(false)
   //获取audio元素
   const audioRef = useRef<HTMLAudioElement>(null)
   //音量状态
   const [volume, setVolume] = useState(INITIAL_VOLUME)
+
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.volume = volume
     }
   }, [volume])
 
-  /**
-   * 暂停或播放
-   */
   const switchMusicStaus = () => {
     if (audioRef.current) {
       isPlaying ? audioRef.current.pause() : audioRef.current.play()
       setIsPlaying(!isPlaying)
     }
   }
-  /**
-   * 音乐可播放的回调函数
-   * @param e
-   */
+
   const canplay = (e: SyntheticEvent<HTMLAudioElement, Event>) => {
     isPlaying ? audioRef.current?.play() : audioRef.current?.pause()
   }
@@ -74,11 +68,7 @@ export default function useAudio(): IAudio {
   }
   const [bufferPercent, setBufferPercent] = useState(0)
 
-  /**
-   * 音频时间改变时触发的函数
-   * @param e 音频事件
-   * @param fn 可选的副作用函数（会将e作为参数传入）
-   */
+
   const audioTimeUpdate = (e: any, fn?: (e) => void) => {
     if (audioRef.current) {
       // 获取timeRange
@@ -96,10 +86,7 @@ export default function useAudio(): IAudio {
   }
 
   const [currentOrder, setCurrentOrder] = useState<Order>('cycle')
-  /**
-   *  切换歌曲
-   * @param type 切换到前一首还是后一首
-   */
+
   const switchMusic = (type: 'pre' | 'next', order: Order = 'cycle') => {
     // 如果有歌曲就执行
     if (playingMusicList.length) {
@@ -134,11 +121,12 @@ export default function useAudio(): IAudio {
       isPlaying ? audioRef.current?.play() : audioRef.current?.pause()
     }
   }
+
   const switchOrder = () => {
     const index = ORDER.findIndex(item => item === currentOrder)
     setCurrentOrder(ORDER[(index + 1) % ORDER.length] as Order)
   }
-  //TODO:探究useCallback的究竟
+
   const onError = () => {
     if (!currentMusic.initFlag) {
       //防止因为单曲循环报错而不切换音乐

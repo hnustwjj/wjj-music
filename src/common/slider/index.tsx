@@ -20,8 +20,10 @@ type SliderProps = {
 const Slider = memo((props: SliderProps) => {
   // value是传入的进度条百分比
   const { value, direction, setValue, bufferValue, slot } = props
+
   // value对应的进度条长度
   const [currentLength, setCurrentLength] = useState(0)
+
   // 实际进度条的div
   const lineRef = useRef<HTMLDivElement>(null)
 
@@ -61,6 +63,7 @@ const Slider = memo((props: SliderProps) => {
       document.onmousemove = null
     }
   }
+
   const widthOrHeight = (length, isPercent = false) => {
     if (isPercent && lineRef.current) {
       length =
@@ -73,11 +76,12 @@ const Slider = memo((props: SliderProps) => {
       ? { height: length }
       : { width: isNaN(length) ? 0 : length }
   }
+
   return (
     <DivWrapper
       ref={lineRef}
       className={direction}
-      onClick={(e: any) => setValue(getOffset(e, direction))}
+      onMouseDown={(e: any) => setValue(getOffset(e, direction))}
     >
       <div
         absolute='~'
@@ -94,9 +98,8 @@ const Slider = memo((props: SliderProps) => {
       <div
         style={widthOrHeight(currentLength)}
         className={
-          (direction === 'row'
-            ? 'h-5px rounded-l-full'
-            : 'w-5px rounded-t-full') + ' transition bg-$slider-current z-2'
+          (direction === 'row' ? 'h-5px rounded-l-full' : 'w-5px rounded-t-full') +
+          ' transition bg-$slider-current z-2'
         }
       />
       {/* 加载进度条 */}

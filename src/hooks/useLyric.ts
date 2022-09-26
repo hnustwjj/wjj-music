@@ -10,6 +10,7 @@ export interface ILyric {
   lyricList: lyricItem[]
   lyricBoxRef: RefObject<HTMLDivElement>
 }
+
 export default function useLyric() {
   const dispatch = useAppDispatch()
 
@@ -51,10 +52,11 @@ export default function useLyric() {
    */
   useEffect(() => {
     if (lyricBoxRef.current) {
-      // 获取子元素中当前
+      // 获取歌词容器中当前歌词的对应元素
       const currentLyricWrapper = lyricBoxRef.current.children[
         currentLyricIndex
       ] as HTMLElement
+
       if (currentLyricWrapper) {
         // 当前歌词偏移到盒子中心的偏移量 = 距离父亲顶部的距离 - 歌词容器高度的一半(card的歌词容器高度是140px) + 自身高度的一半
         const offsetTop =
@@ -63,11 +65,13 @@ export default function useLyric() {
             140) /
             2 +
           currentLyricWrapper?.clientHeight / 2
+        // 设置偏移量
         lyricBoxRef.current.style.transform = `translateY(${-offsetTop}px)`
       }
     }
     // 在当前歌词Index改变，或者是歌曲改变时执行
   }, [currentLyricIndex, currentMusic])
+
   return {
     updateTime,
     currentLyricIndex,

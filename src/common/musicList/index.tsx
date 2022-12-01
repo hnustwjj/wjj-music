@@ -7,6 +7,7 @@ import { formatTime } from '@/utils'
 import { MusicListItem } from '@/store/music/types'
 import { LIST_NULL_TEXT } from '@/constant'
 import useScrollToBottom from '@/hooks/useScrollToBottom'
+
 interface MusicList {
   source: MusicListItem[]
   callback?: () => void
